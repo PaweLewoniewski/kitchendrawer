@@ -1,27 +1,29 @@
-import React from 'react';
-// import GlobalFonts from './fonts/fonts';
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Routes
-} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes,} from "react-router-dom";
 import styled from "styled-components";
+import HomePage from './views/homepage';
+import Policy from './views/policy';
+import MainNavigation from './components/mainNavigation';
+import BottomBoxes from './playground/bottomBoxes';
+import TopBoxes from './playground/topBoxes';
+
 
 function App() {
   return (
     <MaxPage>
       <ContentPage>
         <Router>
-          {/* <GlobalFonts /> */}
           <Header>
             <Title>Kitchen Drawer</Title>
+            <MainNavigation />
           </Header>
           <Content>
             <Pages>
               <Routes>
-                {/* <Route path="/" element={<FrontPage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/contact" element={<ContactPage />} /> */}
+                <Route path="/playground" element={<HomePage />} />
+                <Route path="/playground/bottomCabinets" element={<BottomBoxes />} />
+                <Route path="/playground/topCabinets" element={<TopBoxes />} />
+                <Route path="/policy" element={<Policy />} />
               </Routes>
             </Pages>
           </Content>
@@ -57,7 +59,7 @@ const Title = styled.h1`
   display:flex;
   font-size:3em;
   font-weight:300;
-  /* font-family: 'Press Start 2P'; */
+  font-family: 'Josefin Sans', sans-serif;
 `;
 
 const Content = styled.div`
