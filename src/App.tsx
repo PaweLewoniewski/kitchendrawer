@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter as Router, Route, Routes,} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, } from "react-router-dom";
 import styled from "styled-components";
 import HomePage from './views/homepage';
 import Policy from './views/policy';
@@ -14,15 +14,16 @@ function App() {
       <ContentPage>
         <Router>
           <Header>
-            <Title>Kitchen Drawer</Title>
+            <Title>------  Kitchen Drawer  ------------------------------------------------------------</Title>
             <MainNavigation />
           </Header>
           <Content>
             <Pages>
               <Routes>
-                <Route path="/playground" element={<HomePage />} />
-                <Route path="/playground/bottomCabinets" element={<BottomBoxes />} />
-                <Route path="/playground/topCabinets" element={<TopBoxes />} />
+                <Route path="/playground" element={<HomePage />} >
+                  <Route path=":bottomId" element={<BottomBoxes />} />
+                  <Route path=":topId" element={<TopBoxes />} />
+                </Route>
                 <Route path="/policy" element={<Policy />} />
               </Routes>
             </Pages>
@@ -52,6 +53,7 @@ const MaxPage = styled.div`
 const Header = styled.div`
   display:flex;
   justify-content:space-between;
+  background: #e8f4ff;
   /* background: linear-gradient(40deg, rgba(130,130,130,0.1) 0%, rgba(239,228,255,1) 100%); */
 `;
 
