@@ -1,21 +1,21 @@
 import styled from "styled-components";
 
-interface ActionBtnProps {
+interface SingleBtnProps {
     btnName: string;
+    children: any;
 }
 
-const ActionBtn = ({ btnName }: ActionBtnProps) => {
+const SingleBtn = ({ btnName, children }: SingleBtnProps) => {
     return (
         <Contener>
-            <Btn>{btnName}</Btn>
+            <Btn>{btnName ? btnName : children}</Btn>
         </Contener>
     );
 };
-export default ActionBtn;
+export default SingleBtn;
 
 const Contener = styled.div`
   display: flex;
-  width:100%;
 `;
 
 const Btn = styled.button`
@@ -24,11 +24,11 @@ const Btn = styled.button`
   color:#06151f;
   background:none;
   cursor: pointer;
-  width:100%;
-  padding:10px;
+  padding:10px 15px 10px 15px;
   transition:0.3s ease-in-out;
   font-family: 'Josefin Sans', sans-serif;
   background:#3abfa5;
+  margin:5px 2px;
   &:hover{
     border-bottom:1px solid #06151f;
     transition:0.3s ease-in-out;

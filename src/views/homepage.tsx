@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styled from "styled-components";
+import ActionBtn from '../assets/ActionBtn/ActionBtn';
+import ActionResultsBtns from '../components/ActionsResultsBtns';
 
 const HomePage = () => {
     return (
@@ -10,10 +12,20 @@ const HomePage = () => {
                     <PlaygroundNavList>
                         <PlaygroundNavListItem><NavLink to='/bottomCabinets'>Bottom Cabinets</NavLink></PlaygroundNavListItem>
                         <PlaygroundNavListItem><NavLink to='/topCabinets'>Top Cabinets</NavLink></PlaygroundNavListItem>
+                        <PlaygroundNavListItem><NavLink to='/topCabinets'>Preview</NavLink></PlaygroundNavListItem>
                     </PlaygroundNavList>
                     <PlaygroundBox></PlaygroundBox>
                 </PlaygroundBoxContener>
-                <PlaygroundActions></PlaygroundActions>
+                <PlaygroundActions>
+                    <ActionButtonsBox>
+                        <ActionBtn btnName={'Walls'} />
+                        <ActionBtn btnName={'Construction restrictions'} />
+                        <ActionBtn btnName={'Cabinets'} />
+                    </ActionButtonsBox>
+                    <ActionButtonsResults>
+                            <ActionResultsBtns />
+                    </ActionButtonsResults>
+                </PlaygroundActions>
             </PlaygroundContener>
         </PageContener>
     );
@@ -55,9 +67,11 @@ const PlaygroundNavListItem = styled.li`
     border:1px solid black;
     transition:0.5s ease-in-out;
     font-family: 'Josefin Sans', sans-serif;
+    background:#3abfa5;
     &:hover{
-        border-bottom:1px solid #35917f;
         transition:0.3s ease-in-out;
+        background:#B0FFEE;
+        z-index:1;
     }
     &:first-of-type{
         border-top-left-radius:5px; 
@@ -90,4 +104,12 @@ const PlaygroundActions = styled.div`
     border-radius:3px;
     margin:0px 10px;
     background:#eefffd;
+`;
+
+const ActionButtonsBox = styled.div`
+    width:100%;
+`;
+
+const ActionButtonsResults = styled.div`
+    width:100%;
 `;

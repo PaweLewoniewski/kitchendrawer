@@ -13,3 +13,11 @@ body::-webkit-scrollbar-thumb {
   background-color: #39b69d;
   border-radius: 10px;
 }
+
+.turnRight{
+  transform: rotate(0.25turn);
+}
+
+.turnLeft{
+  transform: rotate(-0.25turn);
+}
