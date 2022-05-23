@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 interface SingleBtnProps {
     btnName: string;
-    children: any;
+    children?: any;
+    onClick?:() => void;
 }
 
-const SingleBtn = ({ btnName, children }: SingleBtnProps) => {
+const SingleBtn = ({ btnName, children, onClick }: SingleBtnProps) => {
     return (
         <Contener>
-            <Btn>{btnName ? btnName : children}</Btn>
+            <Btn onClick={onClick}>{btnName ? btnName : children}</Btn>
         </Contener>
     );
 };
