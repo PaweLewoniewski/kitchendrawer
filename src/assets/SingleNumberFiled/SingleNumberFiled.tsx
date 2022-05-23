@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 interface SingleNumberFieldProps {
     text?: string;
+    placeholder?:string;
 }
 
-const SingleNumberField = ({ text }: SingleNumberFieldProps) => {
+const SingleNumberField = ({ text, placeholder }: SingleNumberFieldProps) => {
     return (
         <ContenerBox>
             <CheckBox>
-                <input type="number" id={text} name={text}></input>
+                <input type="number" id={text} name={text} placeholder={placeholder}></input>
                 <Name>
                     <label htmlFor={text}>{text}</label>
                 </Name>

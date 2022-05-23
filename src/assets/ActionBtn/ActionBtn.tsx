@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 interface ActionBtnProps {
     btnName: string;
+    onClick?:() => void;
 }
 
-const ActionBtn = ({ btnName }: ActionBtnProps) => {
+const ActionBtn = ({ btnName, onClick }: ActionBtnProps) => {
     return (
         <Contener>
-            <Btn>{btnName}</Btn>
+            <Btn onClick={onClick} >{btnName}</Btn>
         </Contener>
     );
 };
@@ -30,6 +31,11 @@ const Btn = styled.button`
   font-family: 'Josefin Sans', sans-serif;
   background:#3abfa5;
   &:hover{
+    border-bottom:1px solid #06151f;
+    transition:0.3s ease-in-out;
+    background:#B0FFEE;
+  }
+  &:active{
     border-bottom:1px solid #06151f;
     transition:0.3s ease-in-out;
     background:#B0FFEE;

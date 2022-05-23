@@ -1,9 +1,27 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from "styled-components";
 import ActionBtn from '../assets/ActionBtn/ActionBtn';
-import ActionResultsBtns from '../components/ActionsResultsBtns';
+import CabinetsPanel from '../components/cabinetsPanel';
+import ConstructionRestriction from '../components/conostructionRestrictions';
+import WallsPanel from '../components/wallsPanel';
 
 const HomePage = () => {
+
+
+    const [panel, setPanel] = useState<string>('walls');
+
+    const usePanel = (panel: string) => {
+        switch (panel) {
+            case 'cabinets':
+                return <CabinetsPanel />;
+            case 'restrictions':
+                return <ConstructionRestriction />
+            default:
+                return <WallsPanel />;
+        }
+    }
+
     return (
         <PageContener>
             <PageName>Homepage</PageName>
@@ -18,13 +36,13 @@ const HomePage = () => {
                 </PlaygroundBoxContener>
                 <PlaygroundActions>
                     <ActionButtonsBox>
-                        <ActionBtn btnName={'Walls'} />
-                        <ActionBtn btnName={'Construction restrictions'} />
-                        <ActionBtn btnName={'Cabinets'} />
+                        <ActionBtn btnName={'Walls'} onClick={() => setPanel('walls')} />
+                        <ActionBtn btnName={'Construction restrictions'} onClick={() => setPanel('restrictions')} />
+                        <ActionBtn btnName={'Cabinets'} onClick={() => setPanel('cabinets')} />
                     </ActionButtonsBox>
-                    <ActionButtonsResults>
-                            <ActionResultsBtns />
-                    </ActionButtonsResults>
+                    <PanelButtonsResults>
+                        {usePanel(panel)}
+                    </PanelButtonsResults>
                 </PlaygroundActions>
             </PlaygroundContener>
         </PageContener>
@@ -63,7 +81,6 @@ const PlaygroundNavList = styled.ul`
 
 const PlaygroundNavListItem = styled.li`
     display:flex;
-    padding:10px;
     border:1px solid black;
     transition:0.5s ease-in-out;
     font-family: 'Josefin Sans', sans-serif;
@@ -82,6 +99,8 @@ const PlaygroundNavListItem = styled.li`
     a{
     text-decoration:none;
     color:#06151f;
+    padding:10px;
+    border-radius:5px 5px 0 0; 
     }
 `;
 
@@ -110,6 +129,6 @@ const ActionButtonsBox = styled.div`
     width:100%;
 `;
 
-const ActionButtonsResults = styled.div`
+const PanelButtonsResults = styled.div`
     width:100%;
 `;

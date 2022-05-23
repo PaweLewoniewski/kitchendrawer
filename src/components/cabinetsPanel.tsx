@@ -3,18 +3,18 @@ import SingleBtn from "../assets/SingleBtn/SingleBtn";
 import { AiOutlineBorderBottom } from 'react-icons/ai';
 import SingleNumberField from "../assets/SingleNumberFiled/SingleNumberFiled";
 
-const ActionResultsBtns = () => {
+const CabinetsPanel = () => {
     return (
         <Contener>
             <SingleBtn btnName={""}><AiOutlineBorderBottom size={25} className='turnLeft' /></SingleBtn>
             <SingleBtn btnName={""}><AiOutlineBorderBottom size={25} /></SingleBtn>
             <SingleBtn btnName={""}><AiOutlineBorderBottom size={25} className='turnRight' /></SingleBtn>
-            <SingleNumberField text={"mm"} />
-            <SingleNumberField text={"mm"} />
+            <SingleNumberField text={"mm"} placeholder={'Width'} />
+            <SingleNumberField text={"mm"} placeholder={'Depth'} />
         </Contener>
     );
 };
-export default ActionResultsBtns;
+export default CabinetsPanel;
 
 const Contener = styled.div`
   display: flex;
