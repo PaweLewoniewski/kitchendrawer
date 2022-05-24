@@ -11,7 +11,7 @@ const SingleNumberField = ({ text, placeholder, onChange, value }: SingleNumberF
     return (
         <ContenerBox>
             <CheckBox>
-                <input onChange={onChange} type="number" id={text} name={text} placeholder={placeholder} value={value}></input>
+                <input onChange={onChange} type="number" id={text} placeholder={placeholder} value={value}></input>
                 <Name>
                     <label htmlFor={text}>{text}</label>
                 </Name>

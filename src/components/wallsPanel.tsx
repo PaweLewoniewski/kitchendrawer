@@ -1,33 +1,35 @@
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import SingleBtn from "../assets/SingleBtn/SingleBtn";
 import SingleNumberField from "../assets/SingleNumberFiled/SingleNumberFiled";
 import { RoomData } from "../types/types";
+import { useNavigate } from "react-router-dom";
 
 const WallsPanel = () => {
     const navigate = useNavigate();
-    const state = useLocation().state as RoomData;
-    const width = state && state.width;
-    const depth = state && state.depth;
+    let localData: string | null = localStorage.getItem("data");
+    const [loadData, setLoadData] = useState<RoomData>();
+    const [widthPlayground, setWidthPlayground] = useState<number | undefined>(loadData?.roomWidth);
+    const [depthPlayground, setDepthPlayground] = useState<number | undefined>(loadData?.roomDepth);
 
-    const [widthPlayground, setWidthPlayground] = useState<number>(width);
-    const [heightPlayground, setHeightPlayground] = useState<number>(depth);
+
+    useEffect(() => {
+        if (localData !== null && loadData === undefined) {
+            setLoadData(JSON.parse(localData))
+        }
+    }, [loadData, localData]);
 
     const setUpRoomPlayground = () => {
-        navigate('/preview',
-            {
-                state: {
-                    width: widthPlayground,
-                    depth: heightPlayground,
-                }
-            });
+        const data = [{'roomWidth': widthPlayground,'roomDepth': depthPlayground}]
+        localStorage.setItem("data", JSON.stringify(data));
+        navigate('/bottomCabinets');
     }
+
     return (
         <Contener>
             <FiledBox>
-                <SingleNumberField value={widthPlayground} text={"mm"} placeholder={'Width'} onChange={(e:any)=> {setWidthPlayground(e.target.value)}} />
-                <SingleNumberField value={heightPlayground} text={"mm"} placeholder={'Depth'} onChange={(e:any)=> {setHeightPlayground(e.target.value)}} />
+                <SingleNumberField text={"mm"} placeholder={'Width'} onChange={(e: any) => { setWidthPlayground(e.target.value) }} />
+                <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthPlayground(e.target.value) }} />
             </FiledBox>
             <BtnBoxEnd>
                 <SingleBtn btnName={"Add"} onClick={setUpRoomPlayground}></SingleBtn>

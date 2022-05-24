@@ -1,6 +1,6 @@
 export interface RoomData {
-    width: number;
-    depth: number;
+    roomWidth: number;
+    roomDepth: number;
 }
 
 export interface LocationParams {
