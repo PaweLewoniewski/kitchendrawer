@@ -7,6 +7,7 @@ import MainNavigation from './components/mainNavigation';
 import BottomBoxes from './playground/bottomBoxes';
 import TopBoxes from './playground/topBoxes';
 import Footer from './components/footer';
+import PlaygroundRoom from './playground/playgroundRoom';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/" element={<HomePage />} >
                   <Route path=":bottomId" element={<BottomBoxes />} />
                   <Route path=":topId" element={<TopBoxes />} />
+                  <Route path=":preview" element={<PlaygroundRoom />} />
                 </Route>
                 <Route path="/policy" element={<Policy />} />
               </Routes>

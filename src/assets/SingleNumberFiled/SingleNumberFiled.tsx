@@ -3,13 +3,15 @@ import styled from "styled-components";
 interface SingleNumberFieldProps {
     text?: string;
     placeholder?:string;
+    onChange?: (e:any)=> void;
+    value?:number;
 }
 
-const SingleNumberField = ({ text, placeholder }: SingleNumberFieldProps) => {
+const SingleNumberField = ({ text, placeholder, onChange, value }: SingleNumberFieldProps) => {
     return (
         <ContenerBox>
             <CheckBox>
-                <input type="number" id={text} name={text} placeholder={placeholder}></input>
+                <input onChange={onChange} type="number" id={text} name={text} placeholder={placeholder} value={value}></input>
                 <Name>
                     <label htmlFor={text}>{text}</label>
                 </Name>

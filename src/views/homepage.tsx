@@ -5,6 +5,7 @@ import ActionBtn from '../assets/ActionBtn/ActionBtn';
 import CabinetsPanel from '../components/cabinetsPanel';
 import ConstructionRestriction from '../components/conostructionRestrictions';
 import WallsPanel from '../components/wallsPanel';
+import PlaygroundRoom from '../playground/playgroundRoom';
 
 const HomePage = () => {
 
@@ -30,9 +31,11 @@ const HomePage = () => {
                     <PlaygroundNavList>
                         <PlaygroundNavListItem><NavLink to='/bottomCabinets'>Bottom Cabinets</NavLink></PlaygroundNavListItem>
                         <PlaygroundNavListItem><NavLink to='/topCabinets'>Top Cabinets</NavLink></PlaygroundNavListItem>
-                        <PlaygroundNavListItem><NavLink to='/topCabinets'>Preview</NavLink></PlaygroundNavListItem>
+                        <PlaygroundNavListItem><NavLink to='/preview'>Preview</NavLink></PlaygroundNavListItem>
                     </PlaygroundNavList>
-                    <PlaygroundBox></PlaygroundBox>
+                    <PlaygroundBox>
+                         <PlaygroundRoom />
+                    </PlaygroundBox>
                 </PlaygroundBoxContener>
                 <PlaygroundActions>
                     <ActionButtonsBox>
@@ -105,7 +108,7 @@ const PlaygroundNavListItem = styled.li`
 `;
 
 const PlaygroundBoxContener = styled.div`
-    width:100%;
+    width:77%;
     border-right:1px dotted black;
 `;
 
@@ -115,10 +118,12 @@ const PlaygroundBox = styled.div`
     border:1px solid black;
     border-radius:3px;
     background:#eefffd;
+    overflow:scroll;
+    padding:10px;
 `;
 
 const PlaygroundActions = styled.div`
-    width:20%;
+    min-width:20%;
     border:1px solid black;
     border-radius:3px;
     margin:0px 10px;
