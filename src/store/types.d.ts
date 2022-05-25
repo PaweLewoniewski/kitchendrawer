@@ -14,18 +14,19 @@ export interface RoomData {
 }
 
 export interface LocalDataState {
-    roomDimensions?:RoomData[];
-    textField?: string;
-    pagination?: string;
-    currency?: string;
-    maxPrice:string;
-    dlc?: boolean;
+    fullData?:RoomData[];
+    refresh?:boolean;
 }
 
 export interface LocalDataAction {
-    type?: 'ROOM_DIMENSIONS' | 'PAGINATION' | 'CURRENCY' | 'MAX_PRICE' | 'DLC';
+    type?: 'ROOM_DIMENSIONS' | 'REFRESH';
     payload?: LocalDataState;
 }
+
+
+
+
+
 
 export interface DataCardAction {
     error?: null;

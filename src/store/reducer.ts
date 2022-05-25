@@ -1,37 +1,26 @@
-import {  LocalDataAction, LocalDataState } from "./types";
+import { LocalDataAction, LocalDataState } from "./types";
 import { combineReducers } from "redux";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import * as actionTypes from "./actionTypes";
 import { store } from "./store";
 
 export const initialLocalData: LocalDataState = {
-    roomDimensions:[],
-    textField: '',
-    pagination: '1',
-    currency: 'USD',
-    maxPrice: '',
-    dlc: false
+    fullData: [],
+    refresh: false,
 };
 
 export function manageLocalDataReducer(state = initialLocalData, action: LocalDataAction) {
     switch (action.type) {
         case "ROOM_DIMENSIONS":
-            return { ...state, roomDimensions: action.payload };
-        case "PAGINATION":
-            return { ...state, pagination: action.payload };
-        case "CURRENCY":
-            return { ...state, currency: action.payload };
-        case "MAX_PRICE":
-            return { ...state, maxPrice: action.payload };
-        case "DLC":
-            return { ...state, dlc: action.payload };
+            return { ...state, fullData: action.payload };
+        case "REFRESH":
+            return { ...state, refresh: action.payload };
         default:
             return state;
     }
 }
 
 export const multiReducers = combineReducers({
-    localData: manageLocalDataReducer
+    localDataReducer: manageLocalDataReducer
 });
 
 type RootState = ReturnType<typeof store.getState>;
