@@ -1,3 +1,8 @@
+
+export interface FullData {
+    fullData: RoomData[];
+}
+
 export interface RoomData {
     roomWidth: number;
     roomDepth: number;

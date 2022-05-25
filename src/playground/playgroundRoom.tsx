@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useAppSelector } from "../store/reducer";
 import { RoomData } from "../types/types";
 
 const PlaygroundRoom = () => {
-    let localData: string | null = localStorage.getItem("data");
+
+    const roomDimensions = useAppSelector((store: any) => store.localData);
     const [loadData, setLoadData] = useState<RoomData[]>();
+    const localData: string | null = localStorage.getItem("data");
+    const dataObj = JSON.parse(localData);
+    setLoadData(dataObj);
 
     useEffect(() => {
-        if (localData !== null && loadData === undefined) {
-            const dataObj = JSON.parse(localData);
-            setLoadData(dataObj);
-            console.log('asd');
-        }
-    }, [loadData, localData]);
+    }, []);
 
     // const roomWidth = loadData.width / 4; //przy /5 to: 200 px to 1 metr
     // const roomDepth = loadData.depth / 4;

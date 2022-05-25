@@ -4,9 +4,12 @@ import SingleBtn from "../assets/SingleBtn/SingleBtn";
 import SingleNumberField from "../assets/SingleNumberFiled/SingleNumberFiled";
 import { RoomData } from "../types/types";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../store/reducer";
 
 const WallsPanel = () => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    // const roomDimensions = useAppSelector((store: any) => store.localData);
     let localData: string | null = localStorage.getItem("data");
     const [loadData, setLoadData] = useState<RoomData>();
     const [widthPlayground, setWidthPlayground] = useState<number | undefined>(loadData?.roomWidth);
@@ -22,6 +25,7 @@ const WallsPanel = () => {
     const setUpRoomPlayground = () => {
         const data = [{'roomWidth': widthPlayground,'roomDepth': depthPlayground}]
         localStorage.setItem("data", JSON.stringify(data));
+        dispatch({ type: "ROOM_DIMENSIONS", payload: data });
         navigate('/bottomCabinets');
     }
 
