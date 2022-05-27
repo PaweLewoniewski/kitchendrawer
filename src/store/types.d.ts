@@ -1,16 +1,31 @@
-export interface DataState {
-    pending: boolean;
-    items: [];
-    error?: null;
-}
-
 export interface FullData {
     fullData: RoomData[];
+}
+
+export interface Restrictions {
+    id:number;
+    restWidth: number;
+    restDepth: number;
+}
+
+export interface BottomCabinets {
+    id:number;
+    cabinWidth:number;
+    cabinDepth:number;
+}
+
+export interface TopCabinets {
+    id:number;
+    cabinWidth:number;
+    cabinDepth:number;
 }
 
 export interface RoomData {
     roomWidth: number;
     roomDepth: number;
+    // restrictions:Restrictions[];
+    // botCabinets:BottomCabinets[];
+    // topCabinets:TopCabinets[];
 }
 
 export interface LocalDataState {
@@ -21,26 +36,4 @@ export interface LocalDataState {
 export interface LocalDataAction {
     type?: 'ROOM_DIMENSIONS' | 'REFRESH';
     payload?: LocalDataState;
-}
-
-
-
-
-
-
-export interface DataCardAction {
-    error?: null;
-    type?: 'FETCH_ITEMS_PENDING' | 'FETCH_ITEMS_SUCCESS' | 'FETCH_ITEMS_ERROR';
-    payload?: DataState;
-}
-
-export interface DataBestPriceAction {
-    error?: null;
-    type?: 'FETCH_BEST_PRICE_PENDING' | 'FETCH_BEST_PRICE_SUCCESS' | 'FETCH_BEST_PRICE_ERROR';
-    payload?: DataState;
-}
-
-export interface DataReducer {
-    state: DataState[];
-    action: DataCardAction;
 }
