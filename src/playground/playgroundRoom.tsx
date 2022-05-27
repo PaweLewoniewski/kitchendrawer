@@ -7,12 +7,12 @@ import { RoomData } from "../store/types";
 const PlaygroundRoom = () => {
 
     const fullData = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
-    const [loadData, setLoadData] = useState<RoomData[]>(fullData);
     const localData: string | null = localStorage.getItem("data");
+    const dataObj = JSON.parse(localData !== null ? localData : '');
+    const [loadData, setLoadData] = useState<RoomData[]>(fullData !== null ? fullData : dataObj);
     const dispatch = useAppDispatch();
     useEffect(() => {
-        if (localData !== null && loadData !== fullData) {
-            const dataObj = JSON.parse(localData);
+        if (localData !== null) {
             setLoadData(dataObj);
             dispatch({ type: "ROOM_DIMENSIONS", payload: dataObj });
         }
