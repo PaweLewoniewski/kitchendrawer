@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import styled from "styled-components";
 import ActionBtn from '../assets/ActionBtn/ActionBtn';
 import CabinetsPanel from '../components/cabinetsPanel';
-import ConstructionRestriction from '../components/conostructionRestrictions';
-import WallsPanel from '../components/wallsPanel';
+import ConstructionRestrictionPanel from '../components/conostructionRestrictionsPanel';
+import RoomWallsPanel from '../components/roomWallsPanel';
 import PlaygroundRoom from '../playground/playgroundRoom';
 
 const HomePage = () => {
@@ -17,9 +17,9 @@ const HomePage = () => {
             case 'cabinets':
                 return <CabinetsPanel />;
             case 'restrictions':
-                return <ConstructionRestriction />
+                return <ConstructionRestrictionPanel />
             default:
-                return <WallsPanel />;
+                return <RoomWallsPanel />;
         }
     }
 

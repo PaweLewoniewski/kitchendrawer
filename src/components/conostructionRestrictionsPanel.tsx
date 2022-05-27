@@ -3,7 +3,7 @@ import SingleBtn from "../assets/SingleBtn/SingleBtn";
 import { AiOutlineBorderOuter } from 'react-icons/ai';
 import SingleNumberField from "../assets/SingleNumberFiled/SingleNumberFiled";
 
-const ConstructionRestriction = () => {
+const ConstructionRestrictionPanel = () => {
     return (
         <Contener>
             <FiledBox>
@@ -17,7 +17,7 @@ const ConstructionRestriction = () => {
         </Contener>
     );
 };
-export default ConstructionRestriction;
+export default ConstructionRestrictionPanel;
 
 const Contener = styled.div`
 padding:10px;

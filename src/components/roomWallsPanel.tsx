@@ -5,7 +5,7 @@ import SingleNumberField from "../assets/SingleNumberFiled/SingleNumberFiled";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store/reducer";
 
-const WallsPanel = () => {
+const RoomWallsPanel = () => {
     const navigate = useNavigate();
     const [widthPlayground, setWidthPlayground] = useState<number | undefined>();
     const [depthPlayground, setDepthPlayground] = useState<number | undefined>();
@@ -31,7 +31,7 @@ const WallsPanel = () => {
         </Contener>
     );
 };
-export default WallsPanel;
+export default RoomWallsPanel;
 
 const Contener = styled.div`
 padding:10px;
