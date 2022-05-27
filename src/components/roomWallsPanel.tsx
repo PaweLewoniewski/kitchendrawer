@@ -6,11 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store/reducer";
 
 const RoomWallsPanel = () => {
+
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const [widthPlayground, setWidthPlayground] = useState<number | undefined>();
     const [depthPlayground, setDepthPlayground] = useState<number | undefined>();
-    const dispatch = useAppDispatch();
-    
 
     const setUpRoomPlayground = () => {
         const data = [{'roomWidth': widthPlayground,'roomDepth': depthPlayground}]

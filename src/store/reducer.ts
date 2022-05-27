@@ -4,16 +4,16 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { store } from "./store";
 
 export const initialLocalData: LocalDataState = {
-    fullData: [],
-    refresh: false,
+    roomData: [],
+    restrictions: [],
 };
 
 export function manageLocalDataReducer(state = initialLocalData, action: LocalDataAction) {
     switch (action.type) {
         case "ROOM_DIMENSIONS":
-            return { ...state, fullData: action.payload };
-        case "REFRESH":
-            return { ...state, refresh: action.payload };
+            return { ...state, roomData: action.payload };
+        case "RESTRICTIONS":
+            return { ...state, restrictions: action.payload };
         default:
             return state;
     }

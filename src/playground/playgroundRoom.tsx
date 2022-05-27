@@ -6,7 +6,7 @@ import { RoomData } from "../store/types";
 
 const PlaygroundRoom = () => {
 
-    const { fullData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    const { roomData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const localData: string | null = localStorage.getItem("data");
     const [loadData, setLoadData] = useState<RoomData[]>();
     const dispatch = useAppDispatch();
@@ -16,8 +16,8 @@ const PlaygroundRoom = () => {
             setLoadData(dataObj);
             dispatch({ type: "ROOM_DIMENSIONS", payload: dataObj });
         }
-        if (loadData?.length !== fullData) {
-            setLoadData(fullData);
+        if (loadData?.length !== roomData) {
+            setLoadData(roomData);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loadData, localData]);
