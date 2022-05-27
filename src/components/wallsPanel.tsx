@@ -1,25 +1,16 @@
-import { useEffect,  useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import SingleBtn from "../assets/SingleBtn/SingleBtn";
 import SingleNumberField from "../assets/SingleNumberFiled/SingleNumberFiled";
-import { RoomData } from "../store/types";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store/reducer";
-// import { useAppDispatch, useAppSelector } from "../store/reducer";
 
 const WallsPanel = () => {
     const navigate = useNavigate();
-    let localData: string | null = localStorage.getItem("data");
-    const [loadData, setLoadData] = useState<RoomData>();
-    const [widthPlayground, setWidthPlayground] = useState<number | undefined>(loadData?.roomWidth);
-    const [depthPlayground, setDepthPlayground] = useState<number | undefined>(loadData?.roomDepth);
+    const [widthPlayground, setWidthPlayground] = useState<number | undefined>();
+    const [depthPlayground, setDepthPlayground] = useState<number | undefined>();
     const dispatch = useAppDispatch();
     
-    useEffect(() => {
-        if (localData !== null && loadData === undefined) {
-            setLoadData(JSON.parse(localData))
-        }
-    }, [loadData, localData]);
 
     const setUpRoomPlayground = () => {
         const data = [{'roomWidth': widthPlayground,'roomDepth': depthPlayground}]
