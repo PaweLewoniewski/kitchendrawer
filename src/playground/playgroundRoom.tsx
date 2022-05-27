@@ -6,19 +6,22 @@ import { RoomData } from "../store/types";
 
 const PlaygroundRoom = () => {
 
-    const fullData = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    const { fullData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const localData: string | null = localStorage.getItem("data");
-    const dataObj = JSON.parse(localData !== null ? localData : '');
-    const [loadData, setLoadData] = useState<RoomData[]>(fullData !== null ? fullData : dataObj);
+    const [loadData, setLoadData] = useState<RoomData[]>();
     const dispatch = useAppDispatch();
     useEffect(() => {
-        if (localData !== null) {
+        if (localData !== null && loadData === undefined) {
+            const dataObj = JSON.parse(localData);
             setLoadData(dataObj);
             dispatch({ type: "ROOM_DIMENSIONS", payload: dataObj });
         }
-    }, [localData]);
-        console.log(fullData);
-        console.log(loadData);
+        if (loadData?.length !== fullData) {
+            setLoadData(fullData);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loadData, localData]);
+
     // const roomWidth = loadData.width / 4; //przy /5 to: 200 px to 1 metr
     // const roomDepth = loadData.depth / 4;
     return (
