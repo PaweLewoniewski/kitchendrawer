@@ -1,29 +1,24 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
-import { FullData, RoomData } from "../types/types";
+import { RoomData } from "../store/types";
 
 const PlaygroundRoom = () => {
 
     const fullData = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
-    const [loadData, setLoadData] = useState<RoomData[]>();
+    const [loadData, setLoadData] = useState<RoomData[]>(fullData);
     const localData: string | null = localStorage.getItem("data");
-
+    const dispatch = useAppDispatch();
     useEffect(() => {
-
-        if (localData !== null && loadData === undefined) {
+        if (localData !== null && loadData !== fullData) {
             const dataObj = JSON.parse(localData);
             setLoadData(dataObj);
-            // console.log(loadData);
-            console.log("oldData not uploading state");
+            dispatch({ type: "ROOM_DIMENSIONS", payload: dataObj });
         }
+    }, [localData]);
         console.log(fullData);
         console.log(loadData);
-
-    }, [loadData, localData]);
-
     // const roomWidth = loadData.width / 4; //przy /5 to: 200 px to 1 metr
     // const roomDepth = loadData.depth / 4;
     return (

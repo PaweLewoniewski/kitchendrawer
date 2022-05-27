@@ -2,7 +2,7 @@ import { useEffect,  useState } from "react";
 import styled from "styled-components";
 import SingleBtn from "../assets/SingleBtn/SingleBtn";
 import SingleNumberField from "../assets/SingleNumberFiled/SingleNumberFiled";
-import { RoomData } from "../types/types";
+import { RoomData } from "../store/types";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store/reducer";
 // import { useAppDispatch, useAppSelector } from "../store/reducer";
