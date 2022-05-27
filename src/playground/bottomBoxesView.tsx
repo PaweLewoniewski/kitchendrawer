@@ -1,7 +1,7 @@
 
-const BottomBoxes = () => {
+const BottomBoxesView = () => {
     return (
         <div>Bottom Boxes Polygon</div>
     );
 };
-export default BottomBoxes;
+export default BottomBoxesView;

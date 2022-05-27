@@ -5,7 +5,7 @@ import ActionBtn from '../assets/ActionBtn/ActionBtn';
 import CabinetsPanel from '../components/cabinetsPanel';
 import ConstructionRestrictionPanel from '../components/conostructionRestrictionsPanel';
 import RoomWallsPanel from '../components/roomWallsPanel';
-import PlaygroundRoom from '../playground/playgroundRoom';
+import PlaygroundRoomView from '../playground/playgroundRoomView';
 
 const HomePage = () => {
 
@@ -34,7 +34,7 @@ const HomePage = () => {
                         <PlaygroundNavListItem><NavLink to='/preview'>Preview</NavLink></PlaygroundNavListItem>
                     </PlaygroundNavList>
                     <PlaygroundBox>
-                         <PlaygroundRoom />
+                         <PlaygroundRoomView />
                     </PlaygroundBox>
                 </PlaygroundBoxContener>
                 <PlaygroundActions>
