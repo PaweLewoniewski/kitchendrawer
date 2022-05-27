@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
 import { RoomData } from "../store/types";
 
-const PlaygroundRoomView = () => {
+const PreviewView = () => {
 
     const { roomData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const localData: string | null = localStorage.getItem("data");
@@ -35,7 +35,7 @@ const PlaygroundRoomView = () => {
         </>
     );
 };
-export default PlaygroundRoomView;
+export default PreviewView;
 
 const Room = styled.div<RoomData>`
     width:${props => props.roomWidth !== 0 ? `${props.roomWidth}px` : '0px'};

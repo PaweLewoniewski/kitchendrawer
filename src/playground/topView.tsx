@@ -1,6 +1,6 @@
-const TopBoxesView = () => {
+const TopView = () => {
     return (
         <div>Top Boxes Polygon</div>
     );
 };
-export default TopBoxesView;
+export default TopView;

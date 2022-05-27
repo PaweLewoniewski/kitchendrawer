@@ -4,10 +4,10 @@ import styled from "styled-components";
 import HomePage from './views/homepage';
 import Policy from './views/policy';
 import MainNavigation from './components/mainNavigation';
-import BottomBoxesView from './playground/bottomBoxesView';
-import TopBoxesView from './playground/topBoxesView';
+import BottomView from './playground/bottomView';
+import TopView from './playground/topView';
 import Footer from './components/footer';
-import PlaygroundRoomView from './playground/playgroundRoomView';
+import PreviewView from './playground/previewView';
 
 
 function App() {
@@ -23,9 +23,9 @@ function App() {
             <Pages>
               <Routes>
                 <Route path="/" element={<HomePage />} >
-                  <Route path=":bottomId" element={<BottomBoxesView />} />
-                  <Route path=":topId" element={<TopBoxesView />} />
-                  <Route path=":preview" element={<PlaygroundRoomView />} />
+                  <Route path=":bottomId" element={<BottomView />} />
+                  <Route path=":topId" element={<TopView />} />
+                  <Route path=":preview" element={<PreviewView />} />
                 </Route>
                 <Route path="/policy" element={<Policy />} />
               </Routes>
