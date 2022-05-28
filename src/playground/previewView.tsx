@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
 import { RoomData } from "../store/types";
+import CabinetBox from "./cabinetBox";
 import RestrictionBox from "./restrictionBox";
 
 const PreviewView = () => {
@@ -31,6 +32,7 @@ const PreviewView = () => {
             (<Room key={index} roomWidth={item.roomWidth} roomDepth={item.roomDepth}>
                 {/* Dimensions Playground Room */}
                 <RestrictionBox />
+                <CabinetBox />
             </Room>
             )) : 'Set Room Dimensions'}
         </>
@@ -43,4 +45,5 @@ const Room = styled.div<RoomData>`
     height:${props => props.roomDepth !== 0 ? `${props.roomDepth}px` : '0px'};
     /* border:2px solid black; */
     box-sizing: border-box;
+    display:flex;
 `;
