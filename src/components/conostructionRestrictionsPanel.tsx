@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import SingleBtn from "../assets/SingleBtn/SingleBtn";
-import { AiOutlineBorderOuter } from 'react-icons/ai';
+// import { AiOutlineBorderOuter } from 'react-icons/ai';
 import SingleNumberField from "../assets/SingleNumberFiled/SingleNumberFiled";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store/reducer";
@@ -12,18 +12,19 @@ const ConstructionRestrictionPanel = () => {
     const dispatch = useAppDispatch();
     const [widthRestrict, setWidthRestrict] = useState<number | undefined>();
     const [depthRestrict, setDepthRestrict] = useState<number | undefined>();
-    // const [restId, setRestId] = useState<number | undefined>(1);
 
     const addRoomRestrictions = () => {
-        const localData: string | null = localStorage.getItem("data");
+        const localData: string | null = localStorage.getItem("roomDim");
+        const restlocalData: string | null = localStorage.getItem("restDim");
         if (localData !== null) {
-            const data = [{'restWidth': widthRestrict, 'restDepth': depthRestrict}];
-            let summData = localData ? JSON.parse(localData) : {};
+            const data = [{ 'restWidth': widthRestrict, 'restDepth': depthRestrict }];
+            const summData = restlocalData ? JSON.parse(restlocalData) : [];
             summData.push(...data);
-            localStorage.setItem("data", JSON.stringify(summData));
-            dispatch({ type: "ADD_RESTRICTIONS", payload: data });
+            localStorage.setItem("restDim", JSON.stringify(summData));
+            dispatch({ type: "ADD_RESTRICTIONS", payload: summData });
+            navigate('/bottomCabinets');
         }
-        navigate('/bottomCabinets');
+        else console.log('setup room');
     }
 
     return (

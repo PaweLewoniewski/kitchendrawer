@@ -11,7 +11,7 @@ const PreviewView = () => {
 
     const { roomData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const { restrictions } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
-    const localData: string | null = localStorage.getItem("data");
+    const localData: string | null = localStorage.getItem("roomDim");
     const [loadData, setLoadData] = useState<RoomData[]>();
     const dispatch = useAppDispatch();
     useEffect(() => {

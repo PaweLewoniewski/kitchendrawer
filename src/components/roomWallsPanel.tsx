@@ -14,7 +14,7 @@ const RoomWallsPanel = () => {
 
     const setUpRoomPlayground = () => {
         const data = [{'roomWidth': widthPlayground,'roomDepth': depthPlayground}]
-        localStorage.setItem("data", JSON.stringify(data));
+        localStorage.setItem("roomDim", JSON.stringify(data));
         dispatch({ type: "ROOM_DIMENSIONS", payload: data });
         navigate('/bottomCabinets');
     }
