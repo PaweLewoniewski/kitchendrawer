@@ -111,5 +111,7 @@ const Pages = styled.div`
  display:flex;
  width:90%;
  /* margin:0 auto; */
- background:#d6fff9;
+ /* background:#d6fff9; */
+ background: rgb(59,194,167);
+ background: radial-gradient(circle, rgba(59,194,167,1) 0%, rgba(15,142,142,1) 100%);
 `;

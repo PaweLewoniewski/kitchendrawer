@@ -12,7 +12,7 @@ export function manageLocalDataReducer(state = initialLocalData, action: LocalDa
     switch (action.type) {
         case "ROOM_DIMENSIONS":
             return { ...state, roomData: action.payload };
-        case "RESTRICTIONS":
+        case "ADD_RESTRICTIONS":
             return { ...state, restrictions: action.payload };
         default:
             return state;

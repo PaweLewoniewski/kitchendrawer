@@ -1,5 +1,5 @@
 export interface Restrictions {
-    id: number;
+    // id: number;
     restWidth: number;
     restDepth: number;
 }
@@ -29,6 +29,6 @@ export interface LocalDataState {
 }
 
 export interface LocalDataAction {
-    type?: 'ROOM_DIMENSIONS' | 'RESTRICTIONS';
+    type?: 'ROOM_DIMENSIONS' | 'ADD_RESTRICTIONS';
     payload?: LocalDataState;
 }

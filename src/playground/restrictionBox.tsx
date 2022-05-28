@@ -1,19 +1,37 @@
+//import { useEffect, useState } from "react";
 import styled from "styled-components";
+//import { useAppSelector } from "../store/reducer";
+import { Restrictions } from "../store/types";
 
-const RestrictionBox = () => {
+interface ElementsData {
+    elementsData: Restrictions[];
+}
+
+
+const RestrictionBox = ({ elementsData }: ElementsData) => {
+
     return (
-        <RestrictBox>
-            <DimensionsBoxLines />
-            <DimensionsBoxNames><DimensionText>1567 mm</DimensionText></DimensionsBoxNames>
-            <CrossLine />
-        </RestrictBox>
+        <>
+            {elementsData && elementsData.length > 0 ? elementsData.map((item: Restrictions,index) =>
+            (
+                <RestrictBox key={index} restWidth={item.restWidth} restDepth={item.restDepth}>
+                    <DimensionsBoxLines />
+                    <DimensionsBoxNames>
+                        <DimensionText>{item.restWidth}</DimensionText>
+                    </DimensionsBoxNames>
+                    <CrossLine />
+                </RestrictBox>
+            )) : ''}
+        </>
     );
 };
 export default RestrictionBox;
 
-const RestrictBox = styled.div`
-    width:150px;
-    height:60px;
+const RestrictBox = styled.div<Restrictions>`
+    /* width:150px;
+    height:60px; */
+    width:${props => props.restWidth !== 0 ? `${props.restWidth}px` : '0px'};
+    height:${props => props.restDepth !== 0 ? `${props.restDepth}px` : '0px'};
     /* transform: rotate(0.25turn); */
     border:2px solid black;
     box-sizing: border-box;
@@ -86,3 +104,19 @@ const CrossLine = styled.div`
 //     border:2px solid black;
 //     box-sizing: border-box;
 // `;
+
+
+    // const { restrictions } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    //  const [loadData, setLoadData] = useState<Restrictions[]>();
+
+    // useEffect(() => {
+    //     if (localData !== null && loadData === undefined) {
+    //         const dataObj = JSON.parse(localData);
+    //         setLoadData(dataObj);
+    //         dispatch({ type: "ROOM_DIMENSIONS", payload: dataObj });
+    //     }
+    //     if (loadData?.length !== roomData) {
+    //         setLoadData(roomData);
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [loadData, localData]);

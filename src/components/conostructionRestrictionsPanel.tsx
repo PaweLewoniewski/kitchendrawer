@@ -12,20 +12,26 @@ const ConstructionRestrictionPanel = () => {
     const dispatch = useAppDispatch();
     const [widthRestrict, setWidthRestrict] = useState<number | undefined>();
     const [depthRestrict, setDepthRestrict] = useState<number | undefined>();
+    // const [restId, setRestId] = useState<number | undefined>(1);
 
     const addRoomRestrictions = () => {
-        const data = [{'restWidth': widthRestrict,'restDepth': depthRestrict}]
-        localStorage.setItem("data", JSON.stringify(data));
-        dispatch({ type: "ROOM_DIMENSIONS", payload: data });
+        const localData: string | null = localStorage.getItem("data");
+        if (localData !== null) {
+            const data = [{'restWidth': widthRestrict, 'restDepth': depthRestrict}];
+            let summData = localData ? JSON.parse(localData) : {};
+            summData.push(...data);
+            localStorage.setItem("data", JSON.stringify(summData));
+            dispatch({ type: "ADD_RESTRICTIONS", payload: data });
+        }
         navigate('/bottomCabinets');
     }
 
     return (
         <Contener>
             <FiledBox>
-                <SingleBtn btnName={""}><AiOutlineBorderOuter size={25} className='turnLeft' /></SingleBtn>
-                <SingleNumberField text={"mm"} placeholder={'Width'} onChange={(e: any) => { setWidthRestrict(e.target.value) }}/>
-                <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthRestrict(e.target.value) }}/>
+                {/* <SingleBtn btnName={""}><AiOutlineBorderOuter size={25} className='turnLeft' /></SingleBtn> */}
+                <SingleNumberField text={"mm"} placeholder={'Width'} onChange={(e: any) => { setWidthRestrict(e.target.value) }} />
+                <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthRestrict(e.target.value) }} />
             </FiledBox>
             <BtnBoxEnd>
                 <SingleBtn btnName={"Add"} onClick={addRoomRestrictions}></SingleBtn>
