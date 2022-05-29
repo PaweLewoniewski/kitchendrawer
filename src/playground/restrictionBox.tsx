@@ -7,12 +7,11 @@ interface ElementsData {
     elementsData: Restrictions[];
 }
 
-
 const RestrictionBox = ({ elementsData }: ElementsData) => {
 
     return (
         <>
-            {elementsData && elementsData.length > 0 ? elementsData.map((item: Restrictions,index) =>
+            {elementsData && elementsData.length > 0 ? elementsData.map((item: Restrictions, index) =>
             (
                 <RestrictBox key={index} restWidth={item.restWidth} restDepth={item.restDepth}>
                     <DimensionsBoxLines />

@@ -4,15 +4,20 @@ import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
 import { RoomData } from "../store/types";
+import CabinetBox from "./cabinetBox";
 //import CabinetBox from "./cabinetBox";
 import RestrictionBox from "./restrictionBox";
 
 const PreviewView = () => {
-
+    // dodać do componentu widoki cabinbox i ify
     const { roomData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const { restrictions } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    const { botCabinets } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    const { topCabinets } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const localData: string | null = localStorage.getItem("roomDim");
     const restlocalData: string | null = localStorage.getItem("restDim");
+    const botlocalData: string | null = localStorage.getItem("botCabinDim");
+    const toplocalData: string | null = localStorage.getItem("topCabinDim");
     const [loadData, setLoadData] = useState<RoomData[]>();
     const dispatch = useAppDispatch();
 
@@ -25,6 +30,14 @@ const PreviewView = () => {
         if (restlocalData !== null) {
             const restDataObj = JSON.parse(restlocalData);
             dispatch({ type: "ADD_RESTRICTIONS", payload: restDataObj });
+        }
+        if (botlocalData !== null) {
+            const botDataObj = JSON.parse(botlocalData);
+            dispatch({ type: "ADD_BOTTOM_CABIN", payload: botDataObj });
+        }
+        if (toplocalData !== null) {
+            const topDataObj = JSON.parse(toplocalData);
+            dispatch({ type: "ADD_TOP_CABIN", payload: topDataObj });
         }
         if (loadData?.length !== roomData) {
             setLoadData(roomData);
@@ -40,6 +53,7 @@ const PreviewView = () => {
             {loadData && loadData.length > 0 ? loadData.map((item: RoomData, index) =>
             (<Room key={index} roomWidth={item.roomWidth} roomDepth={item.roomDepth}>
                 {restrictions !== null ? <RestrictionBox elementsData={restrictions} /> : ''}
+                {restrictions !== null ? <CabinetBox elementsData={restrictions} /> : ''}
             </Room>
             )) : 'Set Room Dimensions'}
         </>

@@ -24,7 +24,8 @@ const ConstructionRestrictionPanel = () => {
             dispatch({ type: "ADD_RESTRICTIONS", payload: summData });
             navigate('/bottomCabinets');
         }
-        else console.log('setup room');
+        else
+       return console.log('setup room');
     }
 
     return (

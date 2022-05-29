@@ -1,18 +1,30 @@
 import styled from "styled-components";
+import { Cabinets } from "../store/types";
 
-const CabinetBox = () => {
+interface ElementsData {
+    elementsData: Cabinets[];
+}
+
+const CabinetBox = ({ elementsData }: ElementsData) => {
     return (
-        <CabinBox>
-            <DimensionsBoxLines />
-            <DimensionsBoxNames><DimensionText>1567 mm</DimensionText></DimensionsBoxNames>
-        </CabinBox>
+        <>
+            {elementsData && elementsData.length > 0 ? elementsData.map((item: Cabinets, index) =>
+            (
+                <CabinBox key={index} cabinWidth={item.cabinWidth} cabinDepth={item.cabinDepth}>
+                    <DimensionsBoxLines />
+                    <DimensionsBoxNames>
+                        <DimensionText>{item.cabinWidth}</DimensionText>
+                    </DimensionsBoxNames>
+                </CabinBox>
+            )) : ''}
+        </>
     );
 };
 export default CabinetBox;
 
-const CabinBox = styled.div`
-    width:150px;
-    height:60px;
+const CabinBox = styled.div<Cabinets>`
+    width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth}px` : '0px'};
+    height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth}px` : '0px'};
     /* transform: rotate(0.25turn); */
     border:2px solid black;
     border-bottom:4px solid black;

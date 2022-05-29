@@ -4,6 +4,11 @@ export interface Restrictions {
     restDepth: number;
 }
 
+export interface Cabinets {
+    cabinWidth: number;
+    cabinDepth: number;
+}
+
 export interface BottomCabinets {
     id: number;
     cabinWidth: number;
@@ -29,6 +34,6 @@ export interface LocalDataState {
 }
 
 export interface LocalDataAction {
-    type?: 'ROOM_DIMENSIONS' | 'ADD_RESTRICTIONS';
+    type?: 'ROOM_DIMENSIONS' | 'ADD_RESTRICTIONS' | 'ADD_BOTTOM_CABIN' | 'ADD_TOP_CABIN';
     payload?: LocalDataState;
 }

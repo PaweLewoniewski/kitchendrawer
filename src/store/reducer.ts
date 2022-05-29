@@ -6,6 +6,8 @@ import { store } from "./store";
 export const initialLocalData: LocalDataState = {
     roomData: [],
     restrictions: [],
+    botCabinets: [],
+    topCabinets: [],
 };
 
 export function manageLocalDataReducer(state = initialLocalData, action: LocalDataAction) {
@@ -14,6 +16,10 @@ export function manageLocalDataReducer(state = initialLocalData, action: LocalDa
             return { ...state, roomData: action.payload };
         case "ADD_RESTRICTIONS":
             return { ...state, restrictions: action.payload };
+        case "ADD_BOTTOM_CABIN":
+            return { ...state, botCabinets: action.payload };
+        case "ADD_TOP_CABIN":
+            return { ...state, topCabinets: action.payload };
         default:
             return state;
     }
