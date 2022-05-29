@@ -9,7 +9,7 @@ import CabinetBox from "./cabinetBox";
 import RestrictionBox from "./restrictionBox";
 
 const PreviewView = () => {
-    // dodać do componentu widoki cabinbox i ify
+
     const { roomData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const { restrictions } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const { botCabinets } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
@@ -53,7 +53,8 @@ const PreviewView = () => {
             {loadData && loadData.length > 0 ? loadData.map((item: RoomData, index) =>
             (<Room key={index} roomWidth={item.roomWidth} roomDepth={item.roomDepth}>
                 {restrictions !== null ? <RestrictionBox elementsData={restrictions} /> : ''}
-                {restrictions !== null ? <CabinetBox elementsData={restrictions} /> : ''}
+                {botCabinets !== null ? <CabinetBox elementsData={botCabinets} /> : ''}
+                {topCabinets !== null ? <CabinetBox elementsData={topCabinets} /> : ''}
             </Room>
             )) : 'Set Room Dimensions'}
         </>

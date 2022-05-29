@@ -35,6 +35,13 @@ const CabinBox = styled.div<Cabinets>`
     position:relative;
     background:#f4f4f4;
     margin:0px 1px;
+    transition:0.3s ease-in-out;
+    cursor:pointer;
+    &:hover{
+        border:2px solid #00d624;
+        border-bottom:4px solid #00d624;
+        transition:0.3s ease-in-out;
+    }
 `;
 
 const DimensionsBoxLines = styled.div`
