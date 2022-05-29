@@ -1,19 +1,35 @@
 import styled from "styled-components";
+import { useAppDispatch } from "../store/reducer";
 import { Cabinets } from "../store/types";
 
 interface ElementsData {
     elementsData: Cabinets[];
+    name: string;
 }
 
-const CabinetBox = ({ elementsData }: ElementsData) => {
+const CabinetBox = ({ elementsData, name }: ElementsData) => {
+
+    const dispatch = useAppDispatch();
+    const removeElement = (item: any) => {
+        const removelement = elementsData.filter(i => i.id !== item);
+        localStorage.setItem(name, JSON.stringify(removelement));
+        console.log(item);
+        if (name === 'botCabinDim') {
+            dispatch({ type: "BOTTOM_CABIN", payload: removelement });
+        }
+        if (name === 'topCabinDim') {
+            dispatch({ type: "TOP_CABIN", payload: removelement });
+        }
+    }
+
     return (
         <>
             {elementsData && elementsData.length > 0 ? elementsData.map((item: Cabinets, index) =>
             (
-                <CabinBox key={index} cabinWidth={item.cabinWidth} cabinDepth={item.cabinDepth}>
+                <CabinBox key={item.id} cabinWidth={item.cabinWidth} cabinDepth={item.cabinDepth} onClick={() => removeElement(item.id)}>
                     <DimensionsBoxLines />
                     <DimensionsBoxNames>
-                        <DimensionText>{item.cabinWidth}</DimensionText>
+                        <DimensionText>{item.cabinWidth} i:{index}</DimensionText>
                     </DimensionsBoxNames>
                 </CabinBox>
             )) : ''}
@@ -27,7 +43,7 @@ const CabinBox = styled.div<Cabinets>`
     height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth}px` : '0px'};
     /* transform: rotate(0.25turn); */
     border:2px solid black;
-    border-bottom:4px solid black;
+    border-bottom:6px solid black;
     box-sizing: border-box;
     display:flex;
     align-items:center;
@@ -39,7 +55,7 @@ const CabinBox = styled.div<Cabinets>`
     cursor:pointer;
     &:hover{
         border:2px solid #00d624;
-        border-bottom:4px solid #00d624;
+        border-bottom:6px solid #00d624;
         transition:0.3s ease-in-out;
     }
 `;
@@ -53,7 +69,6 @@ const DimensionsBoxLines = styled.div`
     position:absolute;
     top:-16px;
     left:-1px;
-    background:white;
 `;
 
 const DimensionsBoxNames = styled.div`

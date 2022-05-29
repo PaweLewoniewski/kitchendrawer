@@ -13,19 +13,21 @@ const CabinetsPanel = () => {
   const dispatch = useAppDispatch();
   const [widthCabin, setWidthCabin] = useState<number | undefined>();
   const [depthCabin, setDepthCabin] = useState<number | undefined>();
+  const [idIterator, setIdIterator] = useState<number>(0);
   const [topbotSwapper, settopbotSwapper] = useState<boolean>(true); // top - false | bot = true
   const [cabinRotate, setCabinRotate] = useState<boolean | null>(null); /// false - lewa | null - prosto | true - prawa
 
   const addRoomCabins = () => {
+    setIdIterator(idIterator + 1);
     if (topbotSwapper === true) {
       const localData: string | null = localStorage.getItem("roomDim");
       const bottomCabinlocalData: string | null = localStorage.getItem("botCabinDim");
       if (localData !== null) {
-        const data = [{ 'cabinWidth': widthCabin, 'cabinDepth': depthCabin }];
+        const data = [{ 'id': idIterator, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin }];
         const summData = bottomCabinlocalData ? JSON.parse(bottomCabinlocalData) : [];
         summData.push(...data);
         localStorage.setItem("botCabinDim", JSON.stringify(summData));
-        dispatch({ type: "ADD_BOTTOM_CABIN", payload: summData });
+        dispatch({ type: "BOTTOM_CABIN", payload: summData });
         navigate('/bottomCabinets');
       }
     }
@@ -33,11 +35,11 @@ const CabinetsPanel = () => {
       const localData: string | null = localStorage.getItem("roomDim");
       const topCabinlocalData: string | null = localStorage.getItem("topCabinDim");
       if (localData !== null) {
-        const data = [{ 'cabinWidth': widthCabin, 'cabinDepth': depthCabin }];
+        const data = [{'id': idIterator, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin }];
         const summData = topCabinlocalData ? JSON.parse(topCabinlocalData) : [];
         summData.push(...data);
         localStorage.setItem("topCabinDim", JSON.stringify(summData));
-        dispatch({ type: "ADD_TOP_CABIN", payload: summData });
+        dispatch({ type: "TOP_CABIN", payload: summData });
         navigate('/topCabinets');
       }
     }

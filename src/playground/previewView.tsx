@@ -33,11 +33,11 @@ const PreviewView = () => {
         }
         if (botlocalData !== null) {
             const botDataObj = JSON.parse(botlocalData);
-            dispatch({ type: "ADD_BOTTOM_CABIN", payload: botDataObj });
+            dispatch({ type: "BOTTOM_CABIN", payload: botDataObj });
         }
         if (toplocalData !== null) {
             const topDataObj = JSON.parse(toplocalData);
-            dispatch({ type: "ADD_TOP_CABIN", payload: topDataObj });
+            dispatch({ type: "TOP_CABIN", payload: topDataObj });
         }
         if (loadData?.length !== roomData) {
             setLoadData(roomData);
@@ -53,8 +53,8 @@ const PreviewView = () => {
             {loadData && loadData.length > 0 ? loadData.map((item: RoomData, index) =>
             (<Room key={index} roomWidth={item.roomWidth} roomDepth={item.roomDepth}>
                 {restrictions !== null ? <RestrictionBox elementsData={restrictions} /> : ''}
-                {botCabinets !== null ? <CabinetBox elementsData={botCabinets} /> : ''}
-                {topCabinets !== null ? <CabinetBox elementsData={topCabinets} /> : ''}
+                {botCabinets !== null ? <CabinetBox elementsData={botCabinets} name={'botCabinDim'} /> : ''}
+                {topCabinets !== null ? <CabinetBox elementsData={topCabinets} name={'topCabinDim'} /> : ''}
             </Room>
             )) : 'Set Room Dimensions'}
         </>

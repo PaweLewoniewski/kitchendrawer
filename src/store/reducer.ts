@@ -16,9 +16,9 @@ export function manageLocalDataReducer(state = initialLocalData, action: LocalDa
             return { ...state, roomData: action.payload };
         case "ADD_RESTRICTIONS":
             return { ...state, restrictions: action.payload };
-        case "ADD_BOTTOM_CABIN":
+        case "BOTTOM_CABIN":
             return { ...state, botCabinets: action.payload };
-        case "ADD_TOP_CABIN":
+        case "TOP_CABIN":
             return { ...state, topCabinets: action.payload };
         default:
             return state;
