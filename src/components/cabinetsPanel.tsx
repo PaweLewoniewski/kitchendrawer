@@ -4,13 +4,17 @@ import { AiOutlineBorderBottom } from 'react-icons/ai';
 import SingleNumberField from "../assets/SingleNumberFiled/SingleNumberFiled";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../store/reducer";
+import { useAppDispatch, useAppSelector } from "../store/reducer";
 import ActionBtnSmall from "../assets/ActionBtnSmall/ActionBtnSmall";
+import { RootState } from "../store/store";
 
 const CabinetsPanel = () => {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+  const { botCabinets } = useAppSelector((store: any) => store.multiReducers.localDataReducer);
+  const { topCabinets } = useAppSelector((store: any) => store.multiReducers.localDataReducer);
   const [widthCabin, setWidthCabin] = useState<number | undefined>();
   const [depthCabin, setDepthCabin] = useState<number | undefined>();
   const [idIterator, setIdIterator] = useState<number>(0);
@@ -23,7 +27,7 @@ const CabinetsPanel = () => {
       const localData: string | null = localStorage.getItem("roomDim");
       const bottomCabinlocalData: string | null = localStorage.getItem("botCabinDim");
       if (localData !== null) {
-        const data = [{ 'id': idIterator, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin }];
+        const data = [{ 'id': idIterator, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'botCabinDim' }];
         const summData = bottomCabinlocalData ? JSON.parse(bottomCabinlocalData) : [];
         summData.push(...data);
         localStorage.setItem("botCabinDim", JSON.stringify(summData));
@@ -35,7 +39,7 @@ const CabinetsPanel = () => {
       const localData: string | null = localStorage.getItem("roomDim");
       const topCabinlocalData: string | null = localStorage.getItem("topCabinDim");
       if (localData !== null) {
-        const data = [{'id': idIterator, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin }];
+        const data = [{ 'id': idIterator, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'topCabinDim' }];
         const summData = topCabinlocalData ? JSON.parse(topCabinlocalData) : [];
         summData.push(...data);
         localStorage.setItem("topCabinDim", JSON.stringify(summData));
@@ -43,6 +47,22 @@ const CabinetsPanel = () => {
         navigate('/topCabinets');
       }
     }
+  }
+
+  const { id, name } = currentTarget;
+
+  const removeTarget = () => {
+    if (name === 'botCabinDim') {
+      const removelement = botCabinets.filter((i: any) => i.id !== id);
+      localStorage.setItem(name, JSON.stringify(removelement));
+      dispatch({ type: "BOTTOM_CABIN", payload: removelement });
+    }
+    if (name === 'topCabinDim') {
+      const removelement = topCabinets.filter((i: any) => i.id !== id);
+      localStorage.setItem(name, JSON.stringify(removelement));
+      dispatch({ type: "TOP_CABIN", payload: removelement });
+    }
+    console.log(botCabinets);
   }
 
   return (
@@ -62,6 +82,7 @@ const CabinetsPanel = () => {
           <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthCabin(e.target.value) }} />
         </FiledBox>
         <BtnBoxEnd>
+          {currentTarget !== undefined ? <SingleBtn danger={'danger'} btnName={"Remove"} onClick={removeTarget} /> : ''}
           <SingleBtn btnName={"Add"} onClick={addRoomCabins}></SingleBtn>
         </BtnBoxEnd>
       </Contener>

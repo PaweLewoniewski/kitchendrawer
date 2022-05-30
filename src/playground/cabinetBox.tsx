@@ -7,26 +7,19 @@ interface ElementsData {
     name: string;
 }
 
-const CabinetBox = ({ elementsData, name }: ElementsData) => {
+const CabinetBox = ({ elementsData }: ElementsData) => {
 
     const dispatch = useAppDispatch();
     const removeElement = (item: any) => {
-        const removelement = elementsData.filter(i => i.id !== item);
-        localStorage.setItem(name, JSON.stringify(removelement));
-        console.log(item);
-        if (name === 'botCabinDim') {
-            dispatch({ type: "BOTTOM_CABIN", payload: removelement });
-        }
-        if (name === 'topCabinDim') {
-            dispatch({ type: "TOP_CABIN", payload: removelement });
-        }
+        dispatch({ type: "CURRENT_TARGET", payload: item });
     }
 
     return (
         <>
             {elementsData && elementsData.length > 0 ? elementsData.map((item: Cabinets, index) =>
             (
-                <CabinBox key={item.id} cabinWidth={item.cabinWidth} cabinDepth={item.cabinDepth} onClick={() => removeElement(item.id)}>
+                <CabinBox key={item.id} cabinWidth={item.cabinWidth} cabinDepth={item.cabinDepth}
+                    onClick={() => removeElement(item)}>
                     <DimensionsBoxLines />
                     <DimensionsBoxNames>
                         <DimensionText>{item.cabinWidth} i:{index}</DimensionText>

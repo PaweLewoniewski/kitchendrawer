@@ -8,6 +8,7 @@ export const initialLocalData: LocalDataState = {
     restrictions: [],
     botCabinets: [],
     topCabinets: [],
+    currentTarget: [],
 };
 
 export function manageLocalDataReducer(state = initialLocalData, action: LocalDataAction) {

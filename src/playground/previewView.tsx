@@ -45,7 +45,7 @@ const PreviewView = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loadData, localData]);
 
-    console.log(loadData)
+    // console.log(loadData)
     // const roomWidth = loadData.width / 4; //przy /5 to: 200 px to 1 metr
     // const roomDepth = loadData.depth / 4;
     return (

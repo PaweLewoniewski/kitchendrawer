@@ -21,12 +21,14 @@ export interface BottomCabinets {
     id: number;
     cabinWidth: number;
     cabinDepth: number;
+    name?: string;
 }
 
 export interface TopCabinets {
     id: number;
     cabinWidth: number;
     cabinDepth: number;
+    name?: string;
 }
 
 export interface RoomData {
@@ -39,7 +41,7 @@ export interface LocalDataState {
     restrictions?: Restrictions[];
     botCabinets?: BottomCabinets[];
     topCabinets?: TopCabinets[];
-    currenttarget: CurrentTarget[];
+    currentTarget?: CurrentTarget[] | undefined;
 }
 
 export interface LocalDataAction {
