@@ -62,7 +62,6 @@ const CabinetsPanel = () => {
       localStorage.setItem(name, JSON.stringify(removelement));
       dispatch({ type: "TOP_CABIN", payload: removelement });
     }
-    console.log(botCabinets);
   }
 
   return (
