@@ -20,6 +20,8 @@ export function manageLocalDataReducer(state = initialLocalData, action: LocalDa
             return { ...state, botCabinets: action.payload };
         case "TOP_CABIN":
             return { ...state, topCabinets: action.payload };
+        case "CURRENT_TARGET":
+            return { ...state, currentTarget: action.payload };
         default:
             return state;
     }

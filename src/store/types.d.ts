@@ -10,6 +10,13 @@ export interface Cabinets {
     cabinDepth: number;
 }
 
+export interface CurrentTarget {
+    id?: number;
+    cabinWidth?: number;
+    cabinDepth?: number;
+    name?: string;
+}
+
 export interface BottomCabinets {
     id: number;
     cabinWidth: number;
@@ -32,9 +39,10 @@ export interface LocalDataState {
     restrictions?: Restrictions[];
     botCabinets?: BottomCabinets[];
     topCabinets?: TopCabinets[];
+    currenttarget: CurrentTarget[];
 }
 
 export interface LocalDataAction {
-    type?: 'ROOM_DIMENSIONS' | 'ADD_RESTRICTIONS' | 'BOTTOM_CABIN' | 'TOP_CABIN';
+    type?: 'ROOM_DIMENSIONS' | 'ADD_RESTRICTIONS' | 'BOTTOM_CABIN' | 'TOP_CABIN' | 'CURRENT_TARGET';
     payload?: LocalDataState;
 }
