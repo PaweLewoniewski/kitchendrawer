@@ -23,15 +23,22 @@
   transform: rotate(-0.25turn);
 }
 
-.active {
+/* .active {
   transition: 0.3s ease-in-out;
   background: #b0ffee;
+} */
+
+.activeTab {
+  transition: 0.3s ease-in-out;
+  background: #ffcc00;
 }
 
 .activeCabin {
+  transition: 0.3s ease-in-out;
   background:rgb(255, 200, 0) !important;
 }
 
 .activePanelBtn {
-background:#B0FFEE !important;
+  transition: 0.3s ease-in-out;
+  background:#ffcc00 !important;
 }

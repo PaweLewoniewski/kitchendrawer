@@ -30,19 +30,25 @@ const HomePage = () => {
             <PlaygroundContener>
                 <PlaygroundBoxContener>
                     <PlaygroundNavList>
-                        <PlaygroundNavListItem><NavLink to='/bottomCabinets'>Bottom Cabinets</NavLink></PlaygroundNavListItem>
-                        <PlaygroundNavListItem><NavLink to='/topCabinets'>Top Cabinets</NavLink></PlaygroundNavListItem>
-                        <PlaygroundNavListItem><NavLink to='/preview'>Preview</NavLink></PlaygroundNavListItem>
+                        <PlaygroundNavListItem>
+                            <NavLink className={({ isActive }) => isActive ? 'activeTab' : ''} to='/bottomCabinets'>Bottom Cabinets</NavLink>
+                        </PlaygroundNavListItem>
+                        <PlaygroundNavListItem>
+                            <NavLink className={({ isActive }) => isActive ? 'activeTab' : ''} to='/topCabinets'>Top Cabinets</NavLink>
+                        </PlaygroundNavListItem>
+                        <PlaygroundNavListItem>
+                            <NavLink className={({ isActive }) => isActive ? 'activeTab' : ''} to='/preview'>Preview</NavLink>
+                        </PlaygroundNavListItem>
                     </PlaygroundNavList>
                     <PlaygroundBox>
-                         <PreviewView />
+                        <PreviewView />
                     </PlaygroundBox>
                 </PlaygroundBoxContener>
                 <PlaygroundActions>
                     <ActionButtonsBox>
-                        <ActionBtn active={active} btnName={'Walls'} onClick={() => {setPanel('walls');setActive('Walls')}} />
-                        <ActionBtn active={active} btnName={'Construction restrictions'} onClick={() => {setPanel('restrictions');setActive('Construction restrictions')}} />
-                        <ActionBtn  active={active} btnName={'Cabinets'} onClick={() => {setPanel('cabinets');setActive('Cabinets')}} />
+                        <ActionBtn active={active} btnName={'Walls'} onClick={() => { setPanel('walls'); setActive('Walls') }} />
+                        <ActionBtn active={active} btnName={'Construction restrictions'} onClick={() => { setPanel('restrictions'); setActive('Construction restrictions') }} />
+                        <ActionBtn active={active} btnName={'Cabinets'} onClick={() => { setPanel('cabinets'); setActive('Cabinets') }} />
                     </ActionButtonsBox>
                     <PanelButtonsResults>
                         {usePanel(panel)}
