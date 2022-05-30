@@ -81,7 +81,7 @@ const CabinetsPanel = () => {
           <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthCabin(e.target.value) }} />
         </FiledBox>
         <BtnBoxEnd>
-          {currentTarget !== undefined ? <SingleBtn danger={'danger'} btnName={"Remove"} onClick={removeTarget} /> : ''}
+          <SingleBtn danger={'danger'} btnName={"Remove"} onClick={removeTarget} />
           <SingleBtn btnName={"Add"} onClick={addRoomCabins}></SingleBtn>
         </BtnBoxEnd>
       </Contener>

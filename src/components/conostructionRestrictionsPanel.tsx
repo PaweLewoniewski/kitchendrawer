@@ -12,12 +12,14 @@ const ConstructionRestrictionPanel = () => {
     const dispatch = useAppDispatch();
     const [widthRestrict, setWidthRestrict] = useState<number | undefined>();
     const [depthRestrict, setDepthRestrict] = useState<number | undefined>();
+    const [idIterator, setIdIterator] = useState<number>(0);
 
     const addRoomRestrictions = () => {
+        setIdIterator(idIterator + 1);
         const localData: string | null = localStorage.getItem("roomDim");
         const restlocalData: string | null = localStorage.getItem("restDim");
         if (localData !== null) {
-            const data = [{ 'restWidth': widthRestrict, 'restDepth': depthRestrict }];
+            const data = [{ 'id': idIterator, 'restWidth': widthRestrict, 'restDepth': depthRestrict }];
             const summData = restlocalData ? JSON.parse(restlocalData) : [];
             summData.push(...data);
             localStorage.setItem("restDim", JSON.stringify(summData));

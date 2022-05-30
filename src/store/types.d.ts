@@ -1,5 +1,5 @@
 export interface Restrictions {
-    // id: number;
+    id?: number;
     restWidth: number;
     restDepth: number;
 }
