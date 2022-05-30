@@ -35,16 +35,19 @@ const CheckBox = styled.div`
   justify-content: flex-start;
   align-items: center;
   user-select:none;
-  margin: 6px;
+  margin: 1px;
   width:80px;
   input {
-      padding:0;
+      padding:6px 0;
       background:none;
       outline:none;
       border:none;
       font-size:18px;
       width:80px;
       font-family: 'Josefin Sans', sans-serif;
+      &:focus{
+        background:#ffcc00;
+      }
   }
   input[type=number]::-webkit-inner-spin-button, 
     input[type=number]::-webkit-outer-spin-button { 

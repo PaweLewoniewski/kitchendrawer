@@ -22,7 +22,9 @@ const Contener = styled.div`
 
 const Btn = styled.button<SingleBtnProps>`
   border:none;
+  border-radius:3px;
   border-bottom:1px dotted #06151f;
+  border-top:1px dotted #06151f;
   color:#06151f;
   background:none;
   cursor: pointer;
@@ -34,7 +36,7 @@ const Btn = styled.button<SingleBtnProps>`
   &:hover{
     border-bottom:1px solid #06151f;
     transition:0.3s ease-in-out;
-    background:#B0FFEE;
+    background:#ffcc00;
   }
 `;
 

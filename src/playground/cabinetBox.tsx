@@ -39,20 +39,20 @@ const CabinBox = styled.div<Cabinets>`
     width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth}px` : '0px'};
     height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth}px` : '0px'};
     /* transform: rotate(0.25turn); */
-    border:2px solid black;
-    border-bottom:6px solid black;
+    border:2px solid #06151f;
+    border-bottom:6px solid #06151f;
     box-sizing: border-box;
     display:flex;
     align-items:center;
     justify-content:center;
     position:relative;
-    background:lightblue;
+    background:#fbffca;
     margin:0px 1px;
     transition:0.3s ease-in-out;
     cursor:pointer;
     &:hover{
-        border:2px solid #00d624;
-        border-bottom:6px solid #00d624;
+        border:2px solid #ff8800;
+        border-bottom:6px solid #ff8800;
         transition:0.3s ease-in-out;
     }
 `;

@@ -97,7 +97,7 @@ const PlaygroundNavListItem = styled.li`
     background:#3abfa5;
     &:hover{
         transition:0.3s ease-in-out;
-        background:#B0FFEE;
+        background:#fff5b2;
         z-index:1;
     }
     &:first-of-type{
