@@ -1,5 +1,7 @@
+import { useState } from "react";
 import styled from "styled-components";
-import { useAppDispatch } from "../store/reducer";
+import { useAppDispatch, useAppSelector } from "../store/reducer";
+import { RootState } from "../store/store";
 import { Cabinets } from "../store/types";
 
 interface ElementsData {
@@ -10,19 +12,21 @@ interface ElementsData {
 const CabinetBox = ({ elementsData }: ElementsData) => {
 
     const dispatch = useAppDispatch();
+    const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    
     const removeElement = (item: any) => {
         dispatch({ type: "CURRENT_TARGET", payload: item });
     }
 
     return (
         <>
-            {elementsData && elementsData.length > 0 ? elementsData.map((item: Cabinets, index) =>
+            {elementsData && elementsData.length > 0 ? elementsData.map((item: Cabinets) =>
             (
                 <CabinBox key={item.id} cabinWidth={item.cabinWidth} cabinDepth={item.cabinDepth}
-                    onClick={() => removeElement(item)}>
+                    onClick={(e) => removeElement(item)} className={currentTarget === item ? "activeCabin" : undefined}>
                     <DimensionsBoxLines />
                     <DimensionsBoxNames>
-                        <DimensionText>{item.cabinWidth} i:{index}</DimensionText>
+                        <DimensionText>{item.cabinWidth}</DimensionText>
                     </DimensionsBoxNames>
                 </CabinBox>
             )) : ''}
@@ -42,7 +46,7 @@ const CabinBox = styled.div<Cabinets>`
     align-items:center;
     justify-content:center;
     position:relative;
-    background:#f4f4f4;
+    background:lightblue;
     margin:0px 1px;
     transition:0.3s ease-in-out;
     cursor:pointer;
@@ -106,7 +110,7 @@ const DimensionText = styled.p`
 // `;
 
 
-
+   /* background: ${(props) => (props.active ? "lightblue" : "orange")}; */
 
 // const Room = styled.div<RoomData>`
 //     width:${props => props.roomWidth !== 0 ? `${props.roomWidth}px` : '0px'};

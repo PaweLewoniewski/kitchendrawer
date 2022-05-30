@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
 import { RoomData } from "../store/types";
 import CabinetBox from "./cabinetBox";
-//import CabinetBox from "./cabinetBox";
 import RestrictionBox from "./restrictionBox";
 
 const PreviewView = () => {

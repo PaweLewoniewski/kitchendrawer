@@ -11,6 +11,7 @@ const HomePage = () => {
 
 
     const [panel, setPanel] = useState<string>('walls');
+    const [active, setActive] = useState<string>('Walls');
 
     const usePanel = (panel: string) => {
         switch (panel) {
@@ -39,9 +40,9 @@ const HomePage = () => {
                 </PlaygroundBoxContener>
                 <PlaygroundActions>
                     <ActionButtonsBox>
-                        <ActionBtn btnName={'Walls'} onClick={() => setPanel('walls')} />
-                        <ActionBtn btnName={'Construction restrictions'} onClick={() => setPanel('restrictions')} />
-                        <ActionBtn btnName={'Cabinets'} onClick={() => setPanel('cabinets')} />
+                        <ActionBtn active={active} btnName={'Walls'} onClick={() => {setPanel('walls');setActive('Walls')}} />
+                        <ActionBtn active={active} btnName={'Construction restrictions'} onClick={() => {setPanel('restrictions');setActive('Construction restrictions')}} />
+                        <ActionBtn  active={active} btnName={'Cabinets'} onClick={() => {setPanel('cabinets');setActive('Cabinets')}} />
                     </ActionButtonsBox>
                     <PanelButtonsResults>
                         {usePanel(panel)}

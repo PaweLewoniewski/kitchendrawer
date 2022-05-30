@@ -27,3 +27,11 @@
   transition: 0.3s ease-in-out;
   background: #b0ffee;
 }
+
+.activeCabin {
+  background:rgb(255, 200, 0) !important;
+}
+
+.activePanelBtn {
+background:#B0FFEE !important;
+}

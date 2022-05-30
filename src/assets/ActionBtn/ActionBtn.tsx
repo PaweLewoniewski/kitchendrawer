@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
 interface ActionBtnProps {
-    btnName: string;
+    btnName?: string;
     onClick?:() => void;
+    active?:string;
 }
 
-const ActionBtn = ({ btnName, onClick }: ActionBtnProps) => {
+const ActionBtn = ({ btnName, onClick , active}: ActionBtnProps) => {
+  console.log(active)
     return (
         <Contener>
-            <Btn onClick={onClick} >{btnName}</Btn>
+            <Btn onClick={onClick} className={btnName === active ? 'activePanelBtn' : ''}>{btnName}</Btn>
         </Contener>
     );
 };
@@ -19,7 +21,7 @@ const Contener = styled.div`
   width:100%;
 `;
 
-const Btn = styled.button`
+const Btn = styled.button<ActionBtnProps>`
   border:none;
   border-bottom:1px dotted #06151f;
   color:#06151f;
