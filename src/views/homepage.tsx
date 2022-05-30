@@ -5,13 +5,18 @@ import ActionBtn from '../assets/ActionBtn/ActionBtn';
 import CabinetsPanel from '../components/cabinetsPanel';
 import ConstructionRestrictionPanel from '../components/conostructionRestrictionsPanel';
 import RoomWallsPanel from '../components/roomWallsPanel';
+import PlaygroundTarget from '../playground/playgroundTarget';
 import PreviewView from '../playground/previewView';
+import { useAppSelector } from '../store/reducer';
+import { RootState } from '../store/store';
 
 const HomePage = () => {
 
-
+    const { currentTarget }  = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const [panel, setPanel] = useState<string>('walls');
     const [active, setActive] = useState<string>('Walls');
+
+console.log(currentTarget)
 
     const usePanel = (panel: string) => {
         switch (panel) {
@@ -29,17 +34,22 @@ const HomePage = () => {
             <PageName>Homepage</PageName>
             <PlaygroundContener>
                 <PlaygroundBoxContener>
-                    <PlaygroundNavList>
-                        <PlaygroundNavListItem>
-                            <NavLink className={({ isActive }) => isActive ? 'activeTab' : ''} to='/bottomCabinets'>Bottom Cabinets</NavLink>
-                        </PlaygroundNavListItem>
-                        <PlaygroundNavListItem>
-                            <NavLink className={({ isActive }) => isActive ? 'activeTab' : ''} to='/topCabinets'>Top Cabinets</NavLink>
-                        </PlaygroundNavListItem>
-                        <PlaygroundNavListItem>
-                            <NavLink className={({ isActive }) => isActive ? 'activeTab' : ''} to='/preview'>Preview</NavLink>
-                        </PlaygroundNavListItem>
-                    </PlaygroundNavList>
+                    <PlaygroundTopLine>
+                        <PlaygroundNavList>
+                            <PlaygroundNavListItem>
+                                <NavLink className={({ isActive }) => isActive ? 'activeTab' : ''} to='/bottomCabinets'>Bottom Cabinets</NavLink>
+                            </PlaygroundNavListItem>
+                            <PlaygroundNavListItem>
+                                <NavLink className={({ isActive }) => isActive ? 'activeTab' : ''} to='/topCabinets'>Top Cabinets</NavLink>
+                            </PlaygroundNavListItem>
+                            <PlaygroundNavListItem>
+                                <NavLink className={({ isActive }) => isActive ? 'activeTab' : ''} to='/preview'>Preview</NavLink>
+                            </PlaygroundNavListItem>
+                        </PlaygroundNavList>
+                        <PlaygroundInfoBox>
+                        <PlaygroundTarget targetProp={currentTarget} />
+                        </PlaygroundInfoBox>
+                    </PlaygroundTopLine>
                     <PlaygroundBox>
                         <PreviewView />
                     </PlaygroundBox>
@@ -112,6 +122,17 @@ const PlaygroundNavListItem = styled.li`
     padding:10px;
     border-radius:5px 5px 0 0; 
     }
+`;
+
+const PlaygroundTopLine = styled.div`
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+`;
+
+const PlaygroundInfoBox = styled.div`
+    display:flex;
+    align-items:center;
 `;
 
 const PlaygroundBoxContener = styled.div`

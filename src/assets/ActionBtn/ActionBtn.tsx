@@ -7,7 +7,6 @@ interface ActionBtnProps {
 }
 
 const ActionBtn = ({ btnName, onClick , active}: ActionBtnProps) => {
-  console.log(active)
     return (
         <Contener>
             <Btn onClick={onClick} className={btnName === active ? 'activePanelBtn' : ''}>{btnName}</Btn>
