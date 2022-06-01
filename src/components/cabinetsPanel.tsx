@@ -18,6 +18,7 @@ const CabinetsPanel = () => {
   const [widthCabin, setWidthCabin] = useState<number | undefined>();
   const [depthCabin, setDepthCabin] = useState<number | undefined>();
   const [idIterator, setIdIterator] = useState<number>(0);
+  const [active, setActive] = useState<string>('Bottom');
   const [topbotSwapper, settopbotSwapper] = useState<boolean>(true); // top - false | bot = true
   const [cabinRotate, setCabinRotate] = useState<boolean | null>(null); /// false - lewa | null - prosto | true - prawa
 
@@ -67,8 +68,8 @@ const CabinetsPanel = () => {
   return (
     <>
       <ActionBtnsWidth>
-        <ActionBtnSmall btnName={'Top'} onClick={() => settopbotSwapper(false)} />
-        <ActionBtnSmall btnName={'Bottom'} onClick={() => settopbotSwapper(true)} />
+        <ActionBtnSmall className={active === 'Top' ? 'activeTab' : ''} btnName={'Top'} onClick={() => {settopbotSwapper(false); setActive('Top')}} />
+        <ActionBtnSmall className={active === 'Bottom'? 'activeTab' : ''} btnName={'Bottom'} onClick={() => {settopbotSwapper(true); setActive('Bottom')}} />
       </ActionBtnsWidth>
       <Contener>
         <BtnBox>

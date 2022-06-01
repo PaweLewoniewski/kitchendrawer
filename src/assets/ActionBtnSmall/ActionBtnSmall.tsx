@@ -3,12 +3,13 @@ import styled from "styled-components";
 interface ActionBtnSmallProps {
     btnName: string;
     onClick?:() => void;
+    className:any;
 }
 
-const ActionBtnSmall = ({ btnName, onClick }: ActionBtnSmallProps) => {
+const ActionBtnSmall = ({ btnName, onClick, className }: ActionBtnSmallProps) => {
     return (
-        <Contener>
-            <Btn onClick={onClick} >{btnName}</Btn>
+        <Contener >
+            <Btn className={className} onClick={onClick} >{btnName}</Btn>
         </Contener>
     );
 };
