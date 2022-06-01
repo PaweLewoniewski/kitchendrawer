@@ -1,5 +1,6 @@
 // import Draggable from 'react-draggable';
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
@@ -8,7 +9,7 @@ import CabinetBox from "./cabinetBox";
 import RestrictionBox from "./restrictionBox";
 
 const PreviewView = () => {
-
+    const { id } = useParams();
     const { roomData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const { restrictions } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const { botCabinets } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
@@ -44,18 +45,32 @@ const PreviewView = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loadData, localData]);
 
-    // console.log(loadData)
+    console.log(id);
     // const roomWidth = loadData.width / 4; //przy /5 to: 200 px to 1 metr
     // const roomDepth = loadData.depth / 4;
     return (
         <>
             {loadData && loadData.length > 0 ? loadData.map((item: RoomData, index) =>
             (<Room key={index} roomWidth={item.roomWidth} roomDepth={item.roomDepth}>
-                {restrictions !== null ? <RestrictionBox elementsData={restrictions} /> : ''}
-                {botCabinets !== null ? <CabinetBox elementsData={botCabinets} name={'botCabinDim'} /> : ''}
-                {topCabinets !== null ? <CabinetBox elementsData={topCabinets} name={'topCabinDim'} /> : ''}
+                {id === 'bottomCabinets' ? <>
+                    {restrictions !== null ? <RestrictionBox elementsData={restrictions} /> : ''}
+                    {botCabinets !== null ? <CabinetBox elementsData={botCabinets} name={'botCabinDim'} /> : ''}
+                </>
+                    : ''}
+                {id === 'topCabinets' ? <>
+                    {restrictions !== null ? <RestrictionBox elementsData={restrictions} /> : ''}
+                    {topCabinets !== null ? <CabinetBox elementsData={topCabinets} name={'topCabinDim'} /> : ''}
+                </>
+                    : ''}
+                {id === 'preview' ? <>
+                    {restrictions !== null ? <RestrictionBox elementsData={restrictions} /> : ''}
+                    {botCabinets !== null ? <CabinetBox elementsData={botCabinets} name={'botCabinDim'} /> : ''}
+                    {topCabinets !== null ? <CabinetBox elementsData={topCabinets} name={'topCabinDim'} /> : ''}
+                </>
+                    : ''}
             </Room>
-            )) : 'Set Room Dimensions'}
+            )) : 'Set Room Dimensions'
+            }
         </>
     );
 };

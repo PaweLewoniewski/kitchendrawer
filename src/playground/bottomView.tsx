@@ -1,7 +1,12 @@
 
-const BottomView = () => {
+interface BottomViewProp {
+    children?: any;
+}
+
+
+const BottomView = ({ children }: BottomViewProp) => {
     return (
-        <div>Bottom Boxes Polygon</div>
+        <div>{children}</div>
     );
 };
 export default BottomView;

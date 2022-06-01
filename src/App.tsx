@@ -23,9 +23,9 @@ function App() {
             <Pages>
               <Routes>
                 <Route path="/" element={<HomePage />} >
-                  <Route path=":bottomId" element={<BottomView />} />
-                  <Route path=":topId" element={<TopView />} />
-                  <Route path=":preview" element={<PreviewView />} />
+                  <Route path="/:id" element={<BottomView />} />
+                  <Route path="/:id" element={<TopView />} />
+                  <Route path="/:id" element={<PreviewView />} />
                 </Route>
                 <Route path="/policy" element={<Policy />} />
               </Routes>

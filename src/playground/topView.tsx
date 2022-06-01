@@ -1,6 +1,10 @@
-const TopView = () => {
+interface TopViewProp {
+    children?: any;
+}
+
+const TopView = ({ children }: TopViewProp) => {
     return (
-        <div>Top Boxes Polygon</div>
+        <div>{children}</div>
     );
 };
 export default TopView;
