@@ -13,8 +13,8 @@ const RoomWallsPanel = () => {
     const [depthPlayground, setDepthPlayground] = useState<number | undefined>();
 
     const setUpRoomPlayground = () => {
-        const data = [{'roomWidth': widthPlayground,'roomDepth': depthPlayground}]
-        localStorage.setItem("roomDim", JSON.stringify(data));
+        const data = [{'roomDimension':{'roomWidth': widthPlayground,'roomDepth': depthPlayground}}]
+        localStorage.setItem("kitchenData", JSON.stringify(data));
         dispatch({ type: "ROOM_DIMENSIONS", payload: data });
         navigate('/bottomCabinets');
     }

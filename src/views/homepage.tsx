@@ -12,11 +12,9 @@ import { RootState } from '../store/store';
 
 const HomePage = () => {
 
-    const { currentTarget }  = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+ //   const { currentTarget }  = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const [panel, setPanel] = useState<string>('walls');
     const [active, setActive] = useState<string>('Walls');
-
-console.log(currentTarget)
 
     const usePanel = (panel: string) => {
         switch (panel) {
@@ -47,7 +45,7 @@ console.log(currentTarget)
                             </PlaygroundNavListItem>
                         </PlaygroundNavList>
                         <PlaygroundInfoBox>
-                        <PlaygroundTarget targetProp={currentTarget} />
+                        {/* <PlaygroundTarget targetProp={currentTarget} /> */}
                         </PlaygroundInfoBox>
                     </PlaygroundTopLine>
                     <PlaygroundBox>
@@ -141,7 +139,7 @@ const PlaygroundBoxContener = styled.div`
 `;
 
 const PlaygroundBox = styled.div`
-    height:600px;
+    /* height:600px; */
     margin:0px 10px;
     border:1px solid black;
     border-radius:3px;

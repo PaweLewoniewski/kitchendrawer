@@ -1,43 +1,38 @@
-import { useState } from "react";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
-import { Cabinets } from "../store/types";
+
 
 interface ElementsData {
-    elementsData: Cabinets[];
+    elementsData: any[];
     name: string;
 }
 
 const CabinetBox = ({ elementsData }: ElementsData) => {
 
     const dispatch = useAppDispatch();
-    const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+//    const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     
-    const removeElement = (item: any) => {
-        dispatch({ type: "CURRENT_TARGET", payload: item });
-    }
+//     const removeElement = (item: any) => {
+//         dispatch({ type: "CURRENT_TARGET", payload: item });
+//     }
 
     return (
         <>
-            {elementsData && elementsData.length > 0 ? elementsData.map((item: Cabinets) =>
-            (
-                <CabinBox key={item.id} cabinWidth={item.cabinWidth} cabinDepth={item.cabinDepth}
-                    onClick={(e) => removeElement(item)} className={currentTarget === item ? "activeCabin" : undefined}>
+                <CabinBox>
                     <DimensionsBoxLines />
                     <DimensionsBoxNames>
-                        <DimensionText>{item.cabinWidth}</DimensionText>
+                        <DimensionText>cabin</DimensionText>
                     </DimensionsBoxNames>
                 </CabinBox>
-            )) : ''}
         </>
     );
 };
 export default CabinetBox;
 
-const CabinBox = styled.div<Cabinets>`
-    width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth}px` : '0px'};
-    height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth}px` : '0px'};
+const CabinBox = styled.div`
+    width:100px;
+    height:50px;
     /* transform: rotate(0.25turn); */
     border:2px solid #06151f;
     border-bottom:6px solid #06151f;
@@ -118,3 +113,7 @@ const DimensionText = styled.p`
 //     border:2px solid black;
 //     box-sizing: border-box;
 // `;
+
+
+    /* width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth}px` : '0px'};
+    height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth}px` : '0px'}; */
