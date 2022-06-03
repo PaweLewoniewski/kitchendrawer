@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
 import ActionBtnSmall from "../assets/ActionBtnSmall/ActionBtnSmall";
+import { RootState } from "../store/store";
 
 const CabinetsPanel = () => {
 
@@ -13,12 +14,11 @@ const CabinetsPanel = () => {
   const dispatch = useAppDispatch();
   const [widthCabin, setWidthCabin] = useState<number | undefined>();
   const [depthCabin, setDepthCabin] = useState<number | undefined>();
-  const [idIterator, setIdIterator] = useState<number>(1);
   const [active, setActive] = useState<string>('Bottom');
-
+  const { idIterator } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
 
   const addRoomCabins = () => {
-    setIdIterator(idIterator + 1)
+    dispatch({ type: "ID_ITERATOR", payload: idIterator + 1 });
     const localData: string | null = localStorage.getItem("kitchenData");
     if (active === 'Bottom') {
       if (localData !== null) {
@@ -37,7 +37,7 @@ const CabinetsPanel = () => {
         const summaringData = [...summData, ...data];
         localStorage.setItem("kitchenData", JSON.stringify(summaringData));
         dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData });
-        navigate('/bottomCabinets');
+        navigate('/topCabinets');
       }
     }
   }
