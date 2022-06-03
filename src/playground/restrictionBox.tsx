@@ -1,26 +1,34 @@
 //import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useAppDispatch, useAppSelector } from "../store/reducer";
 //import { useAppSelector } from "../store/reducer";
 import { Restrictions } from "../store/types";
 
-interface ElementsData {
-    elementsData: Restrictions[];
+interface ElementsDataProps {
+    elementsData?: Restrictions;
 }
 
-const RestrictionBox = ({ elementsData }: ElementsData) => {
+const RestrictionBox = ({ elementsData }: ElementsDataProps) => {
+
+
+    const dispatch = useAppDispatch();
+    //    const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+
+    //     const removeElement = (item: any) => {
+    //         dispatch({ type: "CURRENT_TARGET", payload: item });
+    //     }
 
     return (
         <>
-            {elementsData && elementsData.length > 0 ? elementsData.map((item: Restrictions) =>
-            (
-                <RestrictBox key={item.id} restWidth={item.restWidth} restDepth={item.restDepth}>
+            {elementsData !== undefined ?
+                <RestrictBox key={elementsData.id} restWidth={elementsData.restWidth} restDepth={elementsData.restDepth}>
                     <DimensionsBoxLines />
                     <DimensionsBoxNames>
-                        <DimensionText>{item.restWidth}</DimensionText>
+                        <DimensionText>{elementsData.restWidth}</DimensionText>
                     </DimensionsBoxNames>
                     <CrossLine />
                 </RestrictBox>
-            )) : ''}
+                : ''}
         </>
     );
 };

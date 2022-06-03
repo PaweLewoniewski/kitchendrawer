@@ -22,8 +22,8 @@ const CabinetsPanel = () => {
     const localData: string | null = localStorage.getItem("kitchenData");
     if (active === 'Bottom') {
       if (localData !== null) {
-        const data = [{ botCabinets: { 'id': idIterator, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'botCabinDim' } }];
         const summData = localData ? JSON.parse(localData) : [];
+        const data = [{ botCabinets: { 'id': idIterator, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'botCabinDim' } }];
         const summaringData = [...summData, ...data];
         localStorage.setItem("kitchenData", JSON.stringify(summaringData));
         dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData });
@@ -32,8 +32,8 @@ const CabinetsPanel = () => {
     }
     if (active === 'Top') {
       if (localData !== null) {
-        const data = [{ topCabinets: { 'id': idIterator, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'topCabinDim' } }];
         const summData = localData ? JSON.parse(localData) : [];
+        const data = [{ topCabinets: { 'id': idIterator, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'topCabinDim' } }];
         const summaringData = [...summData, ...data];
         localStorage.setItem("kitchenData", JSON.stringify(summaringData));
         dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData });

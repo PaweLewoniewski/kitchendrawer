@@ -23,6 +23,13 @@ export interface TopCabinets {
     name?: string;
 }
 
+export interface Cabinets {
+    id?: number;
+    cabinWidth: number;
+    cabinDepth: number;
+    name?: string;
+}
+
 export interface CurrentTarget {
     id?: number;
     cabinWidth?: number;
@@ -33,8 +40,8 @@ export interface CurrentTarget {
 export interface AllkitchenData {
     roomDimension?: RoomDimension;
     restrictions?: Restrictions;
-    botCabinets?: BottomCabinets[];
-    topCabinets?: TopCabinets[];
+    botCabinets?: Cabinets;
+    topCabinets?: Cabinets;
 }
 
 export interface LocalDataState {
