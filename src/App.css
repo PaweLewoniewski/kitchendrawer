@@ -1,7 +1,7 @@
 *::-webkit-scrollbar {
   width: 0.5em;
   height: 0.5em;
-  background-color: #B0FFEE;;
+  background-color: #b0ffee;
 }
 
 *::-webkit-scrollbar-track {
@@ -23,10 +23,12 @@
   transform: rotate(-0.25turn);
 }
 
-/* .active {
-  transition: 0.3s ease-in-out;
-  background: #b0ffee;
-} */
+.hide {
+  opacity: 0;
+}
+.show {
+  opacity: 1;
+}
 
 .activeTab {
   transition: 0.3s ease-in-out;
@@ -35,10 +37,10 @@
 
 .activeCabin {
   transition: 0.3s ease-in-out;
-  background:rgb(255, 200, 0) !important;
+  background: rgb(255, 200, 0) !important;
 }
 
 .activePanelBtn {
   transition: 0.3s ease-in-out;
-  background:#ffcc00 !important;
+  background: #ffcc00 !important;
 }

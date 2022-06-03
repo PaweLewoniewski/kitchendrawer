@@ -30,13 +30,11 @@ const PreviewView = () => {
 
 
     const mainData = loadData?.find((item: AllkitchenData) => item.roomDimension?.roomWidth && item.roomDimension.roomDepth);
-    const botCabins = loadData?.filter((item: AllkitchenData) => item.botCabinets);
-
 
     const roomWidth = mainData?.roomDimension?.roomWidth ? mainData?.roomDimension?.roomWidth / 1 : 0;
     const roomDepth = mainData?.roomDimension?.roomDepth ? mainData?.roomDimension?.roomDepth / 1 : 0;
     console.log(loadData);
-    console.log(botCabins);
+    // console.log(botCabins);
 
     return (
         <>
@@ -138,27 +136,9 @@ export default PreviewView;
 
 const Room = styled.div<RoomDimension>`
     width:${props => props.roomWidth !== 0 ? `${props.roomWidth}px` : '0px'};
-height:${props => props.roomDepth !== 0 ? `${props.roomDepth}px` : '0px'};
+    height:${props => props.roomDepth !== 0 ? `${props.roomDepth}px` : '0px'};
     border:2px solid black;
     box-sizing: border-box;
     display:flex;
 `;
-
-
-// {/* {id === 'bottomCabinets' ? <>
-//     {restrictions !== null ? <RestrictionBox elementsData={restrictions} /> : ''}
-//     {botCabinets !== null ? <CabinetBox elementsData={botCabinets} name={'botCabinDim'} /> : ''}
-// </>
-//     : ''}
-// {id === 'topCabinets' ? <>
-//     {restrictions !== null ? <RestrictionBox elementsData={restrictions} /> : ''}
-//     {topCabinets !== null ? <CabinetBox elementsData={topCabinets} name={'topCabinDim'} /> : ''}
-// </>
-//     : ''}
-// {id === 'preview' ? <>
-//     {restrictions !== null ? <RestrictionBox elementsData={restrictions} /> : ''}
-//     {botCabinets !== null ? <CabinetBox elementsData={botCabinets} name={'botCabinDim'} /> : ''}
-//     {topCabinets !== null ? <CabinetBox elementsData={topCabinets} name={'topCabinDim'} /> : ''}
-// </>
-//     : ''} */}
 

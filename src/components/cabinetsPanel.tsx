@@ -98,22 +98,6 @@ const FiledBox = styled.div`
 `;
 
 
-  // const { id, name } = currentTarget;
-
-  // const removeTarget = () => {
-  //   if (name === 'botCabinDim') {
-  //     const removelement = botCabinets.filter((i: any) => i.id !== id);
-  //     localStorage.setItem(name, JSON.stringify(removelement));
-  //     dispatch({ type: "BOTTOM_CABIN", payload: removelement });
-  //   }
-  //   if (name === 'topCabinDim') {
-  //     const removelement = topCabinets.filter((i: any) => i.id !== id);
-  //     localStorage.setItem(name, JSON.stringify(removelement));
-  //     dispatch({ type: "TOP_CABIN", payload: removelement });
-  //   }
-  // }
-
-
 
 
 

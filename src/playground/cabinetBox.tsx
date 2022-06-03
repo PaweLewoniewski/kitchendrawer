@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
-import { Cabinets } from "../store/types";
-
+import { AllkitchenData, Cabinets } from "../store/types";
+import { AiOutlineClose } from 'react-icons/ai';
+import { useEffect, useState } from "react";
 
 interface ElementsDataProps {
     elementsData?: Cabinets;
@@ -11,20 +12,55 @@ interface ElementsDataProps {
 const CabinetBox = ({ elementsData }: ElementsDataProps) => {
 
     const dispatch = useAppDispatch();
-    //    const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    const [loadData, setLoadData] = useState<AllkitchenData[]>();
 
-    //     const removeElement = (item: any) => {
-    //         dispatch({ type: "CURRENT_TARGET", payload: item });
-    //     }
+    useEffect(() => {
+        if (loadData === undefined) {
+            setLoadData(kitchenData);
+        }
+    }, [loadData]);
+
+    const currentElement = (item: {}) => {
+        dispatch({ type: "CURRENT_TARGET", payload: item });
+        console.log(item)
+    }
+
+    const removeElement = (item: any) => {
+        if (loadData !== undefined) {
+            if (item.name === 'botCabinDim') {
+                const filteredBotELements = loadData.filter((i: AllkitchenData) => i.botCabinets?.id !== item.id);
+                localStorage.setItem("kitchenData", JSON.stringify(filteredBotELements));
+                dispatch({ type: "ROOM_DIMENSIONS", payload: filteredBotELements });
+            }
+            if (item.name === 'topCabinDim') {
+                const filteredTopELements = loadData.filter((i: AllkitchenData) => i.topCabinets?.id !== item.id);
+                localStorage.setItem("kitchenData", JSON.stringify(filteredTopELements));
+                dispatch({ type: "ROOM_DIMENSIONS", payload: filteredTopELements });
+            }
+        }
+    }
+
+    // const blurFromElement = () => {
+    //     dispatch({ type: "CURRENT_TARGET", payload: undefined });
+    //     console.log('blur');
+    // }
 
     return (
         <>
             {elementsData !== undefined ?
-                <CabinBox key={elementsData.id} cabinWidth={elementsData.cabinWidth} cabinDepth={elementsData.cabinDepth}>
+                <CabinBox key={elementsData.id} cabinWidth={elementsData.cabinWidth} cabinDepth={elementsData.cabinDepth}
+                    onClick={() => { currentElement(elementsData) }} className={currentTarget === elementsData ? "activeCabin" : undefined}
+                // onBlur={()=>{blurFromElement(); setActive(undefined)}}
+                >
                     <DimensionsBoxLines />
                     <DimensionsBoxNames>
                         <DimensionText>{elementsData.cabinWidth}</DimensionText>
                     </DimensionsBoxNames>
+                    <OptionsBtnsBox className={currentTarget === elementsData ? "show" : 'hide'}>
+                        <OptionsBtn onClick={() => { removeElement(elementsData) }}><AiOutlineClose size={20} /></OptionsBtn>
+                    </OptionsBtnsBox>
                 </CabinBox>
                 : ''}
         </>
@@ -33,10 +69,8 @@ const CabinetBox = ({ elementsData }: ElementsDataProps) => {
 export default CabinetBox;
 
 const CabinBox = styled.div<Cabinets>`
-    /* width:100px;
-    height:50px; */
     /* transform: rotate(0.25turn); */
-      width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth}px` : '0px'};
+    width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth}px` : '0px'};
     height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth}px` : '0px'};
     border:2px solid #06151f;
     border-bottom:6px solid #06151f;
@@ -92,32 +126,39 @@ const DimensionText = styled.p`
     top:-23px;
 `;
 
-// const CrossLine = styled.div`
-//     width:100%;
-//     height:1px;
-//     background:black;
-//     transform: rotate(0.54turn);
-//     position:relative;
-//     &:after{
-//         content:'';
-//         width:100%;
-//         height:1px;
-//         background:black;
-//         position:absolute;
-//         transform: rotate(-0.58turn);
-//     }
-// `;
+const OptionsBtnsBox = styled.div`
+    position:absolute;
+    width:25px;
+    height:50px;
+    bottom:-58px;
+    left:0px;
+    z-index:99;
+    padding:1px;
+`;
 
+const OptionsBtn = styled.div`
+ border:1px solid black;
+ border-radius:3px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+`;
 
-/* background: ${(props) => (props.active ? "lightblue" : "orange")}; */
+        // const { id, name } = currentTarget;
+        // const { botCabinets, topCabinets } = kitchenData;
 
-// const Room = styled.div<RoomData>`
-//     width:${props => props.roomWidth !== 0 ? `${props.roomWidth}px` : '0px'};
-//     height:${props => props.roomDepth !== 0 ? `${props.roomDepth}px` : '0px'};
-//     border:2px solid black;
-//     box-sizing: border-box;
-// `;
-
-
-/* width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth}px` : '0px'};
-height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth}px` : '0px'}; */
+        // const removeTarget = () => {
+        //     if (name === 'botCabinDim') {
+        //       setBotCabin(botCabinets);
+        //       console.log(botCabins)
+        //       const removelement = botCabins.filter((i: any) => i.id !== id);
+        //       localStorage.setItem(name, JSON.stringify(removelement));
+        //       dispatch({ type: "ROOM_DIMENSIONS", payload: removelement });
+        //     }
+        //     if (name === 'topCabinDim') {
+        //       setTopCabin(topCabinets)
+        //       const removelement = topCabins.filter((i: any) => i.id !== id);
+        //       localStorage.setItem(name, JSON.stringify(removelement));
+        //       dispatch({ type: "ROOM_DIMENSIONS", payload: removelement });
+        //     }
+        //   }
