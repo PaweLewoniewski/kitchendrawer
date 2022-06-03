@@ -13,35 +13,46 @@ const CabinetsPanel = () => {
   const dispatch = useAppDispatch();
   const [widthCabin, setWidthCabin] = useState<number | undefined>();
   const [depthCabin, setDepthCabin] = useState<number | undefined>();
-  const [idIterator, setIdIterator] = useState<number>(0);
+  const [idIterator, setIdIterator] = useState<number>(1);
   const [active, setActive] = useState<string>('Bottom');
 
 
   const addRoomCabins = () => {
-
-      const localData: string | null = localStorage.getItem("kitchenData");
+    setIdIterator(idIterator + 1)
+    const localData: string | null = localStorage.getItem("kitchenData");
+    if (active === 'Bottom') {
       if (localData !== null) {
-        const data = [{botCabinets:{ 'id': idIterator, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'botCabinDim' }}];
+        const data = [{ botCabinets: { 'id': idIterator, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'botCabinDim' } }];
         const summData = localData ? JSON.parse(localData) : [];
         const summaringData = [...summData, ...data];
         localStorage.setItem("kitchenData", JSON.stringify(summaringData));
-        dispatch({ type: "BOTTOM_CABIN", payload: summaringData});
+        dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData });
         navigate('/bottomCabinets');
-  
+      }
+    }
+    if (active === 'Top') {
+      if (localData !== null) {
+        const data = [{ topCabinets: { 'id': idIterator, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'topCabinDim' } }];
+        const summData = localData ? JSON.parse(localData) : [];
+        const summaringData = [...summData, ...data];
+        localStorage.setItem("kitchenData", JSON.stringify(summaringData));
+        dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData });
+        navigate('/bottomCabinets');
+      }
     }
   }
 
   return (
     <>
       <ActionBtnsWidth>
-        <ActionBtnSmall className={active === 'Top' ? 'activeTab' : ''} btnName={'Top'}  />
-        <ActionBtnSmall className={active === 'Bottom'? 'activeTab' : ''} btnName={'Bottom'}  />
+        <ActionBtnSmall onClick={() => setActive('Top')} className={active === 'Top' ? 'activeTab' : ''} btnName={'Top'} />
+        <ActionBtnSmall onClick={() => setActive('Bottom')} className={active === 'Bottom' ? 'activeTab' : ''} btnName={'Bottom'} />
       </ActionBtnsWidth>
       <Contener>
         <BtnBox>
           <SingleBtn btnName={""}><AiOutlineBorderBottom size={25} className='turnLeft' /></SingleBtn>
           <SingleBtn btnName={""}><AiOutlineBorderBottom size={25} /></SingleBtn>
-          <SingleBtn btnName={""}><AiOutlineBorderBottom size={25} className='turnRight'  /></SingleBtn>
+          <SingleBtn btnName={""}><AiOutlineBorderBottom size={25} className='turnRight' /></SingleBtn>
         </BtnBox>
         <FiledBox>
           <SingleNumberField text={"mm"} placeholder={'Width'} onChange={(e: any) => { setWidthCabin(e.target.value) }} />

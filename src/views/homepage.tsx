@@ -139,7 +139,7 @@ const PlaygroundBoxContener = styled.div`
 `;
 
 const PlaygroundBox = styled.div`
-    /* height:600px; */
+    height:600px;
     margin:0px 10px;
     border:1px solid black;
     border-radius:3px;

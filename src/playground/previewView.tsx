@@ -30,32 +30,32 @@ const PreviewView = () => {
     const mainData = loadData?.find((item: AllkitchenData) => item.roomDimension?.roomWidth && item.roomDimension.roomDepth);
 
     const roomWidth = mainData?.roomDimension?.roomWidth ? mainData?.roomDimension?.roomWidth / 1 : 0;
-    const roomDepth = mainData?.roomDimension?.roomDepth ? mainData?.roomDimension?.roomDepth / 1 : 0 ;
-    
+    const roomDepth = mainData?.roomDimension?.roomDepth ? mainData?.roomDimension?.roomDepth / 1 : 0;
+
     console.log(roomWidth, roomDepth);
 
     return (
         <>
-
-            <Room roomWidth={roomWidth} roomDepth={roomDepth}>
-                <Draggable
-                    axis="both"
-                    handle=".handle"
-                    defaultPosition={{ x: 0, y: 0 }}
-                    grid={[10, 10]}
-                    bounds={{ left: 0, top: 0, right: roomWidth , bottom: roomDepth }}
-                // scale={1}
-                // onStart={handleStart}
-                // onDrag={handleDrag}
-                // onStop={handleStop}
-                >
-                    <div className="handle">
-                        <div>DIv do latania</div>
-                        {/* <CabinetBox elementsData={botCabinets} name={'botCabinDim'} /> */}
-                    </div>
-                </Draggable>
-            </Room>
-
+            {roomWidth !== 0 ?
+                <Room roomWidth={roomWidth} roomDepth={roomDepth}>
+                    <Draggable
+                        axis="both"
+                        handle=".handle"
+                        defaultPosition={{ x: 0, y: 0 }}
+                        grid={[10, 10]}
+                        bounds={{ left: 0, top: 0, right: roomWidth, bottom: roomDepth }}
+                    // scale={1}
+                    // onStart={handleStart}
+                    // onDrag={handleDrag}
+                    // onStop={handleStop}
+                    >
+                        <div className="handle">
+                            <div>DIv do latania</div>
+                            {/* <CabinetBox elementsData={botCabinets} name={'botCabinDim'} /> */}
+                        </div>
+                    </Draggable>
+                </Room>
+                : 'Set Room Dimensions'}
         </>
     );
 };
