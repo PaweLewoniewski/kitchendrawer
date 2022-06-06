@@ -5,10 +5,7 @@ import ActionBtn from '../assets/ActionBtn/ActionBtn';
 import CabinetsPanel from '../components/cabinetsPanel';
 import ConstructionRestrictionPanel from '../components/conostructionRestrictionsPanel';
 import RoomWallsPanel from '../components/roomWallsPanel';
-import PlaygroundTarget from '../playground/playgroundTarget';
 import PreviewView from '../playground/previewView';
-import { useAppSelector } from '../store/reducer';
-import { RootState } from '../store/store';
 
 const HomePage = () => {
 
@@ -144,8 +141,9 @@ const PlaygroundBox = styled.div`
     border:1px solid black;
     border-radius:3px;
     background:#eefffd;
-    overflow:scroll;
+    overflow:auto;
     padding:30px;
+    position:relative;
 `;
 
 const PlaygroundActions = styled.div`

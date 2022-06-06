@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
-import { AllkitchenData, RoomDimension } from '../store/types';
+import { AllkitchenData, CurrentTarget, RoomDimension } from '../store/types';
 import CabinetBox from './cabinetBox';
 import RestrictionBox from './restrictionBox';
 
@@ -15,6 +15,7 @@ const PreviewView = () => {
     const localData: string | null = localStorage.getItem("kitchenData");
     const [loadData, setLoadData] = useState<AllkitchenData[]>();
     const dispatch = useAppDispatch();
+    // const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
 
     useEffect(() => {
         if (localData !== null && loadData === undefined) {
@@ -33,9 +34,8 @@ const PreviewView = () => {
 
     const roomWidth = mainData?.roomDimension?.roomWidth ? mainData?.roomDimension?.roomWidth / 1 : 0;
     const roomDepth = mainData?.roomDimension?.roomDepth ? mainData?.roomDimension?.roomDepth / 1 : 0;
-    console.log(loadData);
-    // console.log(botCabins);
 
+    console.log(loadData);
     return (
         <>
             {roomWidth !== 0 ?
@@ -49,15 +49,18 @@ const PreviewView = () => {
                                     handle=".handle"
                                     defaultPosition={{ x: 0, y: 0 }}
                                     grid={[10, 10]}
-                                    bounds={{ left: 0, top: 0, right: roomWidth, bottom: roomDepth }}
+                                    bounds="parent"
+                                   // onMouseDown={handleStartCalculate}
+                                   // onStart={handleStartCalculate}
+                                    //onDrag={handleStartCalculate}
                                 // scale={1}
-                                // onStart={handleStart}
+                                //   onStart={handleStart}
                                 // onDrag={handleDrag}
                                 // onStop={handleStop}
                                 >
-                                    <div className="handle">
+                                    <Runner className="handle">
                                         <CabinetBox elementsData={item.botCabinets} />
-                                    </div>
+                                    </Runner>
                                 </Draggable>
                                 : ''}
                         </>
@@ -72,15 +75,15 @@ const PreviewView = () => {
                                     handle=".handle"
                                     defaultPosition={{ x: 0, y: 0 }}
                                     grid={[10, 10]}
-                                    bounds={{ left: 0, top: 0, right: roomWidth, bottom: roomDepth }}
+                                    bounds="parent"
                                 // scale={1}
                                 // onStart={handleStart}
                                 // onDrag={handleDrag}
                                 // onStop={handleStop}
                                 >
-                                    <div className="handle">
+                                    <Runner className="handle">
                                         <CabinetBox elementsData={item.topCabinets} />
-                                    </div>
+                                    </Runner>
                                 </Draggable>
                                 : ''}
                         </>
@@ -95,16 +98,16 @@ const PreviewView = () => {
                                     handle=".handle"
                                     defaultPosition={{ x: 0, y: 0 }}
                                     grid={[10, 10]}
-                                    bounds={{ left: 0, top: 0, right: roomWidth, bottom: roomDepth }}
+                                    bounds="parent"
                                 // scale={1}
                                 // onStart={handleStart}
                                 // onDrag={handleDrag}
                                 // onStop={handleStop}
                                 >
-                                    <div className="handle">
+                                    <Runner className="handle">
                                         <CabinetBox elementsData={item.botCabinets} />
                                         <CabinetBox elementsData={item.topCabinets} />
-                                    </div>
+                                    </Runner>
                                 </Draggable>
                                 : ''}
                         </>
@@ -116,15 +119,16 @@ const PreviewView = () => {
                             handle=".handle"
                             defaultPosition={{ x: 0, y: 0 }}
                             grid={[10, 10]}
-                            bounds={{ left: 0, top: 0, right: roomWidth, bottom: roomDepth }}
+                            bounds="parent"
+                            // bounds={{ left: 0, top: 0, right: roomWidth, bottom: roomDepth }}
                         // scale={1}
                         // onStart={handleStart}
                         // onDrag={handleDrag}
                         // onStop={handleStop}
                         >
-                            <div className="handle">
+                            <Runner className="handle">
                                 <RestrictionBox elementsData={item.restrictions} />
-                            </div>
+                            </Runner>
                         </Draggable>
                     )) : ''}
                 </Room>
@@ -140,5 +144,11 @@ const Room = styled.div<RoomDimension>`
     border:2px solid black;
     box-sizing: border-box;
     display:flex;
+    position:relative;
+`;
+
+const Runner = styled.div`
+display:flex;
+position:absolute;
 `;
 
