@@ -28,6 +28,8 @@ export interface Cabinets {
     cabinWidth: number;
     cabinDepth: number;
     name?: string;
+    xAxis?:number;
+    yAxis?:number;
 }
 
 export interface CurrentTarget {
@@ -35,6 +37,8 @@ export interface CurrentTarget {
     cabinWidth?: number;
     cabinDepth?: number;
     name?: string;
+    xAxis?:number;
+    yAxis?:number;
 }
 
 export interface AllkitchenData {

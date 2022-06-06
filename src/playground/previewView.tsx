@@ -7,6 +7,7 @@ import { RootState } from "../store/store";
 import { AllkitchenData, CurrentTarget, RoomDimension } from '../store/types';
 import CabinetBox from './cabinetBox';
 import RestrictionBox from './restrictionBox';
+import BottomView from './bottomView';
 
 
 const PreviewView = () => {
@@ -35,7 +36,7 @@ const PreviewView = () => {
     const roomWidth = mainData?.roomDimension?.roomWidth ? mainData?.roomDimension?.roomWidth / 1 : 0;
     const roomDepth = mainData?.roomDimension?.roomDepth ? mainData?.roomDimension?.roomDepth / 1 : 0;
 
-    console.log(loadData);
+    // console.log(loadData);
     return (
         <>
             {roomWidth !== 0 ?
@@ -44,24 +45,7 @@ const PreviewView = () => {
                     (
                         <>
                             {id === 'bottomCabinets' ?
-                                <Draggable
-                                    axis="both"
-                                    handle=".handle"
-                                    defaultPosition={{ x: 0, y: 0 }}
-                                    grid={[10, 10]}
-                                    bounds="parent"
-                                   // onMouseDown={handleStartCalculate}
-                                   // onStart={handleStartCalculate}
-                                    //onDrag={handleStartCalculate}
-                                // scale={1}
-                                //   onStart={handleStart}
-                                // onDrag={handleDrag}
-                                // onStop={handleStop}
-                                >
-                                    <Runner className="handle">
-                                        <CabinetBox elementsData={item.botCabinets} />
-                                    </Runner>
-                                </Draggable>
+                                <BottomView data={item.botCabinets} />
                                 : ''}
                         </>
                     )) : ''}
@@ -120,7 +104,7 @@ const PreviewView = () => {
                             defaultPosition={{ x: 0, y: 0 }}
                             grid={[10, 10]}
                             bounds="parent"
-                            // bounds={{ left: 0, top: 0, right: roomWidth, bottom: roomDepth }}
+                        // bounds={{ left: 0, top: 0, right: roomWidth, bottom: roomDepth }}
                         // scale={1}
                         // onStart={handleStart}
                         // onDrag={handleDrag}

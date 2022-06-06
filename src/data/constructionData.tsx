@@ -1,0 +1,1 @@
+export const botCabinsData = [{ id:1, text: ``, url: ``}];

@@ -24,7 +24,7 @@ const CabinetBox = ({ elementsData }: ElementsDataProps) => {
 
     const currentElement = (item: {}) => {
         dispatch({ type: "CURRENT_TARGET", payload: item });
-        console.log(item)
+        // console.log(item)
     }
 
     const removeElement = (item: any) => {
