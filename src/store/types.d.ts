@@ -10,21 +10,18 @@ export interface Restrictions {
 }
 
 export interface BottomCabinets {
-    id: number;
     cabinWidth: number;
     cabinDepth: number;
     name?: string;
 }
 
 export interface TopCabinets {
-    id: number;
     cabinWidth: number;
     cabinDepth: number;
     name?: string;
 }
 
 export interface Cabinets {
-    id?: number;
     cabinWidth: number;
     cabinDepth: number;
     name?: string;
@@ -33,7 +30,6 @@ export interface Cabinets {
 }
 
 export interface CurrentTarget {
-    id?: number;
     cabinWidth?: number;
     cabinDepth?: number;
     name?: string;

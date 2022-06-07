@@ -41,16 +41,16 @@ const PreviewView = () => {
         <>
             {roomWidth !== 0 ?
                 <Room roomWidth={roomWidth} roomDepth={roomDepth}>
-                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData) =>
+                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
                     (
                         <>
                             {id === 'bottomCabinets' ?
-                                <BottomView data={item.botCabinets} />
+                                <BottomView data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis}/>
                                 : ''}
                         </>
                     )) : ''}
 
-                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData) =>
+                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
                     (
                         <>
                             {id === 'topCabinets' ?
@@ -60,20 +60,16 @@ const PreviewView = () => {
                                     defaultPosition={{ x: 0, y: 0 }}
                                     grid={[10, 10]}
                                     bounds="parent"
-                                // scale={1}
-                                // onStart={handleStart}
-                                // onDrag={handleDrag}
-                                // onStop={handleStop}
                                 >
                                     <Runner className="handle">
-                                        <CabinetBox elementsData={item.topCabinets} />
+                                        <CabinetBox elementsData={item.topCabinets} index={index}/>
                                     </Runner>
                                 </Draggable>
                                 : ''}
                         </>
                     )) : ''}
 
-                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData) =>
+                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
                     (
                         <>
                             {id === 'preview' ?
@@ -83,10 +79,6 @@ const PreviewView = () => {
                                     defaultPosition={{ x: 0, y: 0 }}
                                     grid={[10, 10]}
                                     bounds="parent"
-                                // scale={1}
-                                // onStart={handleStart}
-                                // onDrag={handleDrag}
-                                // onStop={handleStop}
                                 >
                                     <Runner className="handle">
                                         <CabinetBox elementsData={item.botCabinets} />
@@ -104,11 +96,6 @@ const PreviewView = () => {
                             defaultPosition={{ x: 0, y: 0 }}
                             grid={[10, 10]}
                             bounds="parent"
-                        // bounds={{ left: 0, top: 0, right: roomWidth, bottom: roomDepth }}
-                        // scale={1}
-                        // onStart={handleStart}
-                        // onDrag={handleDrag}
-                        // onStop={handleStop}
                         >
                             <Runner className="handle">
                                 <RestrictionBox elementsData={item.restrictions} />
