@@ -12,12 +12,16 @@ const RoomWallsPanel = () => {
     const [widthPlayground, setWidthPlayground] = useState<number | undefined>();
     const [depthPlayground, setDepthPlayground] = useState<number | undefined>();
     const [wallDistance, setWallDistance] = useState<number | undefined>(0);
+    const localData: string | null = localStorage.getItem("kitchenData");
 
     const setUpRoomPlayground = () => {
-        const data = [{roomDimension:{roomWidth: widthPlayground,roomDepth: depthPlayground, distance:wallDistance }}]
+        if (localData === null) {
+        const data = [{roomDimension:{roomWidth: widthPlayground, roomDepth: depthPlayground, distance:wallDistance }}]
         localStorage.setItem("kitchenData", JSON.stringify(data));
         dispatch({ type: "ROOM_DIMENSIONS", payload: data });
         navigate('/bottomCabinets');
+        }
+        else return console.log('clear room !')
     }
 
     return (
