@@ -21,6 +21,7 @@ const CabinetBox = ({ elementsData, index }: ElementsDataProps) => {
         if (loadData === undefined) {
             setLoadData(kitchenData);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loadData]);
 
     const currentElement = (item: {}) => {

@@ -32,7 +32,6 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
 
     const allOtherData = datakit.filter(item => item !== currentData);
 
-    // console.log(datakit);
     const handleStop = (event: any, dragElement: { x: SetStateAction<number>; y: SetStateAction<number>; }) => {
         event.preventDefault();
         event.stopPropagation();
@@ -43,7 +42,6 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
             const sumUpdatedData = [...allOtherData, ...updateData];
             localStorage.setItem("kitchenData", JSON.stringify(sumUpdatedData.flat()));
             dispatch({ type: "ROOM_DIMENSIONS", payload: sumUpdatedData.flat() });
-            //  console.log(allOtherData)
         }
     };
 
@@ -55,7 +53,7 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
                     handle=".handle"
                     defaultPosition={{ x: positionX, y: positionY }}
                     position={{ x: positionX, y: positionY }}
-                    grid={[10, 10]}
+                    grid={[5, 5]}
                     bounds="parent"
                     onStop={handleStop}
                 //    onStop={(e, data) => { saveState ({defaultposition: { x: data.x y: data.y })}};

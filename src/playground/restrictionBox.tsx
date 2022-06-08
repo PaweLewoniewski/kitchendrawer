@@ -1,7 +1,5 @@
-//import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useAppDispatch, useAppSelector } from "../store/reducer";
-//import { useAppSelector } from "../store/reducer";
+import { useAppDispatch } from "../store/reducer";
 import { Restrictions } from "../store/types";
 
 interface ElementsDataProps {

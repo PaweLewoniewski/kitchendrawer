@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
-import { AllkitchenData, CurrentTarget, RoomDimension } from '../store/types';
-import CabinetBox from './cabinetBox';
+import { AllkitchenData, RoomDimension } from '../store/types';
 import RestrictionBox from './restrictionBox';
 import BottomView from './bottomView';
+import TopView from './topView';
 
 
 const PreviewView = () => {
@@ -16,7 +16,6 @@ const PreviewView = () => {
     const localData: string | null = localStorage.getItem("kitchenData");
     const [loadData, setLoadData] = useState<AllkitchenData[]>();
     const dispatch = useAppDispatch();
-    // const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
 
     useEffect(() => {
         if (localData !== null && loadData === undefined) {
@@ -30,9 +29,7 @@ const PreviewView = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loadData, localData]);
 
-
     const mainData = loadData?.find((item: AllkitchenData) => item.roomDimension?.roomWidth && item.roomDimension.roomDepth);
-
     const roomWidth = mainData?.roomDimension?.roomWidth ? mainData?.roomDimension?.roomWidth / 1 : 0;
     const roomDepth = mainData?.roomDimension?.roomDepth ? mainData?.roomDimension?.roomDepth / 1 : 0;
 
@@ -45,7 +42,7 @@ const PreviewView = () => {
                     (
                         <>
                             {id === 'bottomCabinets' ?
-                                <BottomView data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis}/>
+                                <BottomView data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
                                 : ''}
                         </>
                     )) : ''}
@@ -54,17 +51,7 @@ const PreviewView = () => {
                     (
                         <>
                             {id === 'topCabinets' ?
-                                <Draggable
-                                    axis="both"
-                                    handle=".handle"
-                                    defaultPosition={{ x: 0, y: 0 }}
-                                    grid={[10, 10]}
-                                    bounds="parent"
-                                >
-                                    <Runner className="handle">
-                                        <CabinetBox elementsData={item.topCabinets} index={index}/>
-                                    </Runner>
-                                </Draggable>
+                                <TopView data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
                                 : ''}
                         </>
                     )) : ''}
@@ -73,18 +60,10 @@ const PreviewView = () => {
                     (
                         <>
                             {id === 'preview' ?
-                                <Draggable
-                                    axis="both"
-                                    handle=".handle"
-                                    defaultPosition={{ x: 0, y: 0 }}
-                                    grid={[10, 10]}
-                                    bounds="parent"
-                                >
-                                    <Runner className="handle">
-                                        <CabinetBox elementsData={item.botCabinets} />
-                                        <CabinetBox elementsData={item.topCabinets} />
-                                    </Runner>
-                                </Draggable>
+                                <>
+                                    <BottomView data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
+                                    <TopView data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
+                                </>
                                 : ''}
                         </>
                     )) : ''}
@@ -94,7 +73,7 @@ const PreviewView = () => {
                             axis="both"
                             handle=".handle"
                             defaultPosition={{ x: 0, y: 0 }}
-                            grid={[10, 10]}
+                            grid={[5, 5]}
                             bounds="parent"
                         >
                             <Runner className="handle">
