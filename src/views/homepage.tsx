@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from "styled-components";
 import ActionBtn from '../assets/ActionBtn/ActionBtn';
+import SingleBtn from '../assets/SingleBtn/SingleBtn';
 import CabinetsPanel from '../components/cabinetsPanel';
 import ConstructionRestrictionPanel from '../components/conostructionRestrictionsPanel';
 import RoomWallsPanel from '../components/roomWallsPanel';
 import PlaygroundTarget from '../playground/playgroundTarget';
 import PreviewView from '../playground/previewView';
-import { useAppSelector } from '../store/reducer';
+import { useAppDispatch, useAppSelector } from '../store/reducer';
 import { RootState } from '../store/store';
 
 const HomePage = () => {
@@ -15,7 +16,8 @@ const HomePage = () => {
     const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const [panel, setPanel] = useState<string>('walls');
     const [active, setActive] = useState<string>('Walls');
-
+    const dispatch = useAppDispatch();
+    
     const usePanel = (panel: string) => {
         switch (panel) {
             case 'cabinets':
@@ -26,6 +28,11 @@ const HomePage = () => {
                 return <RoomWallsPanel />;
         }
     }
+
+    const clearAllData = () => {
+        localStorage.removeItem('kitchenData');
+        dispatch({ type: "ROOM_DIMENSIONS", payload: [] });
+     }
 
     return (
         <PageContener>
@@ -61,6 +68,10 @@ const HomePage = () => {
                     <PanelButtonsResults>
                         {usePanel(panel)}
                     </PanelButtonsResults>
+                    <ActionButtonsBoxBottom>
+                            <div></div>
+                            <SingleBtn danger={'danger'} btnName={"Reset All"} onClick={clearAllData} />
+                    </ActionButtonsBoxBottom>
                 </PlaygroundActions>
             </PlaygroundContener>
         </PageContener>
@@ -155,10 +166,20 @@ const PlaygroundActions = styled.div`
     border-radius:3px;
     margin:0px 10px;
     background:#eefffd;
+    position:relative;
 `;
 
 const ActionButtonsBox = styled.div`
     width:100%;
+`;
+
+const ActionButtonsBoxBottom = styled.div`
+    position: absolute;
+    bottom:0;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:10px;
 `;
 
 const PanelButtonsResults = styled.div`
