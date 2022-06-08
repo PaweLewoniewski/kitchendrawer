@@ -5,11 +5,14 @@ import ActionBtn from '../assets/ActionBtn/ActionBtn';
 import CabinetsPanel from '../components/cabinetsPanel';
 import ConstructionRestrictionPanel from '../components/conostructionRestrictionsPanel';
 import RoomWallsPanel from '../components/roomWallsPanel';
+import PlaygroundTarget from '../playground/playgroundTarget';
 import PreviewView from '../playground/previewView';
+import { useAppSelector } from '../store/reducer';
+import { RootState } from '../store/store';
 
 const HomePage = () => {
 
- //   const { currentTarget }  = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const [panel, setPanel] = useState<string>('walls');
     const [active, setActive] = useState<string>('Walls');
 
@@ -42,7 +45,7 @@ const HomePage = () => {
                             </PlaygroundNavListItem>
                         </PlaygroundNavList>
                         <PlaygroundInfoBox>
-                        {/* <PlaygroundTarget targetProp={currentTarget} /> */}
+                            <PlaygroundTarget targetProp={currentTarget} />
                         </PlaygroundInfoBox>
                     </PlaygroundTopLine>
                     <PlaygroundBox>
