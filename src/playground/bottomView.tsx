@@ -8,65 +8,63 @@ import CabinetBox from "./cabinetBox";
 
 interface BottomViewProp {
     data?: Cabinets;
-    index?:number;
-    positionX?:number;
-    positionY?:number;
+    index?: number;
+    positionX?: number;
+    positionY?: number;
 }
 
 
-const BottomView = ({ data, index ,positionX ,positionY}: BottomViewProp) => {
+const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
 
     const [x, setX] = useState(0);
     const [y, setY] = useState(0);
     const dispatch = useAppDispatch();
-    const [loadData, setLoadData] = useState<AllkitchenData[]>();
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
-    const localData: string | null = localStorage.getItem("kitchenData");
+    const datakit: AllkitchenData[] = kitchenData;
+    const [currentData, setCurrentData] = useState<Cabinets>();
 
 
     useEffect(() => {
-        if (localData !== null && loadData === undefined) {
-            const roomDataObj = JSON.parse(localData);
-            setLoadData(roomDataObj);
-            dispatch({ type: "ROOM_DIMENSIONS", payload: roomDataObj });
+        if (index) {
+            setCurrentData(kitchenData[index]);
         }
-        if (loadData !== kitchenData) {
-            setLoadData(kitchenData);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loadData, localData]);
+    }, [index, kitchenData]);
 
+    const allOtherData = datakit.filter(item => item !== currentData);
+
+    // console.log(datakit);
     const handleStop = (event: any, dragElement: { x: SetStateAction<number>; y: SetStateAction<number>; }) => {
         event.preventDefault();
         event.stopPropagation();
-        if (loadData !== undefined && index !== undefined) {
+        if (data !== undefined) {
             setX(dragElement.x);
             setY(dragElement.y);
-            const currentData = loadData.at(index);
-            const allOtherData = loadData.filter(item => item !== currentData);
-            const updateData = [{ botCabinets: {'cabinWidth': data?.cabinWidth, 'cabinDepth': data?.cabinDepth, 'name': 'botCabinDim', 'xAxis': dragElement.x, 'yAxis': dragElement.y } }];
-            const sumUpdatedData = [allOtherData, ...updateData];
+            const updateData = [{ botCabinets: { 'cabinWidth': data?.cabinWidth, 'cabinDepth': data?.cabinDepth, 'name': 'botCabinDim', 'xAxis': dragElement.x, 'yAxis': dragElement.y } }];
+            const sumUpdatedData = [...allOtherData, ...updateData];
             localStorage.setItem("kitchenData", JSON.stringify(sumUpdatedData.flat()));
             dispatch({ type: "ROOM_DIMENSIONS", payload: sumUpdatedData.flat() });
+            //  console.log(allOtherData)
         }
     };
 
     return (
         <>
-        {positionX !== undefined && positionY !== undefined ?
-            <Draggable
-                axis="both"
-                handle=".handle"
-                position={{ x: positionX, y: positionY }}
-                grid={[10, 10]}
-                bounds="parent"
-               onStop={handleStop}
-            >
-                <Runner className="handle">
-                    <CabinetBox elementsData={data} index={index}/>
-                </Runner>
-            </Draggable>
-: ''}
+            {positionX !== undefined && positionY !== undefined ?
+                <Draggable
+                    axis="both"
+                    handle=".handle"
+                    defaultPosition={{ x: positionX, y: positionY }}
+                    position={{ x: positionX, y: positionY }}
+                    grid={[10, 10]}
+                    bounds="parent"
+                    onStop={handleStop}
+                //    onStop={(e, data) => { saveState ({defaultposition: { x: data.x y: data.y })}};
+                >
+                    <Runner className="handle">
+                        <CabinetBox elementsData={data} index={index} />
+                    </Runner>
+                </Draggable>
+                : ''}
         </>
     );
 };
