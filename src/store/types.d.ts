@@ -1,6 +1,7 @@
 export interface RoomDimension {
-    roomWidth?: number;
-    roomDepth?: number;
+    roomWidth: number;
+    roomDepth: number;
+    distance?:number;
 }
 
 export interface Restrictions {
@@ -46,10 +47,9 @@ export interface AllkitchenData {
 export interface LocalDataState {
     kitchenData?: AllkitchenData[];
     currentTarget?: CurrentTarget[] | undefined;
-    idIterator: number;
 }
 
 export interface LocalDataActions {
-    type?: 'ROOM_DIMENSIONS' |'CURRENT_TARGET' | 'ID_ITERATOR';
+    type?: 'ROOM_DIMENSIONS' |'CURRENT_TARGET';
     payload?: LocalDataState;
 }

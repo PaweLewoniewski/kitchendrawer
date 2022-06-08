@@ -11,9 +11,10 @@ const RoomWallsPanel = () => {
     const dispatch = useAppDispatch();
     const [widthPlayground, setWidthPlayground] = useState<number | undefined>();
     const [depthPlayground, setDepthPlayground] = useState<number | undefined>();
+    const [wallDistance, setWallDistance] = useState<number | undefined>(0);
 
     const setUpRoomPlayground = () => {
-        const data = [{'roomDimension':{'roomWidth': widthPlayground,'roomDepth': depthPlayground}}]
+        const data = [{roomDimension:{roomWidth: widthPlayground,roomDepth: depthPlayground, distance:wallDistance }}]
         localStorage.setItem("kitchenData", JSON.stringify(data));
         dispatch({ type: "ROOM_DIMENSIONS", payload: data });
         navigate('/bottomCabinets');
@@ -24,6 +25,7 @@ const RoomWallsPanel = () => {
             <FiledBox>
                 <SingleNumberField text={"mm"} placeholder={'Width'} onChange={(e: any) => { setWidthPlayground(e.target.value) }} />
                 <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthPlayground(e.target.value) }} />
+                <SingleNumberField text={"mm"} placeholder={'Wall Distance'} onChange={(e: any) => { setWallDistance(e.target.value) }} />
             </FiledBox>
             <BtnBoxEnd>
                 <SingleBtn btnName={"Add"} onClick={setUpRoomPlayground}></SingleBtn>
@@ -34,7 +36,7 @@ const RoomWallsPanel = () => {
 export default RoomWallsPanel;
 
 const Contener = styled.div`
-padding:10px;
+    padding:10px;
 `;
 
 const FiledBox = styled.div`

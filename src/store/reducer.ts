@@ -5,8 +5,7 @@ import { store } from "./store";
 
 export const initialLocalData: LocalDataState = {
     kitchenData: [],
-    currentTarget: [],
-    idIterator: 1
+    currentTarget: []
 };
 
 // export const increment = (idIterator:number) => {
@@ -22,8 +21,6 @@ export function manageLocalDataReducer(state = initialLocalData, action: LocalDa
             return { ...state, kitchenData: action.payload };
         case "CURRENT_TARGET":
             return { ...state, currentTarget: action.payload };
-        case "ID_ITERATOR":
-            return { ...state, idIterator: action.payload };
         default:
             return state;
     }

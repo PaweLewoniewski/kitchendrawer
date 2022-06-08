@@ -31,12 +31,12 @@ const PreviewView = () => {
     const mainData = loadData?.find((item: AllkitchenData) => item.roomDimension?.roomWidth && item.roomDimension.roomDepth);
     const roomWidth = mainData?.roomDimension?.roomWidth ? mainData?.roomDimension?.roomWidth / 1 : 0;
     const roomDepth = mainData?.roomDimension?.roomDepth ? mainData?.roomDimension?.roomDepth / 1 : 0;
-
+    const wallDistance = mainData?.roomDimension?.distance ? mainData?.roomDimension?.distance / 1 : 0;
     // console.log(loadData);
     return (
         <>
             {roomWidth !== 0 ?
-                <Room key={0} roomWidth={roomWidth} roomDepth={roomDepth}>
+                <Room key={0} roomWidth={roomWidth} roomDepth={roomDepth} distance={wallDistance}>
                     {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
                     (
                         <Fragment key={index}>
@@ -91,6 +91,7 @@ export default PreviewView;
 const Room = styled.div<RoomDimension>`
     width:${props => props.roomWidth !== 0 ? `${props.roomWidth}px` : '0px'};
     height:${props => props.roomDepth !== 0 ? `${props.roomDepth}px` : '0px'};
+    padding:${props => props.distance !== 0 ? `${props.distance}px` : '0px'};
     border:2px solid black;
     box-sizing: border-box;
     display:flex;

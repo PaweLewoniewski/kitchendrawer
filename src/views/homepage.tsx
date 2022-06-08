@@ -69,7 +69,6 @@ const HomePage = () => {
                         {usePanel(panel)}
                     </PanelButtonsResults>
                     <ActionButtonsBoxBottom>
-                            <div></div>
                             <SingleBtn danger={'danger'} btnName={"Reset All"} onClick={clearAllData} />
                     </ActionButtonsBoxBottom>
                 </PlaygroundActions>
