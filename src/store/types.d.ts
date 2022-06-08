@@ -4,7 +4,6 @@ export interface RoomDimension {
 }
 
 export interface Restrictions {
-    id?: number;
     restWidth: number;
     restDepth: number;
 }

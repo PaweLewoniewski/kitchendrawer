@@ -13,13 +13,11 @@ const ConstructionRestrictionPanel = () => {
     const dispatch = useAppDispatch();
     const [widthRestrict, setWidthRestrict] = useState<number | undefined>();
     const [depthRestrict, setDepthRestrict] = useState<number | undefined>();
-    const { idIterator } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
-    
+ 
     const addRoomRestrictions = () => {
-        dispatch({ type: "ID_ITERATOR", payload: idIterator + 1 });
         const localData: string | null = localStorage.getItem("kitchenData");
         if (localData !== null) {
-            const data = [{restrictions:{ 'id': idIterator, 'restWidth': widthRestrict, 'restDepth': depthRestrict }}];
+            const data = [{restrictions:{ restWidth: widthRestrict, restDepth: depthRestrict }}];
             const summData = localData ? JSON.parse(localData) : [];
             const summaringData = [...summData, ...data];
             localStorage.setItem("kitchenData", JSON.stringify(summaringData));

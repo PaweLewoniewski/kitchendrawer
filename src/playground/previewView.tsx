@@ -1,5 +1,5 @@
 import Draggable from 'react-draggable';
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
@@ -36,37 +36,37 @@ const PreviewView = () => {
     return (
         <>
             {roomWidth !== 0 ?
-                <Room roomWidth={roomWidth} roomDepth={roomDepth}>
+                <Room key={0} roomWidth={roomWidth} roomDepth={roomDepth}>
                     {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
                     (
-                        <>
+                        <Fragment key={index}>
                             {id === 'bottomCabinets' ?
-                                <BottomView data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
+                                <BottomView key={index} data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
                                 : ''}
-                        </>
+                        </Fragment>
                     )) : ''}
 
                     {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
                     (
-                        <>
+                        <Fragment key={index}>
                             {id === 'topCabinets' ?
-                                <TopView data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
+                                <TopView key={index} data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
                                 : ''}
-                        </>
+                        </Fragment>
                     )) : ''}
 
                     {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
                     (
-                        <>
+                        <Fragment key={index}>
                             {id === 'preview' ?
                                 <>
-                                    <BottomView data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
-                                    <TopView data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
+                                    <BottomView key={index} data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
+                                    <TopView key={index} data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
                                 </>
                                 : ''}
-                        </>
+                        </Fragment>
                     )) : ''}
-                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData) =>
+                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
                     (
                         <Draggable
                             axis="both"
@@ -74,9 +74,10 @@ const PreviewView = () => {
                             defaultPosition={{ x: 0, y: 0 }}
                             grid={[5, 5]}
                             bounds="parent"
+                            key={index}
                         >
-                            <Runner className="handle">
-                                <RestrictionBox elementsData={item.restrictions} />
+                            <Runner key={index} className="handle">
+                                <RestrictionBox elementsData={item.restrictions} index={index}/>
                             </Runner>
                         </Draggable>
                     )) : ''}

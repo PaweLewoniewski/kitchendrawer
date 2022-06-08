@@ -56,9 +56,10 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
                     grid={[5, 5]}
                     bounds="parent"
                     onStop={handleStop}
+                    key={index}
                 //    onStop={(e, data) => { saveState ({defaultposition: { x: data.x y: data.y })}};
                 >
-                    <Runner className="handle">
+                    <Runner  className="handle">
                         <CabinetBox elementsData={data} index={index} />
                     </Runner>
                 </Draggable>

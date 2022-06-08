@@ -4,9 +4,10 @@ import { Restrictions } from "../store/types";
 
 interface ElementsDataProps {
     elementsData?: Restrictions;
+    index?:number;
 }
 
-const RestrictionBox = ({ elementsData }: ElementsDataProps) => {
+const RestrictionBox = ({ elementsData , index}: ElementsDataProps) => {
 
 
     const dispatch = useAppDispatch();
@@ -19,7 +20,7 @@ const RestrictionBox = ({ elementsData }: ElementsDataProps) => {
     return (
         <>
             {elementsData !== undefined ?
-                <RestrictBox key={elementsData.id} restWidth={elementsData.restWidth} restDepth={elementsData.restDepth}>
+                <RestrictBox key={index} restWidth={elementsData.restWidth} restDepth={elementsData.restDepth}>
                     <DimensionsBoxLines />
                     <DimensionsBoxNames>
                         <DimensionText>{elementsData.restWidth}</DimensionText>
