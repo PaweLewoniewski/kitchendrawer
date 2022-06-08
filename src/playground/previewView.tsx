@@ -9,7 +9,6 @@ import RestrictionBox from './restrictionBox';
 import BottomView from './bottomView';
 import TopView from './topView';
 
-
 const PreviewView = () => {
     const { id } = useParams();
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);

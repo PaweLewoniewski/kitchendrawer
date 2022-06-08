@@ -15,10 +15,8 @@ const CabinetsPanel = () => {
   const [widthCabin, setWidthCabin] = useState<number | undefined>();
   const [depthCabin, setDepthCabin] = useState<number | undefined>();
   const [active, setActive] = useState<string>('Bottom');
-  //const { idIterator } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
 
   const addRoomCabins = () => {
-    //dispatch({ type: "ID_ITERATOR", payload: idIterator + 1 });
     const localData: string | null = localStorage.getItem("kitchenData");
     if (active === 'Bottom') {
       if (localData !== null) {
@@ -33,7 +31,7 @@ const CabinetsPanel = () => {
     if (active === 'Top') {
       if (localData !== null) {
         const summData = localData ? JSON.parse(localData) : [];
-        const data = [{ topCabinets: {'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'topCabinDim', 'xAxis': 0, 'yAxis': 0 } }];
+        const data = [{ topCabinets: {'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'topCabinDim', 'xAxis': 250, 'yAxis': 150 } }];
         const summaringData = [...summData, ...data];
         localStorage.setItem("kitchenData", JSON.stringify(summaringData));
         dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData });
@@ -59,7 +57,6 @@ const CabinetsPanel = () => {
           <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthCabin(e.target.value) }} />
         </FiledBox>
         <BtnBoxEnd>
-          {/* <SingleBtn danger={'danger'} btnName={"Remove"} onClick={removeTarget} /> */}
           <SingleBtn btnName={"Add"} onClick={addRoomCabins}></SingleBtn>
         </BtnBoxEnd>
       </Contener>
