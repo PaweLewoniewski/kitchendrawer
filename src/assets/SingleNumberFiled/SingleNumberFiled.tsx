@@ -27,7 +27,7 @@ const ContenerBox = styled.div`
   flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width:80px;
+    width:120px;
 `;
 
 const CheckBox = styled.div`
@@ -36,14 +36,14 @@ const CheckBox = styled.div`
   align-items: center;
   user-select:none;
   margin: 1px;
-  width:80px;
+  width:120px;
   input {
       padding:6px 0;
       background:none;
       outline:none;
       border:none;
       font-size:18px;
-      width:80px;
+      width:120px;
       font-family: 'Josefin Sans', sans-serif;
       &:focus{
         background:#ffcc00;
