@@ -36,7 +36,7 @@ const PreviewView = () => {
     return (
         <>
             {roomWidth !== 0 ?
-                <Room key={0} roomWidth={roomWidth} roomDepth={roomDepth} distance={wallDistance}>
+                <Room key={0} roomWidth={roomWidth} roomDepth={roomDepth} distance={wallDistance} className='workspace'>
                     {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
                     (
                         <Fragment key={index}>
