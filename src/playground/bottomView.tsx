@@ -38,7 +38,7 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
         if (data !== undefined) {
             setX(dragElement.x);
             setY(dragElement.y);
-            const updateData = [{ botCabinets: { 'cabinWidth': data?.cabinWidth, 'cabinDepth': data?.cabinDepth, 'name': 'botCabinDim', 'xAxis': dragElement.x, 'yAxis': dragElement.y } }];
+            const updateData = [{ botCabinets: { cabinWidth: data?.cabinWidth, 'cabinDepth': data?.cabinDepth, name: 'botCabinDim', xAxis: dragElement.x, yAxis: dragElement.y , side:data?.side } }];
             const sumUpdatedData = [...allOtherData, ...updateData];
             localStorage.setItem("kitchenData", JSON.stringify(sumUpdatedData.flat()));
             dispatch({ type: "ROOM_DIMENSIONS", payload: sumUpdatedData.flat() });

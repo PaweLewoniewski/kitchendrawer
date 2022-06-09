@@ -27,6 +27,7 @@ export interface Cabinets {
     name?: string;
     xAxis?:number;
     yAxis?:number;
+    side?:number;
 }
 
 export interface CurrentTarget {

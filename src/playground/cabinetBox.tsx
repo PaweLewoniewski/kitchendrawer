@@ -54,7 +54,7 @@ const CabinetBox = ({ elementsData, index }: ElementsDataProps) => {
     return (
         <>
             {elementsData !== undefined ?
-                <CabinBox cabinWidth={elementsData.cabinWidth} cabinDepth={elementsData.cabinDepth}
+                <CabinBox cabinWidth={elementsData.cabinWidth} cabinDepth={elementsData.cabinDepth} side={elementsData.side}
                     onClick={() => { currentElement(elementsData) }} className={currentTarget === elementsData ? "activeCabin" : undefined}
                 // onBlur={()=>{blurFromElement(); setActive(undefined)}}
                 >
@@ -74,7 +74,7 @@ const CabinetBox = ({ elementsData, index }: ElementsDataProps) => {
 export default CabinetBox;
 
 const CabinBox = styled.div<Cabinets>`
-    /* transform: rotate(0.25turn); */
+    transform:${props => props.side !== 0 ? `rotate(${props.side}turn)` : 'rotate(0turn)'};
     width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth}px` : '0px'};
     height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth}px` : '0px'};
     border:2px solid #06151f;
@@ -86,7 +86,7 @@ const CabinBox = styled.div<Cabinets>`
     position:relative;
     background:#fbffca;
     /* margin:0px 1px; */
-    transition:0.3s ease-in-out;
+    /* transition:0.3s ease-in-out; */
     cursor:pointer;
     &:hover{
         border:2px solid #ff8800;
