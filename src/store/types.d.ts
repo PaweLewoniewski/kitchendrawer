@@ -22,6 +22,7 @@ export interface TopCabinets {
 }
 
 export interface Cabinets {
+    id:string;
     cabinWidth: number;
     cabinDepth: number;
     name?: string;
@@ -31,6 +32,7 @@ export interface Cabinets {
 }
 
 export interface CurrentTarget {
+    id:string;
     cabinWidth?: number;
     cabinDepth?: number;
     name?: string;

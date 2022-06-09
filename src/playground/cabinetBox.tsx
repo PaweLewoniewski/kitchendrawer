@@ -7,10 +7,9 @@ import { useEffect, useState } from "react";
 
 interface ElementsDataProps {
     elementsData?: Cabinets;
-    index?:number;
 }
 
-const CabinetBox = ({ elementsData, index }: ElementsDataProps) => {
+const CabinetBox = ({ elementsData }: ElementsDataProps) => {
 
     const dispatch = useAppDispatch();
     const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
@@ -28,18 +27,17 @@ const CabinetBox = ({ elementsData, index }: ElementsDataProps) => {
         dispatch({ type: "CURRENT_TARGET", payload: item });
         // console.log(item)
     }
-
+    const { id } = currentTarget;
+    
     const removeElement = (item: any) => {
-        if (loadData !== undefined && index !== undefined) {
+        if (loadData !== undefined) {
             if (item.name === 'botCabinDim') {
-                const currentData = loadData.at(index);
-                const filteredBotELements = loadData.filter(item => item !== currentData);
+                const filteredBotELements = loadData.filter(item => item.botCabinets?.id !== id);
                 localStorage.setItem("kitchenData", JSON.stringify(filteredBotELements));
                 dispatch({ type: "ROOM_DIMENSIONS", payload: filteredBotELements });
             }
             if (item.name === 'topCabinDim') {
-                const currentData = loadData.at(index);
-                const filteredTopELements = loadData.filter(item => item !== currentData);
+                const filteredTopELements = loadData.filter(item => item.topCabinets?.id !== id);
                 localStorage.setItem("kitchenData", JSON.stringify(filteredTopELements));
                 dispatch({ type: "ROOM_DIMENSIONS", payload: filteredTopELements });
             }
@@ -54,7 +52,7 @@ const CabinetBox = ({ elementsData, index }: ElementsDataProps) => {
     return (
         <>
             {elementsData !== undefined ?
-                <CabinBox cabinWidth={elementsData.cabinWidth} cabinDepth={elementsData.cabinDepth} side={elementsData.side}
+                <CabinBox id={elementsData.id} cabinWidth={elementsData.cabinWidth} cabinDepth={elementsData.cabinDepth} side={elementsData.side}
                     onClick={() => { currentElement(elementsData) }} className={currentTarget === elementsData ? "activeCabin" : undefined}
                 // onBlur={()=>{blurFromElement(); setActive(undefined)}}
                 >

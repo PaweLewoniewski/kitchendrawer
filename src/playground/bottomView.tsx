@@ -34,7 +34,7 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
         event.preventDefault();
         event.stopPropagation();
         if (data !== undefined) {
-            const updateData = [{ 'botCabinets': { 'cabinWidth': data.cabinWidth, 'cabinDepth': data.cabinDepth, 'name': 'botCabinDim', 'xAxis': dragElement.x, 'yAxis': dragElement.y, 'side': data.side } }];
+            const updateData = [{ 'botCabinets': { 'id':data.id , 'cabinWidth': data.cabinWidth, 'cabinDepth': data.cabinDepth, 'name': 'botCabinDim', 'xAxis': dragElement.x, 'yAxis': dragElement.y, 'side': data.side } }];
             const sumUpdatedData = [...allOtherData, ...updateData];
             localStorage.setItem("kitchenData", JSON.stringify(sumUpdatedData.flat()));
             dispatch({ type: "ROOM_DIMENSIONS", payload: sumUpdatedData.flat() });
@@ -55,7 +55,7 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
                 //    onStop={(e, data) => { saveState ({defaultposition: { x: data.x y: data.y })}};
                 >
                     <Runner className="handle">
-                        <CabinetBox elementsData={data} index={index} />
+                        <CabinetBox elementsData={data} />
                     </Runner>
                 </Draggable>
                 : ''}
