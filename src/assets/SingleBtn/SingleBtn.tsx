@@ -5,12 +5,13 @@ interface SingleBtnProps {
     children?: any;
     onClick?:() => void;
     danger?:string;
+    className?:string;
 }
 
-const SingleBtn = ({ btnName, children, onClick, danger }: SingleBtnProps) => {
+const SingleBtn = ({ btnName, children, onClick, danger, className }: SingleBtnProps) => {
     return (
         <Contener>
-            <Btn danger={danger} onClick={onClick}>{btnName ? btnName : children}</Btn>
+            <Btn danger={danger} onClick={onClick} className={className}>{btnName ? btnName : children}</Btn>
         </Contener>
     );
 };

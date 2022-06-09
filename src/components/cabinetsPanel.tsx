@@ -15,6 +15,7 @@ const CabinetsPanel = () => {
   const [depthCabin, setDepthCabin] = useState<number | undefined>();
   const [sideCabin, setSideCabin] = useState<number>(0);
   const [active, setActive] = useState<string>('Bottom');
+  const [activeSide, setActiveSide] = useState<string>('Stright');
 
   const addRoomCabins = () => {
     const localData: string | null = localStorage.getItem("kitchenData");
@@ -22,7 +23,7 @@ const CabinetsPanel = () => {
     if (active === 'Bottom') {
       if (localData !== null) {
         const summData = localData ? JSON.parse(localData) : [];
-        const data = [{ 'botCabinets': { 'id':hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'botCabinDim', 'xAxis': 250, 'yAxis': 150 , 'side': sideCabin } }];
+        const data = [{ 'botCabinets': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'botCabinDim', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
         const summaringData = [...summData, ...data];
         localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
         dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });
@@ -32,7 +33,7 @@ const CabinetsPanel = () => {
     if (active === 'Top') {
       if (localData !== null) {
         const summData = localData ? JSON.parse(localData) : [];
-        const data = [{ 'topCabinets': {'id':hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'topCabinDim', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
+        const data = [{ 'topCabinets': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'topCabinDim', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
         const summaringData = [...summData, ...data];
         localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
         dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });
@@ -49,9 +50,15 @@ const CabinetsPanel = () => {
       </ActionBtnsWidth>
       <Contener>
         <BtnBox>
-          <SingleBtn onClick={()=> setSideCabin(-0.25)} btnName={""}><AiOutlineBorderBottom size={25} className='turnLeft' /></SingleBtn>
-          <SingleBtn onClick={()=> setSideCabin(0)} btnName={""}><AiOutlineBorderBottom size={25} /></SingleBtn>
-          <SingleBtn onClick={()=> setSideCabin(0.25)} btnName={""}><AiOutlineBorderBottom size={25} className='turnRight' /></SingleBtn>
+          <SingleBtn onClick={() => { setSideCabin(-0.25); setActiveSide('LeftSide') }} className={activeSide === 'LeftSide' ? 'activeTab' : ''} btnName={""}>
+            <AiOutlineBorderBottom size={25} className='turnLeft' />
+          </SingleBtn>
+          <SingleBtn onClick={() => { setSideCabin(0); setActiveSide('Stright') }} className={activeSide === 'Stright' ? 'activeTab' : ''} btnName={""}>
+            <AiOutlineBorderBottom size={25} />
+          </SingleBtn>
+          <SingleBtn onClick={() => { setSideCabin(0.25); setActiveSide('RightSide') }} className={activeSide === 'RightSide' ? 'activeTab' : ''} btnName={""}>
+            <AiOutlineBorderBottom size={25} className='turnRight' />
+          </SingleBtn>
         </BtnBox>
         <FiledBox>
           <SingleNumberField text={"mm"} placeholder={'Width'} onChange={(e: any) => { setWidthCabin(e.target.value) }} />
