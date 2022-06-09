@@ -16,8 +16,6 @@ interface BottomViewProp {
 
 const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
 
-    const [x, setX] = useState(0);
-    const [y, setY] = useState(0);
     const dispatch = useAppDispatch();
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const datakit: AllkitchenData[] = kitchenData;
@@ -36,9 +34,7 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
         event.preventDefault();
         event.stopPropagation();
         if (data !== undefined) {
-            setX(dragElement.x);
-            setY(dragElement.y);
-            const updateData = [{ botCabinets: { cabinWidth: data?.cabinWidth, 'cabinDepth': data?.cabinDepth, name: 'botCabinDim', xAxis: dragElement.x, yAxis: dragElement.y , side:data?.side } }];
+            const updateData = [{ 'botCabinets': { 'cabinWidth': data.cabinWidth, 'cabinDepth': data.cabinDepth, 'name': 'botCabinDim', 'xAxis': dragElement.x, 'yAxis': dragElement.y, 'side': data.side } }];
             const sumUpdatedData = [...allOtherData, ...updateData];
             localStorage.setItem("kitchenData", JSON.stringify(sumUpdatedData.flat()));
             dispatch({ type: "ROOM_DIMENSIONS", payload: sumUpdatedData.flat() });
@@ -56,10 +52,9 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
                     grid={[5, 5]}
                     bounds="parent"
                     onStop={handleStop}
-                    key={index}
                 //    onStop={(e, data) => { saveState ({defaultposition: { x: data.x y: data.y })}};
                 >
-                    <Runner  className="handle">
+                    <Runner className="handle">
                         <CabinetBox elementsData={data} index={index} />
                     </Runner>
                 </Draggable>

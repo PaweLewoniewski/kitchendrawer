@@ -4,9 +4,8 @@ import { AiOutlineBorderBottom } from 'react-icons/ai';
 import SingleNumberField from "../assets/SingleNumberFiled/SingleNumberFiled";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../store/reducer";
+import { useAppDispatch } from "../store/reducer";
 import ActionBtnSmall from "../assets/ActionBtnSmall/ActionBtnSmall";
-import { RootState } from "../store/store";
 
 const CabinetsPanel = () => {
 
@@ -14,10 +13,7 @@ const CabinetsPanel = () => {
   const dispatch = useAppDispatch();
   const [widthCabin, setWidthCabin] = useState<number | undefined>();
   const [depthCabin, setDepthCabin] = useState<number | undefined>();
-  const [sideCabin, setSideCabin] = useState<number | undefined>(0);
-  // const [leftSideCabin, setLeftSideCabin] = useState<number | undefined>();
-  // const [straightCabin, setStraightCabin] = useState<number | undefined>();
-
+  const [sideCabin, setSideCabin] = useState<number>(0);
   const [active, setActive] = useState<string>('Bottom');
 
   const addRoomCabins = () => {
@@ -25,21 +21,21 @@ const CabinetsPanel = () => {
     if (active === 'Bottom') {
       if (localData !== null) {
         const summData = localData ? JSON.parse(localData) : [];
-        const data = [{ botCabinets: { cabinWidth: widthCabin, cabinDepth: depthCabin, name: 'botCabinDim', xAxis: 250, yAxis: 150 , side: sideCabin } }];
+        const data = [{ 'botCabinets': { 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'botCabinDim', 'xAxis': 250, 'yAxis': 150 , 'side': sideCabin } }];
         const summaringData = [...summData, ...data];
-        localStorage.setItem("kitchenData", JSON.stringify(summaringData));
-        dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData });
-        navigate('/bottomCabinets');
+        localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
+        dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });
+        navigate('/preview');
       }
     }
     if (active === 'Top') {
       if (localData !== null) {
         const summData = localData ? JSON.parse(localData) : [];
-        const data = [{ topCabinets: {cabinWidth: widthCabin, cabinDepth: depthCabin, name: 'topCabinDim', xAxis: 250, yAxis: 150, side: sideCabin } }];
+        const data = [{ 'topCabinets': {'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'topCabinDim', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
         const summaringData = [...summData, ...data];
-        localStorage.setItem("kitchenData", JSON.stringify(summaringData));
-        dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData });
-        navigate('/topCabinets');
+        localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
+        dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });
+        navigate('/preview');
       }
     }
   }

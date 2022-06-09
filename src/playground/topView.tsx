@@ -16,8 +16,6 @@ interface TopViewProp {
 
 const TopView = ({ data, index, positionX, positionY }: TopViewProp) => {
 
-    const [x, setX] = useState(0);
-    const [y, setY] = useState(0);
     const dispatch = useAppDispatch();
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const datakit: AllkitchenData[] = kitchenData;
@@ -37,9 +35,7 @@ const TopView = ({ data, index, positionX, positionY }: TopViewProp) => {
         event.preventDefault();
         event.stopPropagation();
         if (data !== undefined) {
-            setX(dragElement.x);
-            setY(dragElement.y);
-            const updateData = [{ topCabinets: { 'cabinWidth': data?.cabinWidth, 'cabinDepth': data?.cabinDepth, 'name': 'topCabinDim', 'xAxis': dragElement.x, 'yAxis': dragElement.y } }];
+            const updateData = [{ 'topCabinets': { 'cabinWidth': data.cabinWidth, 'cabinDepth': data.cabinDepth, 'name': 'topCabinDim', 'xAxis': dragElement.x, 'yAxis': dragElement.y , 'side':data.side}}];
             const sumUpdatedData = [...allOtherData, ...updateData];
             localStorage.setItem("kitchenData", JSON.stringify(sumUpdatedData.flat()));
             dispatch({ type: "ROOM_DIMENSIONS", payload: sumUpdatedData.flat() });
