@@ -7,7 +7,7 @@ import MainNavigation from './components/mainNavigation';
 import BottomView from './playground/bottomView';
 import TopView from './playground/topView';
 import Footer from './components/footer';
-import PreviewView from './playground/previewView';
+import PreviewView from './playground/playgroundView';
 
 
 function App() {

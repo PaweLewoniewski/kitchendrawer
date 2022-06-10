@@ -7,7 +7,7 @@ import CabinetsPanel from '../components/cabinetsPanel';
 import ConstructionRestrictionPanel from '../components/conostructionRestrictionsPanel';
 import RoomWallsPanel from '../components/roomWallsPanel';
 import PlaygroundTarget from '../playground/playgroundTarget';
-import PreviewView from '../playground/previewView';
+import PreviewView from '../playground/playgroundView';
 import { useAppDispatch, useAppSelector } from '../store/reducer';
 import { RootState } from '../store/store';
 
