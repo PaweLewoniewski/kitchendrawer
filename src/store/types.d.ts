@@ -18,6 +18,7 @@ export interface CornerCabinets {
     name?: string;
     xAxis?:number;
     yAxis?:number;
+    side?:number;
 }
 
 export interface Cabinets {
@@ -44,6 +45,7 @@ export interface AllkitchenData {
     restrictions?: Restrictions;
     botCabinets?: Cabinets;
     topCabinets?: Cabinets;
+    corners?: CornerCabinets;
 }
 
 export interface LocalDataState {

@@ -3,21 +3,42 @@ import SingleBtn from "../assets/SingleBtn/SingleBtn";
 import { AiOutlineBorderBottom } from 'react-icons/ai';
 import SingleNumberField from "../assets/SingleNumberFiled/SingleNumberFiled";
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { useAppDispatch } from "../store/reducer";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../store/reducer";
 import ActionBtnSmall from "../assets/ActionBtnSmall/ActionBtnSmall";
 
 const CornerCabinetsPanel = () => {
 
-    // const navigate = useNavigate();
-    // const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const [widthCabin, setWidthCabin] = useState<number | undefined>();
     const [depthCabin, setDepthCabin] = useState<number | undefined>();
     const [sideCabin, setSideCabin] = useState<string>('left');
     const [active, setActive] = useState<string>('Bottom');
-    const [activeSide, setActiveSide] = useState<string>('Stright');
 
 
+    const addRoomCabins = () => {
+        const localData: string | null = localStorage.getItem("kitchenData");
+        const hashgen: string = Math.random().toString(36).slice(2, 7);
+          if (localData !== null) {
+            const summData = localData ? JSON.parse(localData) : [];
+            const data = [{ 'corners': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'corners', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
+            const summaringData = [...summData, ...data];
+            localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
+            dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });
+            navigate('/preview');
+          }
+        // if (active === 'Top') {
+        //   if (localData !== null) {
+        //     const summData = localData ? JSON.parse(localData) : [];
+        //     const data = [{ 'topCabinets': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'topCabinDim', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
+        //     const summaringData = [...summData, ...data];
+        //     localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
+        //     dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });
+        //     navigate('/preview');
+        //   }
+        // }
+      }
 
     return (
         <>
@@ -27,10 +48,10 @@ const CornerCabinetsPanel = () => {
             </ActionBtnsWidth>
             <Contener>
                 <BtnBox>
-                    <SingleBtn onClick={() => { setSideCabin('left'); setActiveSide('LeftCorner') }} className={sideCabin === 'LeftCorner' ? 'activeTab' : ''} btnName={""}>
+                    <SingleBtn onClick={() => { setSideCabin('left') }} className={sideCabin === 'left' ? 'activeTab' : ''} btnName={""}>
                         <AiOutlineBorderBottom size={25} className='turnLeft' />
                     </SingleBtn>
-                    <SingleBtn onClick={() => { setSideCabin('right'); setActiveSide('RightCorner') }} className={sideCabin === 'RightCorner' ? 'activeTab' : ''} btnName={""}>
+                    <SingleBtn onClick={() => { setSideCabin('right') }} className={sideCabin === 'right' ? 'activeTab' : ''} btnName={""}>
                         <AiOutlineBorderBottom size={25} className='turnRight' />
                     </SingleBtn>
                 </BtnBox>
@@ -39,7 +60,7 @@ const CornerCabinetsPanel = () => {
                     <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthCabin(e.target.value) }} />
                 </FiledBox>
                 <BtnBoxEnd>
-                    <SingleBtn btnName={"Add"}></SingleBtn>
+                    <SingleBtn btnName={"Add"} onClick={addRoomCabins}></SingleBtn>
                 </BtnBoxEnd>
             </Contener>
         </>

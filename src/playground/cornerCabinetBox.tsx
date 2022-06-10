@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
-import { AllkitchenData, Cabinets } from "../store/types";
+import { AllkitchenData, Cabinets, CornerCabinets } from "../store/types";
 import { AiOutlineClose } from 'react-icons/ai';
 import { useEffect, useState } from "react";
 
@@ -20,44 +20,57 @@ const CornerCabinetBox = ({ elementsData }: ElementsDataProps) => {
         if (loadData === undefined) {
             setLoadData(kitchenData);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loadData]);
 
     const currentElement = (item: {}) => {
         dispatch({ type: "CURRENT_TARGET", payload: item });
         // console.log(item)
     }
-    // const { id } = currentTarget;
-    
+    const { id } = currentTarget;
+
+
+    const removeElement = (item: any) => {
+        if (loadData !== undefined) {
+            if (item.name === 'corners') {
+                const filteredELements = loadData.filter(item => item.corners?.id !== id);
+                localStorage.setItem("kitchenData", JSON.stringify(filteredELements));
+                dispatch({ type: "ROOM_DIMENSIONS", payload: filteredELements });
+            }
+        }
+    }
 
 
     return (
         <>
-            {/* {elementsData !== undefined ? */}
-                <CornerCabinBox className={currentTarget === elementsData ? "activeCabin" : undefined}>
+            {elementsData !== undefined ?
+                <CornerCabinBox id={elementsData.id} cabinWidth={elementsData.cabinWidth}
+                    cabinDepth={elementsData.cabinDepth} side={elementsData.side}
+                    onClick={() => { currentElement(elementsData) }}
+                    className={currentTarget === elementsData ? "activeCabin" : undefined}>
                     <DimensionsBoxLines />
                     <DimensionsBoxNames>
-                        <DimensionText>250</DimensionText>
+                        <DimensionText>{elementsData.cabinWidth}</DimensionText>
                     </DimensionsBoxNames>
                     <DimensionsSecBoxLines />
                     <DimensionsSecBoxNames>
-                        <DimensionText>270</DimensionText>
+                        <DimensionSecText>{elementsData.cabinDepth}</DimensionSecText>
                     </DimensionsSecBoxNames>
                     <OptionsBtnsBox className={currentTarget === elementsData ? "show" : 'hide'}>
-                        <OptionsBtn 
-                        // onClick={() => { removeElement(elementsData) }}
+                        <OptionsBtn
+                        onClick={() => { removeElement(elementsData) }}
                         ><AiOutlineClose size={20} /></OptionsBtn>
                     </OptionsBtnsBox>
                 </CornerCabinBox>
-                {/* : ''} */}
+                : ''}
         </>
     );
 };
 export default CornerCabinetBox;
 
-const CornerCabinBox = styled.div`
-    width:250px;
-    height:250px;
+const CornerCabinBox = styled.div<CornerCabinets>`
+    width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth}px` : '0px'};
+    height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth}px` : '0px'};
     border:2px solid #06151f;
     box-sizing: border-box;
     display:flex;
@@ -66,14 +79,14 @@ const CornerCabinBox = styled.div`
     position:relative;
     background:#fbffca;
     cursor:pointer;
-    transform:rotate(0turn) ;
+    /* transform:rotate(0turn) ; */
     &:after{
         content:'';
         position:absolute;
         bottom:-2px;
         right:-2px;
-        width:100px;
-        height:100px;
+        width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth / 2}px` : '0px'};
+        height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth / 2}px` : '0px'};
         background:#f4f4f4;
         border:2px solid #06151f;
         border-bottom:2px solid white;
@@ -121,8 +134,16 @@ const DimensionsBoxNames = styled.div`
 const DimensionText = styled.p`
     font-size:16px;
     text-shadow:1px 1px 1px white;
-    position:absolute;
-    top:-23px;
+    /* position:absolute;
+    top:-23px; */
+`;
+
+const DimensionSecText = styled.p`
+    font-size:16px;
+    text-shadow:1px 1px 1px white;
+    transform:rotate(0.25turn) ;
+    /* position:absolute;
+    top:-23px; */
 `;
 
 const OptionsBtnsBox = styled.div`
@@ -144,39 +165,35 @@ const OptionsBtn = styled.div`
 `;
 
 const DimensionsSecBoxLines = styled.div`
-    width:100%;
-    height:15px;
+    width:15px;
+    height:100%;
     border:1px solid black;
-    border-top:none;
-    border-bottom:none;
+    border-left:none;
+    border-right:none;
     position:absolute;
-    right:-132px;
-    top:115px;
-    transform:rotate(0.25turn);
+    right:-16px;
+    top:-2px;
 `;
 
 const DimensionsSecBoxNames = styled.div`
-    width:100%;
-    height:10px;
+    width:10px;
+    height:99%;
     border:1px solid black;
+    border-right:none;
     display:flex;
     align-items:center;
     text-align:center;
     justify-content:center;
     position:absolute;
-    /* top:0px; */
-    right:-143px;
+    top:-2px;
+    right:-24px;
     text-align:center;
-    border-top:none;
     padding-bottom:3px;
     background:white;
     text-shadow:1px 1px 1px white;
-    transform:rotate(0.25turn);
 `;
 
-// transform:${props => props.side !== 0 ? `rotate(${props.side}turn)` : 'rotate(0turn)'};
-// width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth}px` : '0px'};
-// height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth}px` : '0px'};
+
 
         // const { id, name } = currentTarget;
         // const { botCabinets, topCabinets } = kitchenData;
