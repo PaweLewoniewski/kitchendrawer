@@ -5,6 +5,7 @@ import ActionBtn from '../assets/ActionBtn/ActionBtn';
 import SingleBtn from '../assets/SingleBtn/SingleBtn';
 import CabinetsPanel from '../components/cabinetsPanel';
 import ConstructionRestrictionPanel from '../components/conostructionRestrictionsPanel';
+import CornerCabinetsPanel from '../components/cornerCabinPanel';
 import RoomWallsPanel from '../components/roomWallsPanel';
 import PlaygroundTarget from '../playground/playgroundTarget';
 import PreviewView from '../playground/playgroundView';
@@ -22,6 +23,8 @@ const HomePage = () => {
         switch (panel) {
             case 'cabinets':
                 return <CabinetsPanel />;
+            case 'cornerCabinets':
+                return  <CornerCabinetsPanel />;
             case 'restrictions':
                 return <ConstructionRestrictionPanel />
             default:
@@ -64,6 +67,7 @@ const HomePage = () => {
                         <ActionBtn active={active} btnName={'Walls'} onClick={() => { setPanel('walls'); setActive('Walls') }} />
                         <ActionBtn active={active} btnName={'Construction restrictions'} onClick={() => { setPanel('restrictions'); setActive('Construction restrictions') }} />
                         <ActionBtn active={active} btnName={'Cabinets'} onClick={() => { setPanel('cabinets'); setActive('Cabinets') }} />
+                        <ActionBtn active={active} btnName={'Corner cabinets'} onClick={() => { setPanel('cornerCabinets'); setActive('Corner cabinets') }} />
                     </ActionButtonsBox>
                     <PanelButtonsResults>
                         {usePanel(panel)}
