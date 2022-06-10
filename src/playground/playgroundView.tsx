@@ -8,7 +8,6 @@ import { AllkitchenData, RoomDimension } from '../store/types';
 import RestrictionBox from './restrictionBox';
 import BottomView from './bottomView';
 import TopView from './topView';
-import CornerCabinetBox from './cornerCabinetBox';
 
 const PreviewView = () => {
     const { id } = useParams();
@@ -63,25 +62,25 @@ const PreviewView = () => {
                                 <>
                                     <BottomView data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
                                     <TopView data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
-                                    <CornerCabinetBox />
                                 </>
                                 : ''}
                         </Fragment>
                     )) : ''}
                     {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
                     (
-                        <Draggable
-                            axis="both"
-                            handle=".handle"
-                            defaultPosition={{ x: 0, y: 0 }}
-                            grid={[5, 5]}
-                            bounds="parent"
-                            key={index}
-                        >
-                            <Runner key={index} className="handle">
-                                <RestrictionBox elementsData={item.restrictions} index={index}/>
-                            </Runner>
-                        </Draggable>
+                        <Fragment key={index}>
+                            <Draggable
+                                axis="both"
+                                handle=".handle"
+                                defaultPosition={{ x: 0, y: 0 }}
+                                grid={[5, 5]}
+                                bounds="parent"
+                            >
+                                <Runner key={index} className="handle">
+                                    <RestrictionBox elementsData={item.restrictions} index={index} />
+                                </Runner>
+                            </Draggable>
+                        </Fragment>
                     )) : ''}
                 </Room>
                 : 'Set Room Dimensions'}

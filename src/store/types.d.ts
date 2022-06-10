@@ -5,8 +5,10 @@ export interface RoomDimension {
 }
 
 export interface Restrictions {
+    id:string;
     restWidth: number;
     restDepth: number;
+    name?:string;
 }
 
 export interface CornerCabinets {

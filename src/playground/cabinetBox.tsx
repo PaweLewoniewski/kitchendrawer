@@ -20,15 +20,14 @@ const CabinetBox = ({ elementsData }: ElementsDataProps) => {
         if (loadData === undefined) {
             setLoadData(kitchenData);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loadData]);
 
     const currentElement = (item: {}) => {
         dispatch({ type: "CURRENT_TARGET", payload: item });
-        // console.log(item)
     }
     const { id } = currentTarget;
-    
+
     const removeElement = (item: any) => {
         if (loadData !== undefined) {
             if (item.name === 'botCabinDim') {
@@ -44,17 +43,11 @@ const CabinetBox = ({ elementsData }: ElementsDataProps) => {
         }
     }
 
-    // const blurFromElement = () => {
-    //     dispatch({ type: "CURRENT_TARGET", payload: undefined });
-    //     console.log('blur');
-    // }
-
     return (
         <>
             {elementsData !== undefined ?
                 <CabinBox id={elementsData.id} cabinWidth={elementsData.cabinWidth} cabinDepth={elementsData.cabinDepth} side={elementsData.side}
                     onClick={() => { currentElement(elementsData) }} className={currentTarget === elementsData ? "activeCabin" : undefined}
-                // onBlur={()=>{blurFromElement(); setActive(undefined)}}
                 >
                     <DimensionsBoxLines />
                     <DimensionsBoxNames>
@@ -146,22 +139,3 @@ const OptionsBtn = styled.div`
  justify-content:center;
  align-items:center;
 `;
-
-        // const { id, name } = currentTarget;
-        // const { botCabinets, topCabinets } = kitchenData;
-
-        // const removeTarget = () => {
-        //     if (name === 'botCabinDim') {
-        //       setBotCabin(botCabinets);
-        //       console.log(botCabins)
-        //       const removelement = botCabins.filter((i: any) => i.id !== id);
-        //       localStorage.setItem(name, JSON.stringify(removelement));
-        //       dispatch({ type: "ROOM_DIMENSIONS", payload: removelement });
-        //     }
-        //     if (name === 'topCabinDim') {
-        //       setTopCabin(topCabinets)
-        //       const removelement = topCabins.filter((i: any) => i.id !== id);
-        //       localStorage.setItem(name, JSON.stringify(removelement));
-        //       dispatch({ type: "ROOM_DIMENSIONS", payload: removelement });
-        //     }
-        //   }

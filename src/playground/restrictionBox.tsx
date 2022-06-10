@@ -1,31 +1,63 @@
+import { useEffect, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
 import styled from "styled-components";
-import { useAppDispatch } from "../store/reducer";
-import { Restrictions } from "../store/types";
-
+import { useAppDispatch, useAppSelector } from "../store/reducer";
+import { RootState } from "../store/store";
+import { AllkitchenData, Restrictions } from "../store/types";
+import CrossLines from '../image/crossLines.png';
+ 
 interface ElementsDataProps {
     elementsData?: Restrictions;
-    index?:number;
+    index?: number;
 }
 
-const RestrictionBox = ({ elementsData , index}: ElementsDataProps) => {
+const RestrictionBox = ({ elementsData, index }: ElementsDataProps) => {
 
 
     const dispatch = useAppDispatch();
-    //    const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    const [loadData, setLoadData] = useState<AllkitchenData[]>();
+    const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
 
-    //     const removeElement = (item: any) => {
-    //         dispatch({ type: "CURRENT_TARGET", payload: item });
-    //     }
+    useEffect(() => {
+        if (loadData === undefined) {
+            setLoadData(kitchenData);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loadData]);
+
+    const currentElement = (item: {}) => {
+        dispatch({ type: "CURRENT_TARGET", payload: item });
+    }
+
+    const { id } = currentTarget;
+
+    const removeElement = (item: any) => {
+        if (loadData !== undefined) {
+            if (item.name === 'restrictions') {
+                const filteredELements = loadData.filter(item => item.restrictions?.id !== id);
+                localStorage.setItem("kitchenData", JSON.stringify(filteredELements.flat()));
+                dispatch({ type: "ROOM_DIMENSIONS", payload: filteredELements.flat() });
+            }
+        }
+        console.log(item.name)
+    }
 
     return (
         <>
             {elementsData !== undefined ?
-                <RestrictBox key={index} restWidth={elementsData.restWidth} restDepth={elementsData.restDepth}>
+                <RestrictBox id={elementsData.id} restWidth={elementsData.restWidth} restDepth={elementsData.restDepth}
+                onClick={() => { currentElement(elementsData) }} className={currentTarget === elementsData ? "activeCabin" : undefined}
+                >
                     <DimensionsBoxLines />
                     <DimensionsBoxNames>
                         <DimensionText>{elementsData.restWidth}</DimensionText>
                     </DimensionsBoxNames>
                     <CrossLine />
+                    <OptionsBtnsBox className={currentTarget === elementsData ? "show" : 'hide'}>
+                        <OptionsBtn onClick={() => { removeElement(elementsData) }}
+                        ><AiOutlineClose size={20} /></OptionsBtn>
+                    </OptionsBtnsBox>
                 </RestrictBox>
                 : ''}
         </>
@@ -47,7 +79,7 @@ const RestrictBox = styled.div<Restrictions>`
     transition:0.3s ease-in-out;
     cursor:pointer;
     &:hover{
-        border:2px solid #00d624;
+        border:2px solid #ff8800;
         transition:0.3s ease-in-out;
     }
 `;
@@ -61,7 +93,6 @@ const DimensionsBoxLines = styled.div`
     position:absolute;
     top:-16px;
     left:-1px;
-    background:white;
 `;
 
 const DimensionsBoxNames = styled.div`
@@ -91,16 +122,31 @@ const DimensionText = styled.p`
 
 const CrossLine = styled.div`
     width:100%;
-    height:1px;
-    background:black;
-    transform: rotate(0.54turn);
-    position:relative;
-    &:after{
-        content:'';
-        width:100%;
-        height:1px;
-        background:black;
-        position:absolute;
-        transform: rotate(-0.58turn);
-    }
+    height:100%;
+    position:absolute ;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background: url(${CrossLines}) no-repeat;
+    background-size:cover;
+    background-position:center;
+`;
+
+const OptionsBtnsBox = styled.div`
+    position:absolute;
+    width:25px;
+    height:50px;
+    bottom:-58px;
+    left:0px;
+    z-index:99;
+    padding:1px;
+`;
+
+const OptionsBtn = styled.div`
+ border:1px solid black;
+ border-radius:3px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
 `;

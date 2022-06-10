@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
-import { AllkitchenData, Cabinets, CornerCabinets } from "../store/types";
+import { AllkitchenData, Cabinets } from "../store/types";
 import { AiOutlineClose } from 'react-icons/ai';
 import { useEffect, useState } from "react";
 

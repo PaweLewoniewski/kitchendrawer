@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import SingleBtn from "../assets/SingleBtn/SingleBtn";
-// import { AiOutlineBorderOuter } from 'react-icons/ai';
 import SingleNumberField from "../assets/SingleNumberFiled/SingleNumberFiled";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../store/reducer";
+import { useAppDispatch } from "../store/reducer";
 import { useState } from "react";
-import { RootState } from "../store/store";
+
 
 const ConstructionRestrictionPanel = () => {
 
@@ -16,13 +15,14 @@ const ConstructionRestrictionPanel = () => {
  
     const addRoomRestrictions = () => {
         const localData: string | null = localStorage.getItem("kitchenData");
+        const hashgen: string = Math.random().toString(36).slice(2, 7);
         if (localData !== null) {
-            const data = [{restrictions:{ restWidth: widthRestrict, restDepth: depthRestrict }}];
+            const data = [{'restrictions':{ 'id': hashgen, 'restWidth': widthRestrict, 'restDepth': depthRestrict, 'name': 'restrictions', 'xAxis': 0, 'yAxis': 0, }}];
             const summData = localData ? JSON.parse(localData) : [];
             const summaringData = [...summData, ...data];
             localStorage.setItem("kitchenData", JSON.stringify(summaringData));
             dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData });
-            navigate('/bottomCabinets');
+            navigate('/preview');
         }
         else
        return console.log('setup room');
@@ -31,7 +31,6 @@ const ConstructionRestrictionPanel = () => {
     return (
         <Contener>
             <FiledBox>
-                {/* <SingleBtn btnName={""}><AiOutlineBorderOuter size={25} className='turnLeft' /></SingleBtn> */}
                 <SingleNumberField text={"mm"} placeholder={'Width'} onChange={(e: any) => { setWidthRestrict(e.target.value) }} />
                 <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthRestrict(e.target.value) }} />
             </FiledBox>
