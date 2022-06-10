@@ -9,16 +9,13 @@ export interface Restrictions {
     restDepth: number;
 }
 
-export interface BottomCabinets {
+export interface CornerCabinets {
+    id:string;
     cabinWidth: number;
     cabinDepth: number;
     name?: string;
-}
-
-export interface TopCabinets {
-    cabinWidth: number;
-    cabinDepth: number;
-    name?: string;
+    xAxis?:number;
+    yAxis?:number;
 }
 
 export interface Cabinets {

@@ -8,6 +8,7 @@ import { AllkitchenData, RoomDimension } from '../store/types';
 import RestrictionBox from './restrictionBox';
 import BottomView from './bottomView';
 import TopView from './topView';
+import CornerCabinetBox from './cornerCabinetBox';
 
 const PreviewView = () => {
     const { id } = useParams();
@@ -62,6 +63,7 @@ const PreviewView = () => {
                                 <>
                                     <BottomView data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
                                     <TopView data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
+                                    <CornerCabinetBox />
                                 </>
                                 : ''}
                         </Fragment>
