@@ -46,10 +46,15 @@
   background: #ffcc00 !important;
 }
 
-.contentBG {
+/* .contentBG {
   background: url('image/contentbg.png');
   background-position: right;
-}
+} */
+
+/* .contentBG {
+  background: url('image/contentbackground.png');
+  background-position: right;
+} */
 
 .workspace {
   background: url('image/squarebg.jpg');

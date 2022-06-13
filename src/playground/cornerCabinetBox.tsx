@@ -117,7 +117,7 @@ const CornerCabinBox = styled.div<CornerCabinets>`
         width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth / 2}px` : '0px'};
         height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth / 2}px` : '0px'};
         background:#f4f4f4;
-        border:2px solid #06151f;
+        border:6px solid #06151f;
         border-bottom:2px solid white;
         border-left:2px solid white;
     }
@@ -130,7 +130,7 @@ const CornerCabinBox = styled.div<CornerCabinets>`
         width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth / 2}px` : '0px'};
         height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth / 2}px` : '0px'};
         background:#f4f4f4;
-        border:2px solid #06151f;
+        border:6px solid #06151f;
         border-bottom:2px solid white;
         border-right:2px solid white;
     }
@@ -138,12 +138,12 @@ const CornerCabinBox = styled.div<CornerCabinets>`
         border:2px solid #ff8800;
         transition:0.3s ease-in-out;
         &:before{
-        border-top:2px solid #ff8800;
-        border-right:2px solid #ff8800;
+        border-top:6px solid #ff8800;
+        border-right:6px solid #ff8800;
     }
         &:after{
-        border-top:2px solid #ff8800;
-        border-left:2px solid #ff8800;
+        border-top:6px solid #ff8800;
+        border-left:6px solid #ff8800;
     }
     }
 `;

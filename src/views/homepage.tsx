@@ -157,10 +157,11 @@ const PlaygroundBox = styled.div`
     margin:0px 10px;
     border:1px solid black;
     border-radius:3px;
-    background:#eefffd;
     overflow:auto;
     padding:30px;
     position:relative;
+    background-image: radial-gradient(#25a89b 0.5px, #eefffd 0.5px);
+    background-size: 10px 10px;
 `;
 
 const PlaygroundActions = styled.div`
