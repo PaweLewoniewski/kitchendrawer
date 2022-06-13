@@ -15,17 +15,22 @@ const CornerCabinetBox = ({ elementsData }: ElementsDataProps) => {
     const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const [loadData, setLoadData] = useState<AllkitchenData[]>();
+    const localData: string | null = localStorage.getItem("kitchenData");
 
     useEffect(() => {
-        if (loadData === undefined) {
+        if (localData !== null && loadData === undefined) {
+            const roomDataObj = JSON.parse(localData);
+            setLoadData(roomDataObj);
+            dispatch({ type: "ROOM_DIMENSIONS", payload: roomDataObj });
+        }
+        if (loadData !== kitchenData) {
             setLoadData(kitchenData);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loadData]);
+    }, [loadData, localData]);
 
     const currentElement = (item: {}) => {
         dispatch({ type: "CURRENT_TARGET", payload: item });
-        // console.log(item)
     }
     const { id } = currentTarget;
 
@@ -42,7 +47,6 @@ const CornerCabinetBox = ({ elementsData }: ElementsDataProps) => {
                 localStorage.setItem("kitchenData", JSON.stringify(filteredELements));
                 dispatch({ type: "ROOM_DIMENSIONS", payload: filteredELements });
             }
-            console.log(id)
         }
     }
 
@@ -74,7 +78,7 @@ const CornerCabinetBox = ({ elementsData }: ElementsDataProps) => {
                     </RightDimensions>
                     <OptionsBtnsBox className={currentTarget === elementsData ? "show" : 'hide'}>
                         <OptionsBtn
-                            onClick={() => { removeElement(elementsData) }}
+                            onClick={() => removeElement(elementsData)}
                         ><AiOutlineClose size={20} /></OptionsBtn>
                     </OptionsBtnsBox>
                 </CornerCabinBox>
@@ -268,20 +272,14 @@ const DimensionSecLeftText = styled.p`
     background:white;
 `;
 
-        // const { id, name } = currentTarget;
-        // const { botCabinets, topCabinets } = kitchenData;
-
-        // const removeElement = (item: any) => {
-        //     if (loadData !== undefined) {
-        //         if (item.name === 'botCabinDim') {
-        //             const filteredBotELements = loadData.filter(item => item.botCabinets?.id !== id);
-        //             localStorage.setItem("kitchenData", JSON.stringify(filteredBotELements));
-        //             dispatch({ type: "ROOM_DIMENSIONS", payload: filteredBotELements });
-        //         }
-        //         if (item.name === 'topCabinDim') {
-        //             const filteredTopELements = loadData.filter(item => item.topCabinets?.id !== id);
-        //             localStorage.setItem("kitchenData", JSON.stringify(filteredTopELements));
-        //             dispatch({ type: "ROOM_DIMENSIONS", payload: filteredTopELements });
-        //         }
-        //     }
-        // }
+    // useEffect(() => {
+    //     if (loadData === undefined) {
+    //         setLoadData(kitchenData);
+    //     }
+    //     if (savedElements !== undefined) {
+    //         console.log(savedElements);
+    //         localStorage.setItem("kitchenData", JSON.stringify(savedElements));
+    //         dispatch({ type: "ROOM_DIMENSIONS", payload: savedElements });
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [loadData, savedElements]);
