@@ -14,7 +14,7 @@ interface CornersViewProp {
 }
 
 
-const CornersView = ({ data, index, positionX, positionY }: CornersViewProp) => {
+const CornersTopView = ({ data, index, positionX, positionY }: CornersViewProp) => {
 
     const dispatch = useAppDispatch();
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
@@ -34,7 +34,7 @@ const CornersView = ({ data, index, positionX, positionY }: CornersViewProp) => 
         event.preventDefault();
         event.stopPropagation();
         if (data !== undefined) {
-            const updateData = [{ 'corners': { 'id': data.id , 'cabinWidth': data.cabinWidth, 'cabinDepth': data.cabinDepth, 'name': 'corners', 'xAxis': dragElement.x, 'yAxis': dragElement.y, 'side': data.side } }];
+            const updateData = [{ 'cornersTop': { 'id': data.id , 'cabinWidth': data.cabinWidth, 'cabinDepth': data.cabinDepth, 'name': 'corners', 'xAxis': dragElement.x, 'yAxis': dragElement.y, 'side': data.side } }];
             const sumUpdatedData = [...allOtherData, ...updateData];
             localStorage.setItem("kitchenData", JSON.stringify(sumUpdatedData.flat()));
             dispatch({ type: "ROOM_DIMENSIONS", payload: sumUpdatedData.flat() });
@@ -61,7 +61,7 @@ const CornersView = ({ data, index, positionX, positionY }: CornersViewProp) => 
         </>
     );
 };
-export default CornersView;
+export default CornersTopView;
 
 
 const Runner = styled.div`

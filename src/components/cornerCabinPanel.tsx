@@ -9,62 +9,65 @@ import ActionBtnSmall from "../assets/ActionBtnSmall/ActionBtnSmall";
 
 const CornerCabinetsPanel = () => {
 
-    const navigate = useNavigate();
-    const dispatch = useAppDispatch();
-    const [widthCabin, setWidthCabin] = useState<number | undefined>();
-    const [depthCabin, setDepthCabin] = useState<number | undefined>();
-    const [sideCabin, setSideCabin] = useState<number>(0);
-    const [active, setActive] = useState<string>('Bottom');
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [widthCabin, setWidthCabin] = useState<number | undefined>();
+  const [depthCabin, setDepthCabin] = useState<number | undefined>();
+  const [sideCabin, setSideCabin] = useState<number>(0);
+  const [active, setActive] = useState<string>('Bottom');
 
 
-    const addRoomCabins = () => {
-        const localData: string | null = localStorage.getItem("kitchenData");
-        const hashgen: string = Math.random().toString(36).slice(2, 7);
-          if (localData !== null) {
-            const summData = localData ? JSON.parse(localData) : [];
-            const data = [{ 'corners': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'corners', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
-            const summaringData = [...summData, ...data];
-            localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
-            dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });
-            navigate('/preview');
-          }
-        // if (active === 'Top') {
-        //   if (localData !== null) {
-        //     const summData = localData ? JSON.parse(localData) : [];
-        //     const data = [{ 'topCabinets': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'topCabinDim', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
-        //     const summaringData = [...summData, ...data];
-        //     localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
-        //     dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });
-        //     navigate('/preview');
-        //   }
-        // }
+  const addRoomCabins = () => {
+    const localData: string | null = localStorage.getItem("kitchenData");
+    const hashgen: string = Math.random().toString(36).slice(2, 7);
+    
+    if (active === 'Bottom') {
+      if (localData !== null) {
+        const summData = localData ? JSON.parse(localData) : [];
+        const data = [{ 'cornersBot': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'corners', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
+        const summaringData = [...summData, ...data];
+        localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
+        dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });
+        navigate('/preview');
       }
+    }
+    if (active === 'Top') {
+      if (localData !== null) {
+        const summData = localData ? JSON.parse(localData) : [];
+        const data = [{ 'cornersTop': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'corners', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
+        const summaringData = [...summData, ...data];
+        localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
+        dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });
+        navigate('/preview');
+      }
+    }
+  }
 
-    return (
-        <>
-            <ActionBtnsWidth>
-                <ActionBtnSmall onClick={() => setActive('Top')} className={active === 'Top' ? 'activeTab' : ''} btnName={'Top'} />
-                <ActionBtnSmall onClick={() => setActive('Bottom')} className={active === 'Bottom' ? 'activeTab' : ''} btnName={'Bottom'} />
-            </ActionBtnsWidth>
-            <Contener>
-                <BtnBox>
-                    <SingleBtn onClick={() => { setSideCabin(0) }} className={sideCabin === 0 ? 'activeTab' : ''} btnName={""}>
-                        <AiOutlineBorderBottom size={25} className='turnLeft' />
-                    </SingleBtn>
-                    <SingleBtn onClick={() => { setSideCabin(1) }} className={sideCabin === 1 ? 'activeTab' : ''} btnName={""}>
-                        <AiOutlineBorderBottom size={25} className='turnRight' />
-                    </SingleBtn>
-                </BtnBox>
-                <FiledBox>
-                    <SingleNumberField text={"mm"} placeholder={'Width'} onChange={(e: any) => { setWidthCabin(e.target.value) }} />
-                    <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthCabin(e.target.value) }} />
-                </FiledBox>
-                <BtnBoxEnd>
-                    <SingleBtn btnName={"Add"} onClick={addRoomCabins}></SingleBtn>
-                </BtnBoxEnd>
-            </Contener>
-        </>
-    );
+  return (
+    <>
+      <ActionBtnsWidth>
+        <ActionBtnSmall onClick={() => setActive('Top')} className={active === 'Top' ? 'activeTab' : ''} btnName={'Top'} />
+        <ActionBtnSmall onClick={() => setActive('Bottom')} className={active === 'Bottom' ? 'activeTab' : ''} btnName={'Bottom'} />
+      </ActionBtnsWidth>
+      <Contener>
+        <BtnBox>
+          <SingleBtn onClick={() => { setSideCabin(0) }} className={sideCabin === 0 ? 'activeTab' : ''} btnName={""}>
+            <AiOutlineBorderBottom size={25} className='turnLeft' />
+          </SingleBtn>
+          <SingleBtn onClick={() => { setSideCabin(1) }} className={sideCabin === 1 ? 'activeTab' : ''} btnName={""}>
+            <AiOutlineBorderBottom size={25} className='turnRight' />
+          </SingleBtn>
+        </BtnBox>
+        <FiledBox>
+          <SingleNumberField text={"mm"} placeholder={'Width'} onChange={(e: any) => { setWidthCabin(e.target.value) }} />
+          <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthCabin(e.target.value) }} />
+        </FiledBox>
+        <BtnBoxEnd>
+          <SingleBtn btnName={"Add"} onClick={addRoomCabins}></SingleBtn>
+        </BtnBoxEnd>
+      </Contener>
+    </>
+  );
 };
 export default CornerCabinetsPanel;
 

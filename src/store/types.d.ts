@@ -45,7 +45,8 @@ export interface AllkitchenData {
     restrictions?: Restrictions;
     botCabinets?: Cabinets;
     topCabinets?: Cabinets;
-    corners?: CornerCabinets;
+    cornersBot?: CornerCabinets;
+    cornersTop?: CornerCabinets;
 }
 
 export interface LocalDataState {
