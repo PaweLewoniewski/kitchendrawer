@@ -13,7 +13,7 @@ const CornerCabinetsPanel = () => {
     const dispatch = useAppDispatch();
     const [widthCabin, setWidthCabin] = useState<number | undefined>();
     const [depthCabin, setDepthCabin] = useState<number | undefined>();
-    const [sideCabin, setSideCabin] = useState<string>('left');
+    const [sideCabin, setSideCabin] = useState<number>(0);
     const [active, setActive] = useState<string>('Bottom');
 
 
@@ -48,10 +48,10 @@ const CornerCabinetsPanel = () => {
             </ActionBtnsWidth>
             <Contener>
                 <BtnBox>
-                    <SingleBtn onClick={() => { setSideCabin('left') }} className={sideCabin === 'left' ? 'activeTab' : ''} btnName={""}>
+                    <SingleBtn onClick={() => { setSideCabin(0) }} className={sideCabin === 0 ? 'activeTab' : ''} btnName={""}>
                         <AiOutlineBorderBottom size={25} className='turnLeft' />
                     </SingleBtn>
-                    <SingleBtn onClick={() => { setSideCabin('right') }} className={sideCabin === 'right' ? 'activeTab' : ''} btnName={""}>
+                    <SingleBtn onClick={() => { setSideCabin(1) }} className={sideCabin === 1 ? 'activeTab' : ''} btnName={""}>
                         <AiOutlineBorderBottom size={25} className='turnRight' />
                     </SingleBtn>
                 </BtnBox>

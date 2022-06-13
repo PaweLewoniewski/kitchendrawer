@@ -52,13 +52,23 @@ const CornerCabinetBox = ({ elementsData }: ElementsDataProps) => {
                     <DimensionsBoxNames>
                         <DimensionText>{elementsData.cabinWidth}</DimensionText>
                     </DimensionsBoxNames>
-                    <DimensionsSecBoxLines />
-                    <DimensionsSecBoxNames>
-                        <DimensionSecText>{elementsData.cabinDepth}</DimensionSecText>
-                    </DimensionsSecBoxNames>
+                    <LeftDimensions id={elementsData.id} side={elementsData.side} cabinWidth={elementsData.cabinWidth}
+                        cabinDepth={elementsData.cabinDepth}>
+                        <DimensionsSecBoxLines />
+                        <DimensionsSecBoxNames>
+                            <DimensionSecText>{elementsData.cabinDepth}</DimensionSecText>
+                        </DimensionsSecBoxNames>
+                    </LeftDimensions>
+                    <RightDimensions id={elementsData.id} side={elementsData.side} cabinWidth={elementsData.cabinWidth}
+                        cabinDepth={elementsData.cabinDepth}>
+                        <DimensionsSecLeftBoxLines />
+                        <DimensionsSecLeftBoxNames>
+                            <DimensionSecLeftText>{elementsData.cabinDepth}</DimensionSecLeftText>
+                        </DimensionsSecLeftBoxNames>
+                    </RightDimensions>
                     <OptionsBtnsBox className={currentTarget === elementsData ? "show" : 'hide'}>
                         <OptionsBtn
-                        onClick={() => { removeElement(elementsData) }}
+                            onClick={() => { removeElement(elementsData) }}
                         ><AiOutlineClose size={20} /></OptionsBtn>
                     </OptionsBtnsBox>
                 </CornerCabinBox>
@@ -67,6 +77,14 @@ const CornerCabinetBox = ({ elementsData }: ElementsDataProps) => {
     );
 };
 export default CornerCabinetBox;
+
+const LeftDimensions = styled.div<CornerCabinets>`
+  opacity:${props => props.side === 1 ? `1` : `0`};
+`;
+
+const RightDimensions = styled.div<CornerCabinets>`
+  opacity:${props => props.side === 0 ? `1` : `0`};
+`;
 
 const CornerCabinBox = styled.div<CornerCabinets>`
     width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth}px` : '0px'};
@@ -80,7 +98,21 @@ const CornerCabinBox = styled.div<CornerCabinets>`
     background:#fbffca;
     cursor:pointer;
     /* transform:rotate(0turn) ; */
+    &:before{
+        display:${props => props.side === 1 ? `block` : 'none'};
+        content:'';
+        position:absolute;
+        bottom:-2px;
+        left:-2px;
+        width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth / 2}px` : '0px'};
+        height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth / 2}px` : '0px'};
+        background:#f4f4f4;
+        border:2px solid #06151f;
+        border-bottom:2px solid white;
+        border-left:2px solid white;
+    }
     &:after{
+        display:${props => props.side === 0 ? `block` : 'none'};
         content:'';
         position:absolute;
         bottom:-2px;
@@ -95,6 +127,10 @@ const CornerCabinBox = styled.div<CornerCabinets>`
     &:hover {
         border:2px solid #ff8800;
         transition:0.3s ease-in-out;
+        &:before{
+        border-top:2px solid #ff8800;
+        border-right:2px solid #ff8800;
+    }
         &:after{
         border-top:2px solid #ff8800;
         border-left:2px solid #ff8800;
@@ -134,16 +170,13 @@ const DimensionsBoxNames = styled.div`
 const DimensionText = styled.p`
     font-size:16px;
     text-shadow:1px 1px 1px white;
-    /* position:absolute;
-    top:-23px; */
 `;
 
 const DimensionSecText = styled.p`
     font-size:16px;
     text-shadow:1px 1px 1px white;
     transform:rotate(0.25turn) ;
-    /* position:absolute;
-    top:-23px; */
+    background:white;
 `;
 
 const OptionsBtnsBox = styled.div`
@@ -172,28 +205,62 @@ const DimensionsSecBoxLines = styled.div`
     border-right:none;
     position:absolute;
     right:-16px;
-    top:-2px;
+    top:0;
 `;
 
 const DimensionsSecBoxNames = styled.div`
     width:10px;
-    height:99%;
-    border:1px solid black;
+    height:105%;
+    border-left:1px solid black;
     border-right:none;
     display:flex;
     align-items:center;
     text-align:center;
     justify-content:center;
     position:absolute;
-    top:-2px;
-    right:-24px;
+    top:-5px;
+    right:-22px;
     text-align:center;
     padding-bottom:3px;
-    background:white;
     text-shadow:1px 1px 1px white;
 `;
 
 
+const DimensionsSecLeftBoxLines = styled.div`
+    width:25px;
+    height:100%;
+    border:1px solid black;
+    border-left:none;
+    border-right:none;
+    position:absolute;
+    left:-25px;
+    top:0;
+`;
+
+const DimensionsSecLeftBoxNames = styled.div`
+    width:10px;
+    height:105%;
+    border-left:1px solid black;
+    border-right:none;
+    display:flex;
+    align-items:center;
+    text-align:center;
+    justify-content:center;
+    position:absolute;
+    top:-5px;
+    left:-22px;
+    text-align:center;
+    padding-bottom:3px;
+    /* background:white; */
+    text-shadow:1px 1px 1px white;
+`;
+
+const DimensionSecLeftText = styled.p`
+    font-size:16px;
+    text-shadow:1px 1px 1px white;
+    transform:rotate(-0.25turn) ;
+    background:white;
+`;
 
         // const { id, name } = currentTarget;
         // const { botCabinets, topCabinets } = kitchenData;
