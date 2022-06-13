@@ -42,6 +42,7 @@ const CornerCabinetBox = ({ elementsData }: ElementsDataProps) => {
                 localStorage.setItem("kitchenData", JSON.stringify(filteredELements));
                 dispatch({ type: "ROOM_DIMENSIONS", payload: filteredELements });
             }
+            console.log(id)
         }
     }
 

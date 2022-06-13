@@ -34,7 +34,7 @@ const CornersBotView = ({ data, index, positionX, positionY }: CornersViewProp) 
         event.preventDefault();
         event.stopPropagation();
         if (data !== undefined) {
-            const updateData = [{ 'cornersBot': { 'id': data.id , 'cabinWidth': data.cabinWidth, 'cabinDepth': data.cabinDepth, 'name': 'corners', 'xAxis': dragElement.x, 'yAxis': dragElement.y, 'side': data.side } }];
+            const updateData = [{ 'cornersBot': { 'id': data.id , 'cabinWidth': data.cabinWidth, 'cabinDepth': data.cabinDepth, 'name': 'cornersBot', 'xAxis': dragElement.x, 'yAxis': dragElement.y, 'side': data.side } }];
             const sumUpdatedData = [...allOtherData, ...updateData];
             localStorage.setItem("kitchenData", JSON.stringify(sumUpdatedData.flat()));
             dispatch({ type: "ROOM_DIMENSIONS", payload: sumUpdatedData.flat() });
