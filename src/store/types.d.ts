@@ -9,6 +9,8 @@ export interface Restrictions {
     restWidth: number;
     restDepth: number;
     name?:string;
+    xAxis?:number;
+    yAxis?:number;
 }
 
 export interface CornerCabinets {

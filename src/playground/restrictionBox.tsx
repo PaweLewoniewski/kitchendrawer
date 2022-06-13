@@ -5,26 +5,31 @@ import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
 import { AllkitchenData, Restrictions } from "../store/types";
 import CrossLines from '../image/crossLines.png';
- 
+
 interface ElementsDataProps {
     elementsData?: Restrictions;
-    index?: number;
 }
 
-const RestrictionBox = ({ elementsData, index }: ElementsDataProps) => {
+const RestrictionBox = ({ elementsData }: ElementsDataProps) => {
 
 
     const dispatch = useAppDispatch();
     const { currentTarget } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const [loadData, setLoadData] = useState<AllkitchenData[]>();
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    const localData: string | null = localStorage.getItem("kitchenData");
 
     useEffect(() => {
-        if (loadData === undefined) {
+        if (localData !== null && loadData === undefined) {
+            const roomDataObj = JSON.parse(localData);
+            setLoadData(roomDataObj);
+            dispatch({ type: "ROOM_DIMENSIONS", payload: roomDataObj });
+        }
+        if (loadData !== kitchenData) {
             setLoadData(kitchenData);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loadData]);
+    }, [loadData, localData]);
 
     const currentElement = (item: {}) => {
         dispatch({ type: "CURRENT_TARGET", payload: item });
@@ -36,18 +41,17 @@ const RestrictionBox = ({ elementsData, index }: ElementsDataProps) => {
         if (loadData !== undefined) {
             if (item.name === 'restrictions') {
                 const filteredELements = loadData.filter(item => item.restrictions?.id !== id);
-                localStorage.setItem("kitchenData", JSON.stringify(filteredELements.flat()));
-                dispatch({ type: "ROOM_DIMENSIONS", payload: filteredELements.flat() });
+                localStorage.setItem("kitchenData", JSON.stringify(filteredELements));
+                dispatch({ type: "ROOM_DIMENSIONS", payload: filteredELements });
             }
         }
-        console.log(item.name)
     }
 
     return (
         <>
             {elementsData !== undefined ?
                 <RestrictBox id={elementsData.id} restWidth={elementsData.restWidth} restDepth={elementsData.restDepth}
-                onClick={() => { currentElement(elementsData) }} className={currentTarget === elementsData ? "activeCabin" : undefined}
+                    onClick={() => { currentElement(elementsData) }} className={currentTarget === elementsData ? "activeCabin" : undefined}
                 >
                     <DimensionsBoxLines />
                     <DimensionsBoxNames>
@@ -76,7 +80,6 @@ const RestrictBox = styled.div<Restrictions>`
     justify-content:center;
     position:relative;
     background:#f4f4f4;
-    transition:0.3s ease-in-out;
     cursor:pointer;
     &:hover{
         border:2px solid #ff8800;

@@ -10,6 +10,7 @@ import BottomView from './bottomView';
 import TopView from './topView';
 import CornersBotView from './cornersBotView';
 import CornersTopView from './cornersTopView';
+import RestrictionView from './restrictionsView';
 
 const PreviewView = () => {
     const { id } = useParams();
@@ -79,17 +80,9 @@ const PreviewView = () => {
                     {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
                     (
                         <Fragment key={index}>
-                            <Draggable
-                                axis="both"
-                                handle=".handle"
-                                defaultPosition={{ x: 0, y: 0 }}
-                                grid={[5, 5]}
-                                bounds="parent"
-                            >
-                                <Runner key={index} className="handle">
-                                    <RestrictionBox elementsData={item.restrictions} index={index} />
-                                </Runner>
-                            </Draggable>
+                            <>
+                                <RestrictionView data={item.restrictions} index={index} positionX={item.restrictions?.xAxis} positionY={item.restrictions?.yAxis} />
+                            </>
                         </Fragment>
                     )) : ''}
                 </Room>
