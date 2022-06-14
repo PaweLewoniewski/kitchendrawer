@@ -6,6 +6,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store/reducer";
 import ActionBtnSmall from "../assets/ActionBtnSmall/ActionBtnSmall";
+import Checkbox from "../assets/CheckBox/Checkbox";
+import SelectBtn from "../assets/SelectBtn/SelectBtn";
 
 const CabinetsPanel = () => {
 
@@ -16,6 +18,9 @@ const CabinetsPanel = () => {
   const [sideCabin, setSideCabin] = useState<number>(0);
   const [active, setActive] = useState<string>('Bottom');
   const [activeSide, setActiveSide] = useState<string>('Stright');
+  const [img, setImg] = useState<string>('');
+
+  const cabinsOption = [{id:1, name:'Normal', val:''},{ id:2, name:'Stove',val:'Stove'},{ id:3, name:'Sink',val:'Sink'}];
 
   const addRoomCabins = () => {
     const localData: string | null = localStorage.getItem("kitchenData");
@@ -23,7 +28,7 @@ const CabinetsPanel = () => {
     if (active === 'Bottom') {
       if (localData !== null) {
         const summData = localData ? JSON.parse(localData) : [];
-        const data = [{ 'botCabinets': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'botCabinDim', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
+        const data = [{ 'botCabinets': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'botCabinDim', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin, 'image': img } }];
         const summaringData = [...summData, ...data];
         localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
         dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });
@@ -64,6 +69,9 @@ const CabinetsPanel = () => {
           <SingleNumberField text={"mm"} placeholder={'Width'} onChange={(e: any) => { setWidthCabin(e.target.value) }} />
           <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthCabin(e.target.value) }} />
         </FiledBox>
+        <ActionBtnsWidth>
+          <SelectBtn selectOptions={cabinsOption} text={'Accessories'} onChange={(e:any) => setImg(e.target.value)}/>
+        </ActionBtnsWidth>
         <BtnBoxEnd>
           <SingleBtn btnName={"Add"} onClick={addRoomCabins}></SingleBtn>
         </BtnBoxEnd>
@@ -89,6 +97,7 @@ const ActionBtnsWidth = styled.div`
 `;
 
 const BtnBoxEnd = styled.div`
+  padding:20px 0;
   display: flex;
   width:100%;
   justify-content:flex-end;

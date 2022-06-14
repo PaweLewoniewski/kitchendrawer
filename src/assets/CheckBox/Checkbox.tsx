@@ -2,13 +2,16 @@ import styled from "styled-components";
 
 interface CheckboxProps {
     text?: string;
+    onChange?:()=> void;
+    checked?:string;
+    // onChange?:()=> void;
 }
 
-const Checkbox = ({ text }: CheckboxProps) => {
+const Checkbox = ({ text, onChange, checked }: CheckboxProps) => {
     return (
         <Contener>
             <ContenerBox>
-                <CheckBox><input type="checkbox" id={text} name={text}></input>
+                <CheckBox><input type="checkbox" id={text} name={text} onChange={onChange}></input>
                     <Name><label htmlFor={text}>{text}</label></Name>
                 </CheckBox>
                 <Line></Line>

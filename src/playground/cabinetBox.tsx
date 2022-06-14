@@ -4,6 +4,8 @@ import { RootState } from "../store/store";
 import { AllkitchenData, Cabinets } from "../store/types";
 import { AiOutlineClose } from 'react-icons/ai';
 import { useEffect, useState } from "react";
+import Stove from '../image/stove.jpg';
+import Sink from '../image/sink.jpg';
 
 interface ElementsDataProps {
     elementsData?: Cabinets;
@@ -52,8 +54,14 @@ const CabinetBox = ({ elementsData }: ElementsDataProps) => {
     return (
         <>
             {elementsData !== undefined ?
-                <CabinBox id={elementsData.id} cabinWidth={elementsData.cabinWidth} cabinDepth={elementsData.cabinDepth} side={elementsData.side}
-                    onClick={() => { currentElement(elementsData) }} className={currentTarget === elementsData ? "activeCabin" : undefined}
+                <CabinBox 
+                id={elementsData.id} 
+                cabinWidth={elementsData.cabinWidth} 
+                cabinDepth={elementsData.cabinDepth} 
+                side={elementsData.side}
+                image={elementsData.image}
+                    onClick={() => { currentElement(elementsData) }} 
+                    className={currentTarget === elementsData ? "activeCabin" : undefined}
                 >
                     <DimensionsBoxLines />
                     <DimensionsBoxNames>
@@ -74,6 +82,10 @@ const CabinBox = styled.div<Cabinets>`
     transform:${props => props.side !== 0 ? `rotate(${props.side}turn)` : 'rotate(0turn)'};
     width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth}px` : '0px'};
     height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth}px` : '0px'};
+    background:${props => props.image === 'Stove' ? `url(${Stove})no-repeat !important` : `#fbffca;`};
+    background:${props => props.image === 'Sink' ? `url(${Sink})no-repeat !important` : `#fbffca;` };
+    background-size: contain !important;
+    background-position: center !important;
     border:2px solid #06151f;
     border-bottom:6px solid #06151f;
     box-sizing: border-box;
@@ -81,7 +93,7 @@ const CabinBox = styled.div<Cabinets>`
     align-items:center;
     justify-content:center;
     position:relative;
-    background:#fbffca;
+    /* background:#fbffca; */
     /* margin:0px 1px; */
     /* transition:0.3s ease-in-out; */
     cursor:pointer;
