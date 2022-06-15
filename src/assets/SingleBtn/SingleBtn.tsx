@@ -1,17 +1,27 @@
 import styled from "styled-components";
+import useSound from 'use-sound';
+import BtnSound from '../sounds/slight_click.wav';
 
 interface SingleBtnProps {
     btnName?: string;
     children?: any;
-    onClick?:() => void;
+    onClick:() => void;
     danger?:string;
     className?:string;
 }
 
 const SingleBtn = ({ btnName, children, onClick, danger, className }: SingleBtnProps) => {
+
+  const [play] = useSound(BtnSound);
+
+  const handleClick = () => {
+    onClick();
+    play();
+  }
+
     return (
         <Contener>
-            <Btn danger={danger} onClick={onClick} className={className}>{btnName ? btnName : children}</Btn>
+            <Btn danger={danger} onClick={handleClick} className={className}>{btnName ? btnName : children}</Btn>
         </Contener>
     );
 };

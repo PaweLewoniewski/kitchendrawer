@@ -1,15 +1,26 @@
+import { useState } from "react";
 import styled from "styled-components";
+import useSound from 'use-sound';
+import BtnSound from '../sounds/bass_btn_sound.wav';
 
 interface ActionBtnProps {
     btnName?: string;
-    onClick?:() => void;
+    onClick:() => void;
     active?:string;
 }
 
 const ActionBtn = ({ btnName, onClick , active}: ActionBtnProps) => {
+
+  const [play] = useSound(BtnSound);
+
+  const handleClick = () => {
+    onClick();
+    play();
+  }
+
     return (
         <Contener>
-            <Btn onClick={onClick} className={btnName === active ? 'activePanelBtn' : ''}>{btnName}</Btn>
+            <Btn onClick={handleClick} className={btnName === active ? 'activePanelBtn' : ''}>{btnName}</Btn>
         </Contener>
     );
 };

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import useSound from 'use-sound';
 import styled from "styled-components";
 import ActionBtn from '../assets/ActionBtn/ActionBtn';
 import SingleBtn from '../assets/SingleBtn/SingleBtn';
@@ -11,6 +12,7 @@ import PlaygroundTarget from '../playground/playgroundTarget';
 import PreviewView from '../playground/playgroundView';
 import { useAppDispatch, useAppSelector } from '../store/reducer';
 import { RootState } from '../store/store';
+import NavSound from '../assets/sounds/slight_click.wav';
 
 const HomePage = () => {
 
@@ -18,7 +20,8 @@ const HomePage = () => {
     const [panel, setPanel] = useState<string>('walls');
     const [active, setActive] = useState<string>('Walls');
     const dispatch = useAppDispatch();
-    
+    const [play] = useSound(NavSound);
+
     const usePanel = (panel: string) => {
         switch (panel) {
             case 'cabinets':
@@ -45,13 +48,13 @@ const HomePage = () => {
                     <PlaygroundTopLine>
                         <PlaygroundNavList>
                             <PlaygroundNavListItem>
-                                <NavLink className={({ isActive }) => isActive ? 'activeTab' : ''} to='/bottomCabinets'>Bottom Cabinets</NavLink>
+                                <NavLink onClick={()=> play()} className={({ isActive }) => isActive ? 'activeTab' : ''} to='/bottomCabinets'>Bottom Cabinets</NavLink>
                             </PlaygroundNavListItem>
                             <PlaygroundNavListItem>
-                                <NavLink className={({ isActive }) => isActive ? 'activeTab' : ''} to='/topCabinets'>Top Cabinets</NavLink>
+                                <NavLink onClick={()=> play()} className={({ isActive }) => isActive ? 'activeTab' : ''} to='/topCabinets'>Top Cabinets</NavLink>
                             </PlaygroundNavListItem>
                             <PlaygroundNavListItem>
-                                <NavLink className={({ isActive }) => isActive ? 'activeTab' : ''} to='/preview'>Preview</NavLink>
+                                <NavLink onClick={()=> play()} className={({ isActive }) => isActive ? 'activeTab' : ''} to='/preview'>Preview</NavLink>
                             </PlaygroundNavListItem>
                         </PlaygroundNavList>
                         <PlaygroundInfoBox>
