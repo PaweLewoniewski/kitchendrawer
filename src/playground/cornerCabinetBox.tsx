@@ -37,12 +37,12 @@ const CornerCabinetBox = ({ elementsData }: ElementsDataProps) => {
 
     const removeElement = (item: any) => {
         if (loadData !== undefined) {
-            if (item.name === 'cornersBot') {
+            if (item.name === 'Bottom corners') {
                 const filteredELements = loadData.filter(item => item.cornersBot?.id !== id);
                 localStorage.setItem("kitchenData", JSON.stringify(filteredELements));
                 dispatch({ type: "ROOM_DIMENSIONS", payload: filteredELements });
             }
-            if (item.name === 'cornersTop') {
+            if (item.name === 'Top corners') {
                 const filteredELements = loadData.filter(item => item.cornersTop?.id !== id);
                 localStorage.setItem("kitchenData", JSON.stringify(filteredELements));
                 dispatch({ type: "ROOM_DIMENSIONS", payload: filteredELements });

@@ -36,7 +36,7 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
         event.preventDefault();
         event.stopPropagation();
         if (data !== undefined) {
-            const updateData = [{ 'botCabinets': { 'id':data.id , 'cabinWidth': data.cabinWidth, 'cabinDepth': data.cabinDepth, 'name': 'botCabinDim', 'xAxis': dragElement.x, 'yAxis': dragElement.y, 'side': data.side, 'image':data.image } }];
+            const updateData = [{ 'botCabinets': { 'id':data.id , 'cabinWidth': data.cabinWidth, 'cabinDepth': data.cabinDepth, 'name': data.name, 'xAxis': dragElement.x, 'yAxis': dragElement.y, 'side': data.side, 'image':data.image } }];
             const sumUpdatedData = [...allOtherData, ...updateData];
             localStorage.setItem("kitchenData", JSON.stringify(sumUpdatedData.flat()));
             dispatch({ type: "ROOM_DIMENSIONS", payload: sumUpdatedData.flat() });

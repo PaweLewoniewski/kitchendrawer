@@ -39,7 +39,7 @@ const RestrictionBox = ({ elementsData }: ElementsDataProps) => {
 
     const removeElement = (item: any) => {
         if (loadData !== undefined) {
-            if (item.name === 'restrictions') {
+            if (item.name === 'Restrictions') {
                 const filteredELements = loadData.filter(item => item.restrictions?.id !== id);
                 localStorage.setItem("kitchenData", JSON.stringify(filteredELements));
                 dispatch({ type: "ROOM_DIMENSIONS", payload: filteredELements });
@@ -50,12 +50,12 @@ const RestrictionBox = ({ elementsData }: ElementsDataProps) => {
     return (
         <>
             {elementsData !== undefined ?
-                <RestrictBox id={elementsData.id} restWidth={elementsData.restWidth} restDepth={elementsData.restDepth}
+                <RestrictBox id={elementsData.id} cabinWidth={elementsData.cabinWidth} cabinDepth={elementsData.cabinDepth}
                     onClick={() => { currentElement(elementsData) }} className={currentTarget === elementsData ? "activeCabin" : undefined}
                 >
                     <DimensionsBoxLines />
                     <DimensionsBoxNames>
-                        <DimensionText>{elementsData.restWidth}</DimensionText>
+                        <DimensionText>{elementsData.cabinWidth}</DimensionText>
                     </DimensionsBoxNames>
                     <CrossLine />
                     <OptionsBtnsBox className={currentTarget === elementsData ? "show" : 'hide'}>
@@ -70,8 +70,8 @@ const RestrictionBox = ({ elementsData }: ElementsDataProps) => {
 export default RestrictionBox;
 
 const RestrictBox = styled.div<Restrictions>`
-    width:${props => props.restWidth !== 0 ? `${props.restWidth}px` : '0px'};
-    height:${props => props.restDepth !== 0 ? `${props.restDepth}px` : '0px'};
+    width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth}px` : '0px'};
+    height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth}px` : '0px'};
     /* transform: rotate(0.25turn); */
     border:2px solid black;
     box-sizing: border-box;

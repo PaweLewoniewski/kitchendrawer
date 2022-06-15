@@ -6,8 +6,8 @@ export interface RoomDimension {
 
 export interface Restrictions {
     id:string;
-    restWidth: number;
-    restDepth: number;
+    cabinWidth: number;
+    cabinDepth: number;
     name?:string;
     xAxis?:number;
     yAxis?:number;

@@ -35,7 +35,7 @@ const TopView = ({ data, index, positionX, positionY }: TopViewProp) => {
         event.preventDefault();
         event.stopPropagation();
         if (data !== undefined) {
-            const updateData = [{ 'topCabinets': { 'id':data.id ,'cabinWidth': data.cabinWidth, 'cabinDepth': data.cabinDepth, 'name': 'topCabinDim', 'xAxis': dragElement.x, 'yAxis': dragElement.y , 'side':data.side}}];
+            const updateData = [{ 'topCabinets': { 'id':data.id ,'cabinWidth': data.cabinWidth, 'cabinDepth': data.cabinDepth, 'name': data.name, 'xAxis': dragElement.x, 'yAxis': dragElement.y , 'side':data.side}}];
             const sumUpdatedData = [...allOtherData, ...updateData];
             localStorage.setItem("kitchenData", JSON.stringify(sumUpdatedData.flat()));
             dispatch({ type: "ROOM_DIMENSIONS", payload: sumUpdatedData.flat() });

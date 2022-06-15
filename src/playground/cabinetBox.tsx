@@ -38,12 +38,12 @@ const CabinetBox = ({ elementsData }: ElementsDataProps) => {
 
     const removeElement = (item: any) => {
         if (loadData !== undefined) {
-            if (item.name === 'botCabinDim') {
+            if (item.name === 'Bottom cabinets') {
                 const filteredELements = loadData.filter(item => item.botCabinets?.id !== id);
                 localStorage.setItem("kitchenData", JSON.stringify(filteredELements));
                 dispatch({ type: "ROOM_DIMENSIONS", payload: filteredELements });
             }
-            if (item.name === 'topCabinDim') {
+            if (item.name === 'Top cabinets') {
                 const filteredELements = loadData.filter(item => item.topCabinets?.id !== id);
                 localStorage.setItem("kitchenData", JSON.stringify(filteredELements));
                 dispatch({ type: "ROOM_DIMENSIONS", payload: filteredELements });

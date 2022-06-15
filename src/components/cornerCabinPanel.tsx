@@ -24,7 +24,7 @@ const CornerCabinetsPanel = () => {
     if (active === 'Bottom') {
       if (localData !== null) {
         const summData = localData ? JSON.parse(localData) : [];
-        const data = [{ 'cornersBot': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'cornersBot', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
+        const data = [{ 'cornersBot': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'Bottom corners', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
         const summaringData = [...summData, ...data];
         localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
         dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });
@@ -34,7 +34,7 @@ const CornerCabinetsPanel = () => {
     if (active === 'Top') {
       if (localData !== null) {
         const summData = localData ? JSON.parse(localData) : [];
-        const data = [{ 'cornersTop': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'cornersTop', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
+        const data = [{ 'cornersTop': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'Top corners', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
         const summaringData = [...summData, ...data];
         localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
         dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });

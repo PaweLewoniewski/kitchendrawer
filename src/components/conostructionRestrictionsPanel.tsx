@@ -17,7 +17,7 @@ const ConstructionRestrictionPanel = () => {
         const localData: string | null = localStorage.getItem("kitchenData");
         const hashgen: string = Math.random().toString(36).slice(2, 7);
         if (localData !== null) {
-            const data = [{'restrictions':{ 'id': hashgen, 'restWidth': widthRestrict, 'restDepth': depthRestrict, 'name': 'restrictions', 'xAxis': 0, 'yAxis': 0, }}];
+            const data = [{'restrictions':{ 'id': hashgen, 'cabinWidth': widthRestrict, 'cabinDepth': depthRestrict, 'name': 'Restrictions', 'xAxis': 0, 'yAxis': 0, }}];
             const summData = localData ? JSON.parse(localData) : [];
             const summaringData = [...summData, ...data];
             localStorage.setItem("kitchenData", JSON.stringify(summaringData));

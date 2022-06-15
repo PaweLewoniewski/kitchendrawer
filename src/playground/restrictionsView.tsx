@@ -34,7 +34,7 @@ const RestrictionView = ({ data, index, positionX, positionY }: RestrictionsView
         event.preventDefault();
         event.stopPropagation();
         if (data !== undefined) {
-            const updateData = [{ 'restrictions': { 'id':data.id , 'restWidth': data.restWidth, 'restDepth': data.restDepth, 'name': 'restrictions', 'xAxis': dragElement.x, 'yAxis': dragElement.y } }];
+            const updateData = [{ 'restrictions': { 'id':data.id , 'cabinWidth': data.cabinWidth, 'cabinDepth': data.cabinDepth, 'name': data.name, 'xAxis': dragElement.x, 'yAxis': dragElement.y } }];
             const sumUpdatedData = [...allOtherData, ...updateData];
             localStorage.setItem("kitchenData", JSON.stringify(sumUpdatedData.flat()));
             dispatch({ type: "ROOM_DIMENSIONS", payload: sumUpdatedData.flat() });

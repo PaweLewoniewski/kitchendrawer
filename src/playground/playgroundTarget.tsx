@@ -1,13 +1,23 @@
 import styled from "styled-components";
-import { CurrentTarget } from "../store/types";
+import { Cabinets, CornerCabinets, CurrentTarget, Restrictions } from "../store/types";
 
 interface PlaygroundTargetProps {
-    targetProp: CurrentTarget;
+    targetProp: CurrentTarget & Restrictions & CornerCabinets & Cabinets;
 }
 
 const PlaygroundTarget = ({targetProp}:PlaygroundTargetProps) => {
+    console.log(targetProp)
+
+    // const targetPanelDisplay = (cabin: string) => {
+    //     switch (cabin) {
+    //         case 'cabinets':
+    //             return <InfoBox>{targetProp.name} | width:{targetProp.cabinWidth} | depth:{targetProp.cabinDepth}</InfoBox>;
+    //         default:
+    //             return <RoomWallsPanel />;
+    //     }
+    // }
     return (
-        <InfoBox>{targetProp.name === 'topCabinDim' ? 'Top Cabins' : 'Bottom Cabins'} | width:{targetProp.cabinWidth} | depth:{targetProp.cabinDepth}</InfoBox>
+        <InfoBox>{targetProp.name} | width:{targetProp.cabinWidth} | depth:{targetProp.cabinDepth}</InfoBox>
     );
 };
 export default PlaygroundTarget;
