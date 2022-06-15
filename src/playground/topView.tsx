@@ -69,4 +69,5 @@ export default TopView;
 const Runner = styled.div`
 display:flex;
 position:absolute;
+z-index: 99;
 `;

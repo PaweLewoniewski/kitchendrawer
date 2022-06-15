@@ -67,4 +67,5 @@ export default CornersBotView;
 const Runner = styled.div`
 display:flex;
 position:absolute;
+z-index: 50;
 `;

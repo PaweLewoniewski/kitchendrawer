@@ -67,4 +67,5 @@ export default CornersTopView;
 const Runner = styled.div`
 display:flex;
 position:absolute;
+z-index: 99;
 `;

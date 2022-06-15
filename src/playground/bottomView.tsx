@@ -72,4 +72,5 @@ export default BottomView;
 const Runner = styled.div`
 display:flex;
 position:absolute;
+z-index: 50;
 `;
