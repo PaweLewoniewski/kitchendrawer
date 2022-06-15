@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store/reducer";
 import ActionBtnSmall from "../assets/ActionBtnSmall/ActionBtnSmall";
-import Checkbox from "../assets/CheckBox/Checkbox";
 import SelectBtn from "../assets/SelectBtn/SelectBtn";
 
 const CabinetsPanel = () => {

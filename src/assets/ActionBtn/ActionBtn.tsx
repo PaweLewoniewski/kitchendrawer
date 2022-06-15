@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import useSound from 'use-sound';
 import BtnSound from '../sounds/bass_btn_sound.wav';

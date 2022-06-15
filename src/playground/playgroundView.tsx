@@ -1,11 +1,9 @@
-import Draggable from 'react-draggable';
 import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
 import { AllkitchenData, RoomDimension } from '../store/types';
-import RestrictionBox from './restrictionBox';
 import BottomView from './bottomView';
 import TopView from './topView';
 import CornersBotView from './cornersBotView';
