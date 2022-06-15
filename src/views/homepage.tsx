@@ -156,6 +156,9 @@ const PlaygroundBoxContener = styled.div`
 `;
 
 const PlaygroundBox = styled.div`
+    display:flex;
+    align-items: center;
+    justify-content: center;
     height:600px;
     margin:0px 10px;
     border:1px solid black;
