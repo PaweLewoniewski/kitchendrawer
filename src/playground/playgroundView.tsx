@@ -100,10 +100,11 @@ const Room = styled.div<RoomDimension>`
     box-sizing: border-box;
     display:flex;
     position:relative;
-`;
-
-const Runner = styled.div`
-display:flex;
-position:absolute;
+    &:before{
+        content: '';
+        border:1px dotted black;
+        width:100%;
+        height:100%;       
+    }
 `;
 
