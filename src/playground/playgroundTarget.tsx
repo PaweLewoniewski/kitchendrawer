@@ -5,20 +5,15 @@ interface PlaygroundTargetProps {
     targetProp: CurrentTarget & Restrictions & CornerCabinets & Cabinets;
 }
 
-const PlaygroundTarget = ({targetProp}:PlaygroundTargetProps) => {
+const PlaygroundTarget = ({ targetProp }: PlaygroundTargetProps) => {
     console.log(targetProp)
 
-    // const targetPanelDisplay = (cabin: string) => {
-    //     switch (cabin) {
-    //         case 'cabinets':
-    //             return <InfoBox>{targetProp.name} | width:{targetProp.cabinWidth} | depth:{targetProp.cabinDepth}</InfoBox>;
-    //         default:
-    //             return <RoomWallsPanel />;
-    //     }
-    // }
-    return (
-        <InfoBox>{targetProp.name} | width:{targetProp.cabinWidth} | depth:{targetProp.cabinDepth}</InfoBox>
-    );
+    if (targetProp.cabinWidth !== undefined) {
+        return (
+            <InfoBox>{targetProp.name} | width:{targetProp.cabinWidth} | depth:{targetProp.cabinDepth}</InfoBox>
+        );
+    }
+    else return (<InfoBox></InfoBox>)
 };
 export default PlaygroundTarget;
 
