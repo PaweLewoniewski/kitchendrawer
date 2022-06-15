@@ -45,14 +45,14 @@ const TopView = ({ data, index, positionX, positionY }: TopViewProp) => {
 
     return (
         <>
-            {positionX !== undefined && positionY !== undefined ?
+            {data && positionX !== undefined && positionY !== undefined ?
                 <Draggable
                     axis="both"
                     handle=".handle"
                     defaultPosition={{ x: positionX, y: positionY }}
                     position={{ x: positionX, y: positionY }}
                     grid={[5, 5]}
-                    bounds="parent"
+                    bounds={data.side !== 0 ? {left:-data.cabinWidth / 3.6, top: data.cabinWidth /4, right: 800 - (data.cabinWidth /1.3), bottom: 400 - (data.cabinWidth / 1.3)} : `parent`}
                     onStop={handleStop}
                 >
                     <Runner className="handle">

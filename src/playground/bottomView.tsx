@@ -20,6 +20,8 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const datakit: AllkitchenData[] = kitchenData;
     const [currentData, setCurrentData] = useState<Cabinets>();
+    // const [classGenerator, setClassGenerator] = useState<string>();
+    // const classGen: string = Math.random().toString(36).slice(2, 7);
 
 
     useEffect(() => {
@@ -43,17 +45,20 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
 
     return (
         <>
-            {positionX !== undefined && positionY !== undefined ?
+            {data && positionX !== undefined && positionY !== undefined ?
                 <Draggable
                     axis="both"
-                    handle=".handle"
+                    handle='.handle'
                     defaultPosition={{ x: positionX, y: positionY }}
                     position={{ x: positionX, y: positionY }}
+                    positionOffset={{x:'0', y:'0'}}
                     grid={[5, 5]}
-                    bounds="parent"
+                    bounds={data.side !== 0 ? {left:-data.cabinWidth / 3.6, top: data.cabinWidth /4, right: 800 - (data.cabinWidth /1.3), bottom: 400 - (data.cabinWidth / 1.3)} : `parent`}
+                    //bounds="parent"
+                    //bounds={{left:-data.cabinWidth / 3.6, top: data.cabinWidth /4, right: 800 - (data.cabinWidth /1.3), bottom: 400 - (data.cabinWidth / 1.3)}}
                     onStop={handleStop}
                 >
-                    <Runner className="handle">
+                    <Runner className={'handle'}>
                         <CabinetBox elementsData={data} />
                     </Runner>
                 </Draggable>
