@@ -40,6 +40,10 @@ const HomePage = () => {
         dispatch({ type: "ROOM_DIMENSIONS", payload: [] });
      }
 
+     const printContent = () => {
+        console.log('print');
+     }
+
     return (
         <PageContener>
             <PageName>Homepage</PageName>
@@ -62,6 +66,9 @@ const HomePage = () => {
                         </PlaygroundInfoBox>
                     </PlaygroundTopLine>
                     <PlaygroundBox>
+                        <SpecialBtns>
+                            <SingleBtn btnName={"Print"} onClick={printContent} />
+                        </SpecialBtns>
                         <PlaygroundView />
                     </PlaygroundBox>
                 </PlaygroundBoxContener>
@@ -195,4 +202,12 @@ const ActionButtonsBoxBottom = styled.div`
 
 const PanelButtonsResults = styled.div`
     width:100%;
+`;
+
+const SpecialBtns = styled.div`
+    position:absolute;
+    top:0;
+    right:0;
+    display:flex;
+    padding:5px 7px;
 `;

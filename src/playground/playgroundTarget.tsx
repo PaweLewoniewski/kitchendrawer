@@ -6,8 +6,7 @@ interface PlaygroundTargetProps {
 }
 
 const PlaygroundTarget = ({ targetProp }: PlaygroundTargetProps) => {
-    console.log(targetProp)
-
+    
     if (targetProp.cabinWidth !== undefined) {
         return (
             <InfoBox>{targetProp.name} | width:{targetProp.cabinWidth} | depth:{targetProp.cabinDepth}</InfoBox>
