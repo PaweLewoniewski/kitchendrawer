@@ -61,3 +61,17 @@
   width:100%;
   height:100%;
 }
+
+.cornerBox_img_left {
+  background: url('image/cornerBoxLeft.png') no-repeat;
+  background-position: center;
+  background-size: contain;
+  height:100%;
+}
+
+.cornerBox_img_right {
+  background: url('image/cornerBoxRight.png') no-repeat;
+  background-position: center;
+  background-size: contain;
+  height:100%;
+}

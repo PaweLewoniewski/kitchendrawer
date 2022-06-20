@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
-import { AllkitchenData, Cabinets, CornerCabinets } from "../store/types";
+import { AllkitchenData, CornerCabinets } from "../store/types";
 import { AiOutlineClose } from 'react-icons/ai';
 import { useEffect, useState } from "react";
 
 interface ElementsDataProps {
-    elementsData?: Cabinets;
+    elementsData?: CornerCabinets;
 }
 
 const CornerCabinetBox = ({ elementsData }: ElementsDataProps) => {
@@ -54,23 +54,39 @@ const CornerCabinetBox = ({ elementsData }: ElementsDataProps) => {
     return (
         <>
             {elementsData !== undefined ?
-                <CornerCabinBox id={elementsData.id} cabinWidth={elementsData.cabinWidth}
-                    cabinDepth={elementsData.cabinDepth} side={elementsData.side}
+                <CornerCabinBox 
+                    id={elementsData.id} 
+                    cabinWidth={elementsData.cabinWidth}
+                    cabinDepth={elementsData.cabinDepth} 
+                    side={elementsData.side}
+                    sideA={elementsData.sideA}
+                    sideB={elementsData.sideB}
                     onClick={() => { currentElement(elementsData) }}
                     className={currentTarget === elementsData ? "activeCabin" : undefined}>
                     <DimensionsBoxLines />
                     <DimensionsBoxNames>
                         <DimensionText>{elementsData.cabinWidth}</DimensionText>
                     </DimensionsBoxNames>
-                    <LeftDimensions id={elementsData.id} side={elementsData.side} cabinWidth={elementsData.cabinWidth}
-                        cabinDepth={elementsData.cabinDepth}>
+                    <LeftDimensions 
+                        id={elementsData.id} 
+                        side={elementsData.side} 
+                        cabinWidth={elementsData.cabinWidth}
+                        cabinDepth={elementsData.cabinDepth}
+                        sideA={elementsData.sideA}
+                        sideB={elementsData.sideB}>
                         <DimensionsSecBoxLines />
                         <DimensionsSecBoxNames>
                             <DimensionSecText>{elementsData.cabinDepth}</DimensionSecText>
                         </DimensionsSecBoxNames>
                     </LeftDimensions>
-                    <RightDimensions id={elementsData.id} side={elementsData.side} cabinWidth={elementsData.cabinWidth}
-                        cabinDepth={elementsData.cabinDepth}>
+                    <RightDimensions 
+                        id={elementsData.id} 
+                        side={elementsData.side} 
+                        cabinWidth={elementsData.cabinWidth}
+                        cabinDepth={elementsData.cabinDepth}
+                        sideA={elementsData.sideA}
+                        sideB={elementsData.sideB}
+                        >
                         <DimensionsSecLeftBoxLines />
                         <DimensionsSecLeftBoxNames>
                             <DimensionSecLeftText>{elementsData.cabinDepth}</DimensionSecLeftText>
@@ -114,8 +130,8 @@ const CornerCabinBox = styled.div<CornerCabinets>`
         position:absolute;
         bottom:-2px;
         left:-2px;
-        width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth / 2}px` : '0px'};
-        height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth / 2}px` : '0px'};
+        width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth - props.sideB}px` : '0px'};
+        height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth - props.sideA}px` : '0px'};
         background:#f4f4f4;
         border:6px solid #06151f;
         border-bottom:2px solid white;
@@ -127,8 +143,8 @@ const CornerCabinBox = styled.div<CornerCabinets>`
         position:absolute;
         bottom:-2px;
         right:-2px;
-        width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth / 2}px` : '0px'};
-        height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth / 2}px` : '0px'};
+        width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth - props.sideB}px` : '0px'};
+        height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth - props.sideA}px` : '0px'};
         background:#f4f4f4;
         border:6px solid #06151f;
         border-bottom:2px solid white;

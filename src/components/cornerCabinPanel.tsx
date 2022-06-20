@@ -13,6 +13,8 @@ const CornerCabinetsPanel = () => {
   const dispatch = useAppDispatch();
   const [widthCabin, setWidthCabin] = useState<number | undefined>();
   const [depthCabin, setDepthCabin] = useState<number | undefined>();
+  const [sideA, setsideA] = useState<number | undefined>();
+  const [sideB, setsideB] = useState<number | undefined>();
   const [sideCabin, setSideCabin] = useState<number>(0);
   const [active, setActive] = useState<string>('Bottom');
 
@@ -24,7 +26,7 @@ const CornerCabinetsPanel = () => {
     if (active === 'Bottom') {
       if (localData !== null) {
         const summData = localData ? JSON.parse(localData) : [];
-        const data = [{ 'cornersBot': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'Bottom corners', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
+        const data = [{ 'cornersBot': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'Bottom corners', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin, 'sideA': sideA, 'sideB': sideB } }];
         const summaringData = [...summData, ...data];
         localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
         dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });
@@ -34,7 +36,7 @@ const CornerCabinetsPanel = () => {
     if (active === 'Top') {
       if (localData !== null) {
         const summData = localData ? JSON.parse(localData) : [];
-        const data = [{ 'cornersTop': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'Top corners', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin } }];
+        const data = [{ 'cornersTop': { 'id': hashgen, 'cabinWidth': widthCabin, 'cabinDepth': depthCabin, 'name': 'Top corners', 'xAxis': 250, 'yAxis': 150, 'side': sideCabin, 'sideA': sideA, 'sideB': sideB } }];
         const summaringData = [...summData, ...data];
         localStorage.setItem("kitchenData", JSON.stringify(summaringData.flat()));
         dispatch({ type: "ROOM_DIMENSIONS", payload: summaringData.flat() });
@@ -58,9 +60,12 @@ const CornerCabinetsPanel = () => {
             <AiOutlineBorderBottom size={25} className='turnRight' />
           </SingleBtn>
         </BtnBox>
+        <InfoImgBox><InfoImg className={sideCabin === 0 ? `cornerBox_img_left` : `cornerBox_img_right`} /></InfoImgBox>
         <FiledBox>
           <SingleNumberField text={"mm"} placeholder={'Width'} onChange={(e: any) => { setWidthCabin(e.target.value) }} />
           <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthCabin(e.target.value) }} />
+          <SingleNumberField text={"mm"} placeholder={'Side A'} onChange={(e: any) => { setsideA(e.target.value) }} />
+          <SingleNumberField text={"mm"} placeholder={'Side B'} onChange={(e: any) => { setsideB(e.target.value) }} />
         </FiledBox>
         <BtnBoxEnd>
           <SingleBtn btnName={"Add"} onClick={addRoomCabins}></SingleBtn>
@@ -98,6 +103,18 @@ const FiledBox = styled.div`
     padding:10px;
   flex-direction:column;
   flex-wrap:wrap;
+`;
+
+const InfoImgBox = styled.div`
+  height:135px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+`;
+
+const InfoImg = styled.div`
+  width:35%;
+  height:100%;
 `;
 
 

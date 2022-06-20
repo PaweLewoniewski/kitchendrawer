@@ -21,6 +21,8 @@ export interface CornerCabinets {
     xAxis?:number;
     yAxis?:number;
     side?:number;
+    sideA:number;
+    sideB:number;
 }
 
 export interface Cabinets {
