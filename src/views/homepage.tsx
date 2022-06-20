@@ -9,10 +9,10 @@ import ConstructionRestrictionPanel from '../components/conostructionRestriction
 import CornerCabinetsPanel from '../components/cornerCabinPanel';
 import RoomWallsPanel from '../components/roomWallsPanel';
 import PlaygroundTarget from '../playground/playgroundTarget';
-import PreviewView from '../playground/playgroundView';
 import { useAppDispatch, useAppSelector } from '../store/reducer';
 import { RootState } from '../store/store';
 import NavSound from '../assets/sounds/slight_click.wav';
+import PlaygroundView from '../playground/playgroundView';
 
 const HomePage = () => {
 
@@ -62,7 +62,7 @@ const HomePage = () => {
                         </PlaygroundInfoBox>
                     </PlaygroundTopLine>
                     <PlaygroundBox>
-                        <PreviewView />
+                        <PlaygroundView />
                     </PlaygroundBox>
                 </PlaygroundBoxContener>
                 <PlaygroundActions>

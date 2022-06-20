@@ -10,7 +10,7 @@ import CornersBotView from './cornersBotView';
 import CornersTopView from './cornersTopView';
 import RestrictionView from './restrictionsView';
 
-const PreviewView = () => {
+const PlaygroundView = () => {
     const { id } = useParams();
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const localData: string | null = localStorage.getItem("kitchenData");
@@ -88,7 +88,7 @@ const PreviewView = () => {
         </>
     );
 };
-export default PreviewView;
+export default PlaygroundView;
 
 const Room = styled.div<RoomDimension>`
     width:${props => props.roomWidth !== 0 ? `${props.roomWidth}px` : '0px'};
