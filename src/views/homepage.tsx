@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import useSound from 'use-sound';
 import styled from "styled-components";
@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from '../store/reducer';
 import { RootState } from '../store/store';
 import NavSound from '../assets/sounds/slight_click.wav';
 import PlaygroundView from '../playground/playgroundView';
+import { useReactToPrint } from 'react-to-print';
 
 const HomePage = () => {
 
@@ -21,13 +22,14 @@ const HomePage = () => {
     const [active, setActive] = useState<string>('Walls');
     const dispatch = useAppDispatch();
     const [play] = useSound(NavSound);
+    const divRef = useRef<HTMLDivElement>(null);
 
     const usePanel = (panel: string) => {
         switch (panel) {
             case 'cabinets':
                 return <CabinetsPanel />;
             case 'cornerCabinets':
-                return  <CornerCabinetsPanel />;
+                return <CornerCabinetsPanel />;
             case 'restrictions':
                 return <ConstructionRestrictionPanel />
             default:
@@ -38,11 +40,11 @@ const HomePage = () => {
     const clearAllData = () => {
         localStorage.removeItem('kitchenData');
         dispatch({ type: "ROOM_DIMENSIONS", payload: [] });
-     }
+    }
 
-     const printContent = () => {
-        console.log('print');
-     }
+    const printContent = useReactToPrint({
+        content: () => divRef.current,
+    });
 
     return (
         <PageContener>
@@ -52,13 +54,13 @@ const HomePage = () => {
                     <PlaygroundTopLine>
                         <PlaygroundNavList>
                             <PlaygroundNavListItem>
-                                <NavLink onClick={()=> play()} className={({ isActive }) => isActive ? 'activeTab' : ''} to='/bottomCabinets'>Bottom Cabinets</NavLink>
+                                <NavLink onClick={() => play()} className={({ isActive }) => isActive ? 'activeTab' : ''} to='/bottomCabinets'>Bottom Cabinets</NavLink>
                             </PlaygroundNavListItem>
                             <PlaygroundNavListItem>
-                                <NavLink onClick={()=> play()} className={({ isActive }) => isActive ? 'activeTab' : ''} to='/topCabinets'>Top Cabinets</NavLink>
+                                <NavLink onClick={() => play()} className={({ isActive }) => isActive ? 'activeTab' : ''} to='/topCabinets'>Top Cabinets</NavLink>
                             </PlaygroundNavListItem>
                             <PlaygroundNavListItem>
-                                <NavLink onClick={()=> play()} className={({ isActive }) => isActive ? 'activeTab' : ''} to='/preview'>Preview</NavLink>
+                                <NavLink onClick={() => play()} className={({ isActive }) => isActive ? 'activeTab' : ''} to='/preview'>Preview</NavLink>
                             </PlaygroundNavListItem>
                         </PlaygroundNavList>
                         <PlaygroundInfoBox>
@@ -69,7 +71,7 @@ const HomePage = () => {
                         <SpecialBtns>
                             <SingleBtn btnName={"Print"} onClick={printContent} />
                         </SpecialBtns>
-                        <PlaygroundView />
+                        <PlaygroundView componentToPrint={divRef} />
                     </PlaygroundBox>
                 </PlaygroundBoxContener>
                 <PlaygroundActions>
@@ -83,7 +85,7 @@ const HomePage = () => {
                         {usePanel(panel)}
                     </PanelButtonsResults>
                     <ActionButtonsBoxBottom>
-                            <SingleBtn danger={'danger'} btnName={"Reset All"} onClick={clearAllData} />
+                        <SingleBtn danger={'danger'} btnName={"Reset All"} onClick={clearAllData} />
                     </ActionButtonsBoxBottom>
                 </PlaygroundActions>
             </PlaygroundContener>

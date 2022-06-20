@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
@@ -10,7 +10,12 @@ import CornersBotView from './cornersBotView';
 import CornersTopView from './cornersTopView';
 import RestrictionView from './restrictionsView';
 
-const PlaygroundView = () => {
+type PlaygroundViewProps = {
+    componentToPrint?: any;
+};
+
+
+const PlaygroundView = ({ componentToPrint }: PlaygroundViewProps) => {
     const { id } = useParams();
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const localData: string | null = localStorage.getItem("kitchenData");
@@ -37,7 +42,7 @@ const PlaygroundView = () => {
     return (
         <>
             {roomWidth !== 0 ?
-                <Room key={0} roomWidth={roomWidth} roomDepth={roomDepth} distance={wallDistance} className='workspace'>
+                <Room key={0} roomWidth={roomWidth} roomDepth={roomDepth} distance={wallDistance} className='workspace' ref={componentToPrint}>
                     {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
                     (
                         <Fragment key={index}>
@@ -98,6 +103,7 @@ const Room = styled.div<RoomDimension>`
     box-sizing: border-box;
     display:flex;
     position:relative;
+    margin:25px;
     &:before{
         content: '';
         border:1px dotted black;
