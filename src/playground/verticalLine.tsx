@@ -53,7 +53,7 @@ export default VerticalLine;
 const VerticalLineBox = styled.div`
     display:flex;
     position:absolute;
-    top:-90px;
+    top:-70px;
     height:100%;
     z-index:200;
     cursor:pointer;

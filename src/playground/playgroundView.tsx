@@ -44,7 +44,7 @@ const PlaygroundView = ({ componentToPrint }: PlaygroundViewProps) => {
     return (
         <>
             {roomWidth !== 0 ?
-                <PlaygroundOutter>
+                <PlaygroundOutter ref={componentToPrint}>
                     <VerticalLine dimensionX={roomWidth} />
                     <HorizontalLine dimensionY={roomDepth} />
                     <Room key={0} roomWidth={roomWidth} roomDepth={roomDepth} distance={wallDistance} className='workspace' ref={componentToPrint}>
@@ -110,7 +110,7 @@ const Room = styled.div<RoomDimension>`
     display:flex;
     position:relative;
     align-self:center;
-    /* margin:45px auto; */
+    justify-self:center;
     &:before{
         content: '';
         border:1px dotted black;
@@ -122,5 +122,6 @@ const Room = styled.div<RoomDimension>`
 const PlaygroundOutter = styled.div`
     position:relative;
     padding:0px 100px;
+    margin:100px 0px;
 `;
 
