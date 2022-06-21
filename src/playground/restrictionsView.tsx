@@ -65,6 +65,7 @@ export default RestrictionView;
 
 
 const Runner = styled.div`
-display:flex;
-position:absolute;
+    display:flex;
+    position:absolute;
+    z-index:150;
 `;

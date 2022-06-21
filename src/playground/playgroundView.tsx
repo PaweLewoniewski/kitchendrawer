@@ -38,7 +38,7 @@ const PlaygroundView = ({ componentToPrint }: PlaygroundViewProps) => {
     const roomWidth = mainData?.roomDimension?.roomWidth ? mainData?.roomDimension?.roomWidth / 1 : 0;
     const roomDepth = mainData?.roomDimension?.roomDepth ? mainData?.roomDimension?.roomDepth / 1 : 0;
     const wallDistance = mainData?.roomDimension?.distance ? mainData?.roomDimension?.distance / 1 : 0;
-    // console.log(loadData);
+
     return (
         <>
             {roomWidth !== 0 ?

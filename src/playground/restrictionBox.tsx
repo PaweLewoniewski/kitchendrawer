@@ -107,7 +107,7 @@ const DimensionsBoxNames = styled.div`
     text-align:center;
     justify-content:center;
     position:absolute;
-    top:-27px;
+    top:-15px;
     left:-1px;
     text-align:center;
     border-top:none;
