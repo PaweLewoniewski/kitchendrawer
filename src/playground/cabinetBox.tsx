@@ -142,12 +142,10 @@ const DimensionsBoxNames = styled.div`
     border-top:none;
     padding-bottom:3px;
     background:white;
-    text-shadow:1px 1px 1px white;
 `;
 
 const DimensionText = styled.p`
     font-size:16px;
-    text-shadow:1px 1px 1px white;
     position:absolute;
     top:-23px;
 `;
@@ -179,12 +177,10 @@ const DimensionsBoxNamesLong = styled.div`
     border-top:none;
     padding-bottom:3px;
     background:white;
-    text-shadow:1px 1px 1px white;
 `;
 
 const DimensionTextLong = styled.p`
     font-size:16px;
-    text-shadow:1px 1px 1px white;
     position:absolute;
     top:-23px;
 `;

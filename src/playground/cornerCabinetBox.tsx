@@ -190,17 +190,14 @@ const DimensionsBoxNames = styled.div`
     border-top:none;
     padding-bottom:3px;
     background:white;
-    text-shadow:1px 1px 1px white;
 `;
 
 const DimensionText = styled.p`
     font-size:16px;
-    text-shadow:1px 1px 1px white;
 `;
 
 const DimensionSecText = styled.p`
     font-size:16px;
-    text-shadow:1px 1px 1px white;
     transform:rotate(0.25turn) ;
     background:white;
 `;
@@ -216,11 +213,11 @@ const OptionsBtnsBox = styled.div`
 `;
 
 const OptionsBtn = styled.div`
- border:1px solid black;
- border-radius:3px;
- display:flex;
- justify-content:center;
- align-items:center;
+    border:1px solid black;
+    border-radius:3px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 `;
 
 const DimensionsSecBoxLines = styled.div`
@@ -248,7 +245,6 @@ const DimensionsSecBoxNames = styled.div`
     right:-22px;
     text-align:center;
     padding-bottom:3px;
-    text-shadow:1px 1px 1px white;
 `;
 
 
@@ -278,24 +274,10 @@ const DimensionsSecLeftBoxNames = styled.div`
     text-align:center;
     padding-bottom:3px;
     /* background:white; */
-    text-shadow:1px 1px 1px white;
 `;
 
 const DimensionSecLeftText = styled.p`
     font-size:16px;
-    text-shadow:1px 1px 1px white;
     transform:rotate(-0.25turn) ;
     background:white;
 `;
-
-    // useEffect(() => {
-    //     if (loadData === undefined) {
-    //         setLoadData(kitchenData);
-    //     }
-    //     if (savedElements !== undefined) {
-    //         console.log(savedElements);
-    //         localStorage.setItem("kitchenData", JSON.stringify(savedElements));
-    //         dispatch({ type: "ROOM_DIMENSIONS", payload: savedElements });
-    //     }
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [loadData, savedElements]);
