@@ -103,7 +103,7 @@ const Room = styled.div<RoomDimension>`
     box-sizing: border-box;
     display:flex;
     position:relative;
-    margin:25px;
+    margin:45px;
     &:before{
         content: '';
         border:1px dotted black;
