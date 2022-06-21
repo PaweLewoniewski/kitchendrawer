@@ -68,14 +68,14 @@ const CabinetBox = ({ elementsData }: ElementsDataProps) => {
                         <>
                             <DimensionsBoxLinesLong />
                             <DimensionsBoxNamesLong>
-                                <DimensionTextLong>b:{elementsData.cabinWidth}</DimensionTextLong>
+                                <DimensionTextLong>{elementsData.cabinWidth}</DimensionTextLong>
                             </DimensionsBoxNamesLong>
                         </>
                         :
                         <>
                             <DimensionsBoxLines />
                             <DimensionsBoxNames>
-                                <DimensionText>t:{elementsData.cabinWidth}</DimensionText>
+                                <DimensionText>{elementsData.cabinWidth}</DimensionText>
                             </DimensionsBoxNames>
                         </>
                     }
