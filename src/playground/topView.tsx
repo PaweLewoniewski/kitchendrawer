@@ -56,8 +56,8 @@ const TopView = ({ data, index, positionX, positionY }: TopViewProp) => {
                     bounds={data.side !== 0 ? 
                         {left:-data.cabinWidth / 3.6, 
                         top: data.cabinWidth /4, 
-                        right: roomWidth? roomWidth - (data.cabinWidth / 1.3) : data.cabinWidth, 
-                        bottom: roomDepth ? roomDepth - (data.cabinDepth * 1.7) : data.cabinDepth 
+                        right: roomWidth? roomWidth - (data.cabinWidth / 1.3) : 700, 
+                        bottom: roomDepth ? roomDepth - (data.cabinDepth * 1.7) : 400 
                     } : `parent`}
                     onStop={handleStop}
                 >
