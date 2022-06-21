@@ -9,6 +9,8 @@ import TopView from './topView';
 import CornersBotView from './cornersBotView';
 import CornersTopView from './cornersTopView';
 import RestrictionView from './restrictionsView';
+import HorizontalLine from "./horizontalLine";
+import VerticalLine from "./verticalLine";
 
 type PlaygroundViewProps = {
     componentToPrint?: any;
@@ -42,53 +44,57 @@ const PlaygroundView = ({ componentToPrint }: PlaygroundViewProps) => {
     return (
         <>
             {roomWidth !== 0 ?
-                <Room key={0} roomWidth={roomWidth} roomDepth={roomDepth} distance={wallDistance} className='workspace' ref={componentToPrint}>
-                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
-                    (
-                        <Fragment key={index}>
-                            {id === 'bottomCabinets' ?
-                                <>
-                                    <BottomView key={index} data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
-                                    <CornersBotView data={item.cornersBot} index={index} positionX={item.cornersBot?.xAxis} positionY={item.cornersBot?.yAxis} />
-                                </>
-                                : ''}
-                        </Fragment>
-                    )) : ''}
+                <PlaygroundOutter>
+                    <VerticalLine dimensionX={roomWidth} />
+                    <HorizontalLine dimensionY={roomDepth} />
+                    <Room key={0} roomWidth={roomWidth} roomDepth={roomDepth} distance={wallDistance} className='workspace' ref={componentToPrint}>
+                        {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
+                        (
+                            <Fragment key={index}>
+                                {id === 'bottomCabinets' ?
+                                    <>
+                                        <BottomView key={index} data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
+                                        <CornersBotView data={item.cornersBot} index={index} positionX={item.cornersBot?.xAxis} positionY={item.cornersBot?.yAxis} />
+                                    </>
+                                    : ''}
+                            </Fragment>
+                        )) : ''}
 
-                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
-                    (
-                        <Fragment key={index}>
-                            {id === 'topCabinets' ?
-                                <>
-                                    <TopView key={index} data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
-                                    <CornersTopView data={item.cornersTop} index={index} positionX={item.cornersTop?.xAxis} positionY={item.cornersTop?.yAxis} />
-                                </>
-                                : ''}
-                        </Fragment>
-                    )) : ''}
+                        {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
+                        (
+                            <Fragment key={index}>
+                                {id === 'topCabinets' ?
+                                    <>
+                                        <TopView key={index} data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
+                                        <CornersTopView data={item.cornersTop} index={index} positionX={item.cornersTop?.xAxis} positionY={item.cornersTop?.yAxis} />
+                                    </>
+                                    : ''}
+                            </Fragment>
+                        )) : ''}
 
-                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
-                    (
-                        <Fragment key={index}>
-                            {id === 'preview' ?
+                        {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
+                        (
+                            <Fragment key={index}>
+                                {id === 'preview' ?
+                                    <>
+                                        <BottomView data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
+                                        <TopView data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
+                                        <CornersBotView data={item.cornersBot} index={index} positionX={item.cornersBot?.xAxis} positionY={item.cornersBot?.yAxis} />
+                                        <CornersTopView data={item.cornersTop} index={index} positionX={item.cornersTop?.xAxis} positionY={item.cornersTop?.yAxis} />
+                                    </>
+                                    : ''}
+                            </Fragment>
+                        )) : ''}
+                        {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
+                        (
+                            <Fragment key={index}>
                                 <>
-                                    <BottomView data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
-                                    <TopView data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
-                                    <CornersBotView data={item.cornersBot} index={index} positionX={item.cornersBot?.xAxis} positionY={item.cornersBot?.yAxis} />
-                                    <CornersTopView data={item.cornersTop} index={index} positionX={item.cornersTop?.xAxis} positionY={item.cornersTop?.yAxis} />
+                                    <RestrictionView data={item.restrictions} index={index} positionX={item.restrictions?.xAxis} positionY={item.restrictions?.yAxis} />
                                 </>
-                                : ''}
-                        </Fragment>
-                    )) : ''}
-                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
-                    (
-                        <Fragment key={index}>
-                            <>
-                                <RestrictionView data={item.restrictions} index={index} positionX={item.restrictions?.xAxis} positionY={item.restrictions?.yAxis} />
-                            </>
-                        </Fragment>
-                    )) : ''}
-                </Room>
+                            </Fragment>
+                        )) : ''}
+                    </Room>
+                </ PlaygroundOutter>
                 : 'Set Room Dimensions'}
         </>
     );
@@ -103,12 +109,18 @@ const Room = styled.div<RoomDimension>`
     box-sizing: border-box;
     display:flex;
     position:relative;
-    margin:45px;
+    align-self:center;
+    /* margin:45px auto; */
     &:before{
         content: '';
         border:1px dotted black;
         width:100%;
         height:100%;       
     }
+`;
+
+const PlaygroundOutter = styled.div`
+    position:relative;
+    padding:0px 100px;
 `;
 
