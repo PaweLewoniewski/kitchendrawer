@@ -29,8 +29,10 @@ const TopView = ({ data, index, positionX, positionY }: TopViewProp) => {
     }, [index, kitchenData]);
 
     const allOtherData = datakit.filter(item => item !== currentData);
+    const mainDim = datakit.find((item:AllkitchenData) => item.roomDimension?.roomWidth);
+    const roomWidth = mainDim?.roomDimension?.roomWidth;
+    const roomDepth = mainDim?.roomDimension?.roomDepth;
 
-    // console.log(datakit);
     const handleStop = (event: any, dragElement: { x: SetStateAction<number>; y: SetStateAction<number>; }) => {
         event.preventDefault();
         event.stopPropagation();
@@ -39,7 +41,6 @@ const TopView = ({ data, index, positionX, positionY }: TopViewProp) => {
             const sumUpdatedData = [...allOtherData, ...updateData];
             localStorage.setItem("kitchenData", JSON.stringify(sumUpdatedData.flat()));
             dispatch({ type: "ROOM_DIMENSIONS", payload: sumUpdatedData.flat() });
-            //  console.log(allOtherData)
         }
     };
 
@@ -52,7 +53,12 @@ const TopView = ({ data, index, positionX, positionY }: TopViewProp) => {
                     defaultPosition={{ x: positionX, y: positionY }}
                     position={{ x: positionX, y: positionY }}
                     grid={[5, 5]}
-                    bounds={data.side !== 0 ? {left:-data.cabinWidth / 3.6, top: data.cabinWidth /4, right: 800 - (data.cabinWidth /1.3), bottom: 400 - (data.cabinWidth / 1.3)} : `parent`}
+                    bounds={data.side !== 0 ? 
+                        {left:-data.cabinWidth / 3.6, 
+                        top: data.cabinWidth /4, 
+                        right: roomWidth? roomWidth - (data.cabinWidth / 1.3) : data.cabinWidth, 
+                        bottom: roomDepth ? roomDepth - (data.cabinDepth * 1.7) : data.cabinDepth 
+                    } : `parent`}
                     onStop={handleStop}
                 >
                     <Runner className="handle">

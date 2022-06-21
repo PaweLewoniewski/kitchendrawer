@@ -28,6 +28,9 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
     }, [index, kitchenData]);
 
     const allOtherData = datakit.filter(item => item !== currentData);
+    const mainDim = datakit.find((item:AllkitchenData) => item.roomDimension?.roomWidth);
+    const roomWidth = mainDim?.roomDimension?.roomWidth;
+    const roomDepth = mainDim?.roomDimension?.roomDepth;
 
     const handleStop = (event: any, dragElement: { x: SetStateAction<number>; y: SetStateAction<number>; }) => {
         event.preventDefault();
@@ -50,9 +53,12 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
                     position={{ x: positionX, y: positionY }}
                     positionOffset={{x:'0', y:'0'}}
                     grid={[5, 5]}
-                    bounds={data.side !== 0 ? {left:-data.cabinWidth / 3.6, top: data.cabinWidth /4, right: 800 - (data.cabinWidth /1.3), bottom: 400 - (data.cabinWidth / 1.3)} : `parent`}
-                    //bounds="parent"
-                    //bounds={{left:-data.cabinWidth / 3.6, top: data.cabinWidth /4, right: 800 - (data.cabinWidth /1.3), bottom: 400 - (data.cabinWidth / 1.3)}}
+                    bounds={data.side !== 0 ? 
+                    {left:-data.cabinWidth / 3.6, 
+                    top: data.cabinWidth /4, 
+                    right: roomWidth? roomWidth - (data.cabinWidth / 1.3) : data.cabinWidth, 
+                    bottom: roomDepth ? roomDepth - (data.cabinDepth * 1.7) : data.cabinDepth 
+                } : `parent`}
                     onStop={handleStop}
                 >
                     <Runner className={'handle'}>
