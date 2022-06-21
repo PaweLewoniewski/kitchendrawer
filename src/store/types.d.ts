@@ -13,6 +13,10 @@ export interface Restrictions {
     yAxis?:number;
 }
 
+export interface CornerCabinetsNames {
+    name?: string;
+}
+
 export interface CornerCabinets {
     id:string;
     cabinWidth: number;

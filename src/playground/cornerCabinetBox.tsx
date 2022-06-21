@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
 import { RootState } from "../store/store";
-import { AllkitchenData, CornerCabinets } from "../store/types";
+import { AllkitchenData, CornerCabinets, CornerCabinetsNames } from "../store/types";
 import { AiOutlineClose } from 'react-icons/ai';
 import { useEffect, useState } from "react";
 
@@ -63,8 +63,8 @@ const CornerCabinetBox = ({ elementsData }: ElementsDataProps) => {
                     sideB={elementsData.sideB}
                     onClick={() => { currentElement(elementsData) }}
                     className={currentTarget === elementsData ? "activeCabin" : undefined}>
-                    <DimensionsBoxLines />
-                    <DimensionsBoxNames>
+                    <DimensionsBoxLines name={elementsData.name}/>
+                    <DimensionsBoxNames name={elementsData.name}>
                         <DimensionText>{elementsData.cabinWidth}</DimensionText>
                     </DimensionsBoxNames>
                     <LeftDimensions 
@@ -73,9 +73,11 @@ const CornerCabinetBox = ({ elementsData }: ElementsDataProps) => {
                         cabinWidth={elementsData.cabinWidth}
                         cabinDepth={elementsData.cabinDepth}
                         sideA={elementsData.sideA}
-                        sideB={elementsData.sideB}>
-                        <DimensionsSecBoxLines />
-                        <DimensionsSecBoxNames>
+                        sideB={elementsData.sideB}
+                        name={elementsData.name}
+                        >
+                        <DimensionsSecBoxLines name={elementsData.name}/>
+                        <DimensionsSecBoxNames name={elementsData.name}>
                             <DimensionSecText>{elementsData.cabinDepth}</DimensionSecText>
                         </DimensionsSecBoxNames>
                     </LeftDimensions>
@@ -86,9 +88,10 @@ const CornerCabinetBox = ({ elementsData }: ElementsDataProps) => {
                         cabinDepth={elementsData.cabinDepth}
                         sideA={elementsData.sideA}
                         sideB={elementsData.sideB}
+                        name={elementsData.name}
                         >
-                        <DimensionsSecLeftBoxLines />
-                        <DimensionsSecLeftBoxNames>
+                        <DimensionsSecLeftBoxLines name={elementsData.name}/>
+                        <DimensionsSecLeftBoxNames name={elementsData.name}>
                             <DimensionSecLeftText>{elementsData.cabinDepth}</DimensionSecLeftText>
                         </DimensionsSecLeftBoxNames>
                     </RightDimensions>
@@ -164,18 +167,18 @@ const CornerCabinBox = styled.div<CornerCabinets>`
     }
 `;
 
-const DimensionsBoxLines = styled.div`
+const DimensionsBoxLines = styled.div<CornerCabinetsNames>`
     width:100%;
-    height:15px;
+    height:${props => props.name === `Top corners` ? `15px` : `40px`};
     border:1px solid black;
     border-top:none;
     border-bottom:none;
     position:absolute;
-    top:-16px;
+    top:${props => props.name === `Top corners` ? `-16px` : `-40px`};
     left:-1px;
 `;
 
-const DimensionsBoxNames = styled.div`
+const DimensionsBoxNames = styled.div<CornerCabinetsNames>`
     width:100%;
     height:10px;
     border:1px solid black;
@@ -184,7 +187,7 @@ const DimensionsBoxNames = styled.div`
     text-align:center;
     justify-content:center;
     position:absolute;
-    top:-27px;
+    top:${props => props.name === `Top corners` ? `-30px` : `-50px`};
     left:-1px;
     text-align:center;
     border-top:none;
@@ -198,8 +201,7 @@ const DimensionText = styled.p`
 
 const DimensionSecText = styled.p`
     font-size:16px;
-    transform:rotate(0.25turn) ;
-    background:white;
+    transform:rotate(0.25turn);
 `;
 
 const OptionsBtnsBox = styled.div`
@@ -220,64 +222,56 @@ const OptionsBtn = styled.div`
     align-items:center;
 `;
 
-const DimensionsSecBoxLines = styled.div`
-    width:15px;
+const DimensionsSecBoxLines = styled.div<CornerCabinetsNames>`
+    width:${props => props.name === `Top corners` ? `15px` : `40px`};
     height:100%;
     border:1px solid black;
     border-left:none;
     border-right:none;
     position:absolute;
-    right:-16px;
+    right:${props => props.name === `Top corners` ? `-16px` : `-40px`};
     top:0;
 `;
 
-const DimensionsSecBoxNames = styled.div`
+const DimensionsSecBoxNames = styled.div<CornerCabinetsNames>`
     width:10px;
     height:105%;
     border-left:1px solid black;
     border-right:none;
-    display:flex;
-    align-items:center;
-    text-align:center;
-    justify-content:center;
+     display:flex;
     position:absolute;
-    top:-5px;
-    right:-22px;
+    top:-3px;
+    right:${props => props.name === `Top corners` ? `-22px` : `-45px`};
     text-align:center;
     padding-bottom:3px;
 `;
 
 
-const DimensionsSecLeftBoxLines = styled.div`
-    width:25px;
+const DimensionsSecLeftBoxLines = styled.div<CornerCabinetsNames>`
+    width:${props => props.name === `Top corners` ? `25px` : `50px`};
     height:100%;
     border:1px solid black;
     border-left:none;
     border-right:none;
     position:absolute;
-    left:-25px;
+    left:${props => props.name === `Top corners` ? `-25px` : `-45px`};
     top:0;
 `;
 
-const DimensionsSecLeftBoxNames = styled.div`
-    width:10px;
+const DimensionsSecLeftBoxNames = styled.div<CornerCabinetsNames>`
+    width:${props => props.name === `Top corners` ? `10px` : `45px`};
     height:105%;
     border-left:1px solid black;
     border-right:none;
     display:flex;
-    align-items:center;
-    text-align:center;
-    justify-content:center;
     position:absolute;
-    top:-5px;
-    left:-22px;
+    top:-2px;
+    left:${props => props.name === `Top corners` ? `-22px` : `-40px`};
     text-align:center;
     padding-bottom:3px;
-    /* background:white; */
 `;
 
 const DimensionSecLeftText = styled.p`
     font-size:16px;
     transform:rotate(-0.25turn) ;
-    background:white;
 `;
