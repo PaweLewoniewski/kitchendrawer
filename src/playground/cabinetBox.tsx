@@ -64,7 +64,7 @@ const CabinetBox = ({ elementsData }: ElementsDataProps) => {
                     className={currentTarget === elementsData ? "activeCabin" : undefined}
                 >
 
-                    {elementsData.name === `Bottom cabines` ?
+                    {elementsData.name === `Bottom cabinets` ?
                         <>
                             <DimensionsBoxLinesLong />
                             <DimensionsBoxNamesLong>
