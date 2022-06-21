@@ -54,19 +54,31 @@ const CabinetBox = ({ elementsData }: ElementsDataProps) => {
     return (
         <>
             {elementsData !== undefined ?
-                <CabinBox 
-                id={elementsData.id} 
-                cabinWidth={elementsData.cabinWidth} 
-                cabinDepth={elementsData.cabinDepth} 
-                side={elementsData.side}
-                image={elementsData.image}
-                    onClick={() => { currentElement(elementsData) }} 
+                <CabinBox
+                    id={elementsData.id}
+                    cabinWidth={elementsData.cabinWidth}
+                    cabinDepth={elementsData.cabinDepth}
+                    side={elementsData.side}
+                    image={elementsData.image}
+                    onClick={() => { currentElement(elementsData) }}
                     className={currentTarget === elementsData ? "activeCabin" : undefined}
                 >
-                    <DimensionsBoxLines />
-                    <DimensionsBoxNames>
-                        <DimensionText>{elementsData.cabinWidth}</DimensionText>
-                    </DimensionsBoxNames>
+
+                    {elementsData.name === `Bottom cabines` ?
+                        <>
+                            <DimensionsBoxLinesLong />
+                            <DimensionsBoxNamesLong>
+                                <DimensionTextLong>b:{elementsData.cabinWidth}</DimensionTextLong>
+                            </DimensionsBoxNamesLong>
+                        </>
+                        :
+                        <>
+                            <DimensionsBoxLines />
+                            <DimensionsBoxNames>
+                                <DimensionText>t:{elementsData.cabinWidth}</DimensionText>
+                            </DimensionsBoxNames>
+                        </>
+                    }
                     <OptionsBtnsBox className={currentTarget === elementsData ? "show" : 'hide'}>
                         <OptionsBtn onClick={() => { removeElement(elementsData) }}
                         ><AiOutlineClose size={20} /></OptionsBtn>
@@ -83,7 +95,7 @@ const CabinBox = styled.div<Cabinets>`
     width:${props => props.cabinWidth !== 0 ? `${props.cabinWidth}px` : '0px'};
     height:${props => props.cabinDepth !== 0 ? `${props.cabinDepth}px` : '0px'};
     background:${props => props.image === 'Stove' ? `url(${Stove})no-repeat !important` : `#fbffca;`};
-    background:${props => props.image === 'Sink' ? `url(${Sink})no-repeat !important` : `#fbffca;` };
+    background:${props => props.image === 'Sink' ? `url(${Sink})no-repeat !important` : `#fbffca;`};
     background-size: contain !important;
     background-position: center !important;
     border:2px solid #06151f;
@@ -139,6 +151,44 @@ const DimensionText = styled.p`
     position:absolute;
     top:-23px;
 `;
+
+
+const DimensionsBoxLinesLong = styled.div`
+    width:100%;
+    height:40px;
+    border:1px solid black;
+    border-top:none;
+    border-bottom:none;
+    position:absolute;
+    top:-40px;
+    left:-1px;
+`;
+
+const DimensionsBoxNamesLong = styled.div`
+    width:100%;
+    height:10px;
+    border:1px solid black;
+    display:flex;
+    align-items:center;
+    text-align:center;
+    justify-content:center;
+    position:absolute;
+    top:-50px;
+    left:-1px;
+    text-align:center;
+    border-top:none;
+    padding-bottom:3px;
+    background:white;
+    text-shadow:1px 1px 1px white;
+`;
+
+const DimensionTextLong = styled.p`
+    font-size:16px;
+    text-shadow:1px 1px 1px white;
+    position:absolute;
+    top:-23px;
+`;
+
 
 const OptionsBtnsBox = styled.div`
     position:absolute;

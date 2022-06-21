@@ -20,9 +20,6 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const datakit: AllkitchenData[] = kitchenData;
     const [currentData, setCurrentData] = useState<Cabinets>();
-    // const [classGenerator, setClassGenerator] = useState<string>();
-    // const classGen: string = Math.random().toString(36).slice(2, 7);
-
 
     useEffect(() => {
         if (index) {
