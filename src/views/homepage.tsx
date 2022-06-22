@@ -14,6 +14,7 @@ import { RootState } from '../store/store';
 import NavSound from '../assets/sounds/slight_click.wav';
 import PlaygroundView from '../playground/playgroundView';
 import { useReactToPrint } from 'react-to-print';
+import { CABINETS, CONSTRUCTION_RESTRICTIONS, CORNER_CABINETS, PRINT, RESET_ALL, WALLS } from '../data/dictionary';
 
 const HomePage = () => {
 
@@ -69,23 +70,23 @@ const HomePage = () => {
                     </PlaygroundTopLine>
                     <PlaygroundBox>
                         <SpecialBtns>
-                            <SingleBtn btnName={"Print"} onClick={printContent} />
+                            <SingleBtn btnName={PRINT} onClick={printContent} />
                         </SpecialBtns>
                         <PlaygroundView componentToPrint={divRef} />
                     </PlaygroundBox>
                 </PlaygroundBoxContener>
                 <PlaygroundActions>
                     <ActionButtonsBox>
-                        <ActionBtn active={active} btnName={'Walls'} onClick={() => { setPanel('walls'); setActive('Walls') }} />
-                        <ActionBtn active={active} btnName={'Construction restrictions'} onClick={() => { setPanel('restrictions'); setActive('Construction restrictions') }} />
-                        <ActionBtn active={active} btnName={'Cabinets'} onClick={() => { setPanel('cabinets'); setActive('Cabinets') }} />
-                        <ActionBtn active={active} btnName={'Corner cabinets'} onClick={() => { setPanel('cornerCabinets'); setActive('Corner cabinets') }} />
+                        <ActionBtn active={active} btnName={WALLS} onClick={() => { setPanel('walls'); setActive('Walls') }} />
+                        <ActionBtn active={active} btnName={CONSTRUCTION_RESTRICTIONS} onClick={() => { setPanel('restrictions'); setActive('Construction restrictions') }} />
+                        <ActionBtn active={active} btnName={CABINETS} onClick={() => { setPanel('cabinets'); setActive('Cabinets') }} />
+                        <ActionBtn active={active} btnName={CORNER_CABINETS} onClick={() => { setPanel('cornerCabinets'); setActive('Corner cabinets') }} />
                     </ActionButtonsBox>
                     <PanelButtonsResults>
                         {usePanel(panel)}
                     </PanelButtonsResults>
                     <ActionButtonsBoxBottom>
-                        <SingleBtn danger={'danger'} btnName={"Reset All"} onClick={clearAllData} />
+                        <SingleBtn danger={'danger'} btnName={RESET_ALL} onClick={clearAllData} />
                     </ActionButtonsBoxBottom>
                 </PlaygroundActions>
             </PlaygroundContener>

@@ -4,6 +4,7 @@ import SingleBtn from "../assets/SingleBtn/SingleBtn";
 import SingleNumberField from "../assets/SingleNumberFiled/SingleNumberFiled";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store/reducer";
+import { ADD, DEPTH, MM, WALL_DISTANCE, WIDTH } from "../data/dictionary";
 
 const RoomWallsPanel = () => {
 
@@ -27,12 +28,12 @@ const RoomWallsPanel = () => {
     return (
         <Contener>
             <FiledBox>
-                <SingleNumberField text={"mm"} placeholder={'Width'} onChange={(e: any) => { setWidthPlayground(e.target.value) }} />
-                <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthPlayground(e.target.value) }} />
-                <SingleNumberField text={"mm"} placeholder={'Wall Distance'} onChange={(e: any) => { setWallDistance(e.target.value) }} />
+                <SingleNumberField text={MM} placeholder={WIDTH} onChange={(e: any) => { setWidthPlayground(e.target.value) }} />
+                <SingleNumberField text={MM} placeholder={DEPTH} onChange={(e: any) => { setDepthPlayground(e.target.value) }} />
+                <SingleNumberField text={MM} placeholder={WALL_DISTANCE} onChange={(e: any) => { setWallDistance(e.target.value) }} />
             </FiledBox>
             <BtnBoxEnd>
-                <SingleBtn btnName={"Add"} onClick={setUpRoomPlayground}></SingleBtn>
+                <SingleBtn btnName={ADD} onClick={setUpRoomPlayground}></SingleBtn>
             </BtnBoxEnd>
         </Contener>
     );

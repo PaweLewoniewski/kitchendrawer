@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, } from "react-router-dom";
 import styled from "styled-components";
 import HomePage from './views/homepage';
 import Policy from './views/policy';
-import MainNavigation from './components/mainNavigation';
+//import MainNavigation from './components/mainNavigation';
 import BottomView from './playground/bottomView';
 import TopView from './playground/topView';
 import Footer from './components/footer';
@@ -16,7 +16,7 @@ function App() {
       <ContentPage>
         <Router>
           <Header>
-            <MainNavigation />
+            {/* <MainNavigation /> */}
             <Title>Kitchen Drawer</Title>
           </Header>
           <Content>
@@ -71,7 +71,7 @@ const Title = styled.h1`
   font-family: 'Josefin Sans', sans-serif;
   white-space:nowrap;
   align-items:center;
-  padding:0 0 33.6px 0;
+  padding:33.6px 0 33.6px 0;
   margin:0;
   color:#06151f;
   &:before{

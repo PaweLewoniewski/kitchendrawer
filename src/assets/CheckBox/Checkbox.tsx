@@ -4,7 +4,6 @@ interface CheckboxProps {
     text?: string;
     onChange?:()=> void;
     checked?:string;
-    // onChange?:()=> void;
 }
 
 const Checkbox = ({ text, onChange, checked }: CheckboxProps) => {

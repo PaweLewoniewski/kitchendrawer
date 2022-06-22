@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store/reducer";
 import ActionBtnSmall from "../assets/ActionBtnSmall/ActionBtnSmall";
+import { ADD, MM } from "../data/dictionary";
 
 const CornerCabinetsPanel = () => {
 
@@ -62,13 +63,13 @@ const CornerCabinetsPanel = () => {
         </BtnBox>
         <InfoImgBox><InfoImg className={sideCabin === 0 ? `cornerBox_img_left` : `cornerBox_img_right`} /></InfoImgBox>
         <FiledBox>
-          <SingleNumberField text={"mm"} placeholder={'Width'} onChange={(e: any) => { setWidthCabin(e.target.value) }} />
-          <SingleNumberField text={"mm"} placeholder={'Depth'} onChange={(e: any) => { setDepthCabin(e.target.value) }} />
-          <SingleNumberField text={"mm"} placeholder={'Side A'} onChange={(e: any) => { setsideA(e.target.value) }} />
-          <SingleNumberField text={"mm"} placeholder={'Side B'} onChange={(e: any) => { setsideB(e.target.value) }} />
+          <SingleNumberField text={MM} placeholder={'Width'} onChange={(e: any) => { setWidthCabin(e.target.value) }} />
+          <SingleNumberField text={MM} placeholder={'Depth'} onChange={(e: any) => { setDepthCabin(e.target.value) }} />
+          <SingleNumberField text={MM} placeholder={'Side A'} onChange={(e: any) => { setsideA(e.target.value) }} />
+          <SingleNumberField text={MM} placeholder={'Side B'} onChange={(e: any) => { setsideB(e.target.value) }} />
         </FiledBox>
         <BtnBoxEnd>
-          <SingleBtn btnName={"Add"} onClick={addRoomCabins}></SingleBtn>
+          <SingleBtn btnName={ADD} onClick={addRoomCabins}></SingleBtn>
         </BtnBoxEnd>
       </Contener>
     </>
