@@ -11,6 +11,8 @@ import CornersTopView from './cornersTopView';
 import RestrictionView from './restrictionsView';
 import HorizontalLine from "./horizontalLine";
 import VerticalLine from "./verticalLine";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 type PlaygroundViewProps = {
     componentToPrint?: any;
@@ -37,66 +39,82 @@ const PlaygroundView = ({ componentToPrint }: PlaygroundViewProps) => {
     }, [loadData, localData]);
 
     const mainData = loadData?.find((item: AllkitchenData) => item.roomDimension?.roomWidth && item.roomDimension.roomDepth);
-    const roomWidth = mainData?.roomDimension?.roomWidth ? mainData?.roomDimension?.roomWidth  / 1 : 0;
-    const roomDepth = mainData?.roomDimension?.roomDepth ? mainData?.roomDimension?.roomDepth  / 1 : 0;
-    const wallDistance = mainData?.roomDimension?.distance ? mainData?.roomDimension?.distance / 1  : 0;
+    const roomWidth = mainData?.roomDimension?.roomWidth ? mainData?.roomDimension?.roomWidth / 1 : 0;
+    const roomDepth = mainData?.roomDimension?.roomDepth ? mainData?.roomDimension?.roomDepth / 1 : 0;
+    const wallDistance = mainData?.roomDimension?.distance ? mainData?.roomDimension?.distance / 1 : 0;
 
     return (
-        <>
-            {roomWidth !== 0 ?
-                <PlaygroundOutter ref={componentToPrint}>
-                    <VerticalLine dimensionX={roomWidth} />
-                    <HorizontalLine dimensionY={roomDepth} />
-                    <Room key={0} roomWidth={roomWidth} roomDepth={roomDepth} distance={wallDistance} className='workspace' ref={componentToPrint}>
-                        {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
-                        (
-                            <Fragment key={index}>
-                                {id === 'bottomCabinets' ?
-                                    <>
-                                        <BottomView key={index} data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
-                                        <CornersBotView data={item.cornersBot} index={index} positionX={item.cornersBot?.xAxis} positionY={item.cornersBot?.yAxis} />
-                                    </>
-                                    : ''}
-                            </Fragment>
-                        )) : ''}
+        <TransformWrapper
+            initialScale={1}
+            initialPositionX={200}
+            initialPositionY={100}
+        >
+            {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                <Fragment>
+                    <div className="tools">
+                        <button onClick={() => zoomIn()}>+</button>
+                        <button onClick={() => zoomOut()}>-</button>
+                        <button onClick={() => resetTransform()}>x</button>
+                    </div>
 
-                        {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
-                        (
-                            <Fragment key={index}>
-                                {id === 'topCabinets' ?
-                                    <>
-                                        <TopView key={index} data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
-                                        <CornersTopView data={item.cornersTop} index={index} positionX={item.cornersTop?.xAxis} positionY={item.cornersTop?.yAxis} />
-                                    </>
-                                    : ''}
-                            </Fragment>
-                        )) : ''}
+                    <TransformComponent>
+                        {roomWidth !== 0 ?
+                            <PlaygroundOutter ref={componentToPrint}>
+                                <VerticalLine dimensionX={roomWidth} />
+                                <HorizontalLine dimensionY={roomDepth} />
+                                <Room key={0} roomWidth={roomWidth} roomDepth={roomDepth} distance={wallDistance} className='workspace' ref={componentToPrint}>
+                                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
+                                    (
+                                        <Fragment key={index}>
+                                            {id === 'bottomCabinets' ?
+                                                <>
+                                                    <BottomView key={index} data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
+                                                    <CornersBotView data={item.cornersBot} index={index} positionX={item.cornersBot?.xAxis} positionY={item.cornersBot?.yAxis} />
+                                                </>
+                                                : ''}
+                                        </Fragment>
+                                    )) : ''}
 
-                        {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
-                        (
-                            <Fragment key={index}>
-                                {id === 'preview' ?
-                                    <>
-                                        <BottomView data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
-                                        <TopView data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
-                                        <CornersBotView data={item.cornersBot} index={index} positionX={item.cornersBot?.xAxis} positionY={item.cornersBot?.yAxis} />
-                                        <CornersTopView data={item.cornersTop} index={index} positionX={item.cornersTop?.xAxis} positionY={item.cornersTop?.yAxis} />
-                                    </>
-                                    : ''}
-                            </Fragment>
-                        )) : ''}
-                        {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
-                        (
-                            <Fragment key={index}>
-                                <>
-                                    <RestrictionView data={item.restrictions} index={index} positionX={item.restrictions?.xAxis} positionY={item.restrictions?.yAxis} />
-                                </>
-                            </Fragment>
-                        )) : ''}
-                    </Room>
-                </ PlaygroundOutter>
-                : 'Set Room Dimensions'}
-        </>
+                                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
+                                    (
+                                        <Fragment key={index}>
+                                            {id === 'topCabinets' ?
+                                                <>
+                                                    <TopView key={index} data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
+                                                    <CornersTopView data={item.cornersTop} index={index} positionX={item.cornersTop?.xAxis} positionY={item.cornersTop?.yAxis} />
+                                                </>
+                                                : ''}
+                                        </Fragment>
+                                    )) : ''}
+
+                                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
+                                    (
+                                        <Fragment key={index}>
+                                            {id === 'preview' ?
+                                                <>
+                                                    <BottomView data={item.botCabinets} index={index} positionX={item.botCabinets?.xAxis} positionY={item.botCabinets?.yAxis} />
+                                                    <TopView data={item.topCabinets} index={index} positionX={item.topCabinets?.xAxis} positionY={item.topCabinets?.yAxis} />
+                                                    <CornersBotView data={item.cornersBot} index={index} positionX={item.cornersBot?.xAxis} positionY={item.cornersBot?.yAxis} />
+                                                    <CornersTopView data={item.cornersTop} index={index} positionX={item.cornersTop?.xAxis} positionY={item.cornersTop?.yAxis} />
+                                                </>
+                                                : ''}
+                                        </Fragment>
+                                    )) : ''}
+                                    {loadData && loadData.length > 0 ? loadData.map((item: AllkitchenData, index) =>
+                                    (
+                                        <Fragment key={index}>
+                                            <>
+                                                <RestrictionView data={item.restrictions} index={index} positionX={item.restrictions?.xAxis} positionY={item.restrictions?.yAxis} />
+                                            </>
+                                        </Fragment>
+                                    )) : ''}
+                                </Room>
+                            </ PlaygroundOutter>
+                            : 'Set Room Dimensions'}
+                    </TransformComponent>
+                </Fragment>
+            )}
+        </TransformWrapper>
     );
 };
 export default PlaygroundView;
