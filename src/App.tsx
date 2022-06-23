@@ -16,8 +16,8 @@ function App() {
       <ContentPage>
         <Router>
           <Header>
-            {/* <MainNavigation /> */}
-            <Title>Kitchen Drawer</Title>
+            {/* <MainNavigation /> #2f5951 */}
+            <Title>Kitchen Draw<span>er</span></Title>
           </Header>
           <Content>
             <Pages>
@@ -89,6 +89,9 @@ const Title = styled.h1`
     box-shadow: 0px 0px 1px #00fcff;
     background:black;
     margin:0px 0px 0px 30px;
+  }
+  span{
+    color:#2f5951;
   }
 `;
 
