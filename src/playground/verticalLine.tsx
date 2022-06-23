@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Draggable from "react-draggable";
 import styled from "styled-components";
+import { MM } from "../data/dictionary";
 
 interface VerticalProps {
     dimensionX: number;
@@ -42,7 +43,7 @@ const VerticalLine = ({ dimensionX  }: VerticalProps) => {
                 onStop={handleStop}
             >
                 <VerticalLineBox>
-                    <VerticalLineText className="handle">Dist. {linePositionX}</VerticalLineText>
+                    <VerticalLineText className="handle">{linePositionX} {MM}</VerticalLineText>
                 </VerticalLineBox>
             </Draggable>
         </>

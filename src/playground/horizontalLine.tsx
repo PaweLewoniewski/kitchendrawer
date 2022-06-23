@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Draggable from "react-draggable";
 import styled from "styled-components";
+import { MM } from "../data/dictionary";
 
 interface HorizontalProps {
     dimensionY:number;
@@ -42,7 +43,7 @@ const HorizontalLine = ({dimensionY}:HorizontalProps) => {
                 onStop={handleStop}
             >
                 <HorizontalLineBox>
-                    <HorizontalLineText className="handle">Dist. {linePositionY}</HorizontalLineText>
+                    <HorizontalLineText className="handle">{linePositionY} {MM}</HorizontalLineText>
                 </HorizontalLineBox>
             </Draggable>
         </>

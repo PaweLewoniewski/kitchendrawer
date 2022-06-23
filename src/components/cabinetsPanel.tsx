@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store/reducer";
 import ActionBtnSmall from "../assets/ActionBtnSmall/ActionBtnSmall";
 import SelectBtn from "../assets/SelectBtn/SelectBtn";
-import { ACCESSORIES, ADD, DEPTH, MM, WIDTH } from "../data/dictionary";
+import { ACCESSORIES, ADD, BOTTOM, DEPTH, MM, TOP, WIDTH } from "../data/dictionary";
 
 const CabinetsPanel = () => {
 
@@ -50,8 +50,8 @@ const CabinetsPanel = () => {
   return (
     <>
       <ActionBtnsWidth>
-        <ActionBtnSmall onClick={() => setActive('Top')} className={active === 'Top' ? 'activeTab' : ''} btnName={'Top'} />
-        <ActionBtnSmall onClick={() => setActive('Bottom')} className={active === 'Bottom' ? 'activeTab' : ''} btnName={'Bottom'} />
+        <ActionBtnSmall onClick={() => setActive('Top')} className={active === 'Top' ? 'activeTab' : ''} btnName={TOP} />
+        <ActionBtnSmall onClick={() => setActive('Bottom')} className={active === 'Bottom' ? 'activeTab' : ''} btnName={BOTTOM} />
       </ActionBtnsWidth>
       <Contener>
         <BtnBox>
