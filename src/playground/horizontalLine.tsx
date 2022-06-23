@@ -1,13 +1,14 @@
 import { useState } from "react";
 import Draggable from "react-draggable";
+import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import styled from "styled-components";
 import { MM } from "../data/dictionary";
 
 interface HorizontalProps {
-    dimensionY:number;
+    dimensionY: number;
 }
 
-const HorizontalLine = ({dimensionY}:HorizontalProps) => {
+const HorizontalLine = ({ dimensionY }: HorizontalProps) => {
 
     let [linePositionY, setLinePositionY] = useState<number>(0);
 
@@ -43,7 +44,10 @@ const HorizontalLine = ({dimensionY}:HorizontalProps) => {
                 onStop={handleStop}
             >
                 <HorizontalLineBox>
-                    <HorizontalLineText className="handle">{linePositionY} {MM}</HorizontalLineText>
+                    <HorizontalLinear />
+                    <HorizontalLineText className="handle">
+                        <span><AiOutlineArrowUp size={10} /></span>{linePositionY} {MM}<span><AiOutlineArrowDown size={10} /></span>
+                    </HorizontalLineText>
                 </HorizontalLineBox>
             </Draggable>
         </>
@@ -52,12 +56,12 @@ const HorizontalLine = ({dimensionY}:HorizontalProps) => {
 export default HorizontalLine;
 
 const HorizontalLineBox = styled.div`
-    display:flex;
+    /* display:flex; */
     position:absolute;
     left:0;
     top:0;
     width:100%;
-    z-index:200;
+    z-index:45;
     cursor:pointer;
 `;
 
@@ -65,10 +69,10 @@ const HorizontalLineText = styled.div`
     display:flex;
     flex-direction:column ;
     width:100%;
-    &:before{
-        content: '';
+`;
+
+const HorizontalLinear = styled.div`
         border-top:1px dotted black;
         width:100%;
         height:1px;       
-    }
 `;
