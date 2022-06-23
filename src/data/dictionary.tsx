@@ -2,6 +2,7 @@ export const BOTTOM_CABINETS = "Bottom Cabinets";
 export const ACCESSORIES = 'Accessories';
 export const ADD = 'Add';
 export const MM = 'mm';
+export const CM = 'cm';
 export const WIDTH = 'Width';
 export const DEPTH = 'Depth';
 export const WALL_DISTANCE = 'Wall Distance';
