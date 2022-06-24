@@ -2,7 +2,7 @@ import { useState } from "react";
 import Draggable from "react-draggable";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import styled from "styled-components";
-import { MM } from "../data/dictionary";
+import { CM } from "../data/dictionary";
 
 interface VerticalProps {
     dimensionX: number;
@@ -46,7 +46,7 @@ const VerticalLine = ({ dimensionX }: VerticalProps) => {
                 <VerticalLineBox>
                 <VerticalLinear />
                     <VerticalLineText className="handle">
-                        <span><AiOutlineArrowLeft size={10} /></span>{linePositionX} {MM}<span><AiOutlineArrowRight size={10} /></span>
+                        <span><AiOutlineArrowLeft size={10} /></span>{linePositionX} {CM}<span><AiOutlineArrowRight size={10} /></span>
                     </VerticalLineText>
                 </VerticalLineBox>
             </Draggable>

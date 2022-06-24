@@ -2,7 +2,7 @@ import { useState } from "react";
 import Draggable from "react-draggable";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import styled from "styled-components";
-import { MM } from "../data/dictionary";
+import { CM } from "../data/dictionary";
 
 interface HorizontalProps {
     dimensionY: number;
@@ -46,7 +46,7 @@ const HorizontalLine = ({ dimensionY }: HorizontalProps) => {
                 <HorizontalLineBox>
                     <HorizontalLinear />
                     <HorizontalLineText className="handle">
-                        <span><AiOutlineArrowUp size={10} /></span>{linePositionY} {MM}<span><AiOutlineArrowDown size={10} /></span>
+                        <span><AiOutlineArrowUp size={10} /></span>{linePositionY} {CM}<span><AiOutlineArrowDown size={10} /></span>
                     </HorizontalLineText>
                 </HorizontalLineBox>
             </Draggable>

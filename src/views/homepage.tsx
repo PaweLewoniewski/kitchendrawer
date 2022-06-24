@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import useSound from 'use-sound';
 import styled from "styled-components";

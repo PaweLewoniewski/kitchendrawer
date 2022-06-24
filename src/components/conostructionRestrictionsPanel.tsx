@@ -4,7 +4,7 @@ import SingleNumberField from "../assets/SingleNumberFiled/SingleNumberFiled";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store/reducer";
 import { useState } from "react";
-import { ADD, DEPTH, MM, WIDTH } from "../data/dictionary";
+import { ADD, CM, DEPTH, WIDTH } from "../data/dictionary";
 
 
 const ConstructionRestrictionPanel = () => {
@@ -32,8 +32,8 @@ const ConstructionRestrictionPanel = () => {
     return (
         <Contener>
             <FiledBox>
-                <SingleNumberField text={MM} placeholder={WIDTH} onChange={(e: any) => { setWidthRestrict(e.target.value) }} />
-                <SingleNumberField text={MM} placeholder={DEPTH} onChange={(e: any) => { setDepthRestrict(e.target.value) }} />
+                <SingleNumberField text={CM} placeholder={WIDTH} onChange={(e: any) => { setWidthRestrict(e.target.value) }} />
+                <SingleNumberField text={CM} placeholder={DEPTH} onChange={(e: any) => { setDepthRestrict(e.target.value) }} />
             </FiledBox>
             <BtnBoxEnd>
                 <SingleBtn btnName={ADD} onClick={addRoomRestrictions}></SingleBtn>

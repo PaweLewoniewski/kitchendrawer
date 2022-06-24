@@ -51,7 +51,7 @@ const PlaygroundView = () => {
             initialScale={1}
             initialPositionX={0}
             initialPositionY={0}
-            panning={{ disabled: true }}
+            panning={{ excluded: ['div'] }}
         >
             {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
                 <Fragment>
@@ -61,7 +61,7 @@ const PlaygroundView = () => {
                         <SingleBtn btnName={CENTER} onClick={() => resetTransform()} />
                         <SingleBtn btnName={PRINT} onClick={printContent} />
                     </SpecialBtns>
-                    <TransformComponent>
+                    <TransformComponent wrapperStyle={{overflow:'visible'}}>
                         {roomWidth !== 0 ?
                             <PlaygroundOutter ref={componentToPrint}>
                                 <VerticalLine dimensionX={roomWidth} />

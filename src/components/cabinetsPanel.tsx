@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store/reducer";
 import ActionBtnSmall from "../assets/ActionBtnSmall/ActionBtnSmall";
 import SelectBtn from "../assets/SelectBtn/SelectBtn";
-import { ACCESSORIES, ADD, BOTTOM, DEPTH, MM, TOP, WIDTH } from "../data/dictionary";
+import { ACCESSORIES, ADD, BOTTOM, CM, DEPTH, TOP, WIDTH } from "../data/dictionary";
 
 const CabinetsPanel = () => {
 
@@ -66,8 +66,8 @@ const CabinetsPanel = () => {
           </SingleBtn>
         </BtnBox>
         <FiledBox>
-          <SingleNumberField text={MM} placeholder={WIDTH} onChange={(e: any) => { setWidthCabin(e.target.value) }} />
-          <SingleNumberField text={MM} placeholder={DEPTH} onChange={(e: any) => { setDepthCabin(e.target.value) }} />
+          <SingleNumberField text={CM} placeholder={WIDTH} onChange={(e: any) => { setWidthCabin(e.target.value) }} />
+          <SingleNumberField text={CM} placeholder={DEPTH} onChange={(e: any) => { setDepthCabin(e.target.value) }} />
         </FiledBox>
         <ActionBtnsWidth>
           <SelectBtn selectOptions={cabinsOption} text={ACCESSORIES} onChange={(e:any) => setImg(e.target.value)}/>
