@@ -17,3 +17,6 @@ export const SIDE_A = 'Side A';
 export const SIDE_B = 'Side B';
 export const BOTTOM = 'Bottom';
 export const TOP = 'Top';
+export const ZOOM_IN = 'Zoom In';
+export const ZOOM_OUT = 'Zoom Out';
+export const CENTER = 'Center';

@@ -13,8 +13,7 @@ import { useAppDispatch, useAppSelector } from '../store/reducer';
 import { RootState } from '../store/store';
 import NavSound from '../assets/sounds/slight_click.wav';
 import PlaygroundView from '../playground/playgroundView';
-import { useReactToPrint } from 'react-to-print';
-import { CABINETS, CONSTRUCTION_RESTRICTIONS, CORNER_CABINETS, PRINT, RESET_ALL, WALLS } from '../data/dictionary';
+import { CABINETS, CONSTRUCTION_RESTRICTIONS, CORNER_CABINETS, RESET_ALL, WALLS } from '../data/dictionary';
 
 const HomePage = () => {
 
@@ -23,7 +22,6 @@ const HomePage = () => {
     const [active, setActive] = useState<string>('Walls');
     const dispatch = useAppDispatch();
     const [play] = useSound(NavSound);
-    const divRef = useRef<HTMLDivElement>(null);
 
     const usePanel = (panel: string) => {
         switch (panel) {
@@ -42,10 +40,6 @@ const HomePage = () => {
         localStorage.removeItem('kitchenData');
         dispatch({ type: "ROOM_DIMENSIONS", payload: [] });
     }
-
-    const printContent = useReactToPrint({
-        content: () => divRef.current,
-    });
 
     return (
         <PageContener>
@@ -69,10 +63,7 @@ const HomePage = () => {
                         </PlaygroundInfoBox>
                     </PlaygroundTopLine>
                     <PlaygroundBox>
-                        <SpecialBtns>
-                            <SingleBtn btnName={PRINT} onClick={printContent} />
-                        </SpecialBtns>
-                        <PlaygroundView componentToPrint={divRef} />
+                        <PlaygroundView />
                     </PlaygroundBox>
                 </PlaygroundBoxContener>
                 <PlaygroundActions>
@@ -205,12 +196,4 @@ const ActionButtonsBoxBottom = styled.div`
 
 const PanelButtonsResults = styled.div`
     width:100%;
-`;
-
-const SpecialBtns = styled.div`
-    position:absolute;
-    top:0;
-    right:0;
-    display:flex;
-    padding:5px 7px;
 `;

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/reducer";
@@ -12,19 +12,17 @@ import RestrictionView from './restrictionsView';
 import HorizontalLine from "./horizontalLine";
 import VerticalLine from "./verticalLine";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
+import SingleBtn from "../assets/SingleBtn/SingleBtn";
+import { CENTER, PRINT, ZOOM_IN, ZOOM_OUT } from "../data/dictionary";
+import { useReactToPrint } from 'react-to-print';
 
-type PlaygroundViewProps = {
-    componentToPrint?: any;
-};
-
-
-const PlaygroundView = ({ componentToPrint }: PlaygroundViewProps) => {
+const PlaygroundView = () => {
     const { id } = useParams();
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const localData: string | null = localStorage.getItem("kitchenData");
     const [loadData, setLoadData] = useState<AllkitchenData[]>();
     const dispatch = useAppDispatch();
+    const componentToPrint = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (localData !== null && loadData === undefined) {
@@ -43,21 +41,26 @@ const PlaygroundView = ({ componentToPrint }: PlaygroundViewProps) => {
     const roomDepth = mainData?.roomDimension?.roomDepth ? mainData?.roomDimension?.roomDepth / 1 : 0;
     const wallDistance = mainData?.roomDimension?.distance ? mainData?.roomDimension?.distance / 1 : 0;
 
+    const printContent = useReactToPrint({
+        content: () => componentToPrint.current,
+    });
+
+
     return (
         <TransformWrapper
             initialScale={1}
-            initialPositionX={200}
-            initialPositionY={200}
-            panning={{disabled:true}}
+            initialPositionX={0}
+            initialPositionY={0}
+            panning={{ disabled: true }}
         >
             {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
                 <Fragment>
-                    <div className="tools">
-                        <button onClick={() => zoomIn()}>+</button>
-                        <button onClick={() => zoomOut()}>-</button>
-                        <button onClick={() => resetTransform()}>x</button>
-                    </div>
-
+                    <SpecialBtns>
+                        <SingleBtn btnName={ZOOM_IN} onClick={() => zoomIn()} />
+                        <SingleBtn btnName={ZOOM_OUT} onClick={() => zoomOut()} />
+                        <SingleBtn btnName={CENTER} onClick={() => resetTransform()} />
+                        <SingleBtn btnName={PRINT} onClick={printContent} />
+                    </SpecialBtns>
                     <TransformComponent>
                         {roomWidth !== 0 ?
                             <PlaygroundOutter ref={componentToPrint}>
@@ -142,5 +145,14 @@ const PlaygroundOutter = styled.div`
     position:relative;
     padding:0px 100px;
     margin:100px 0px;
+`;
+
+const SpecialBtns = styled.div`
+    position:absolute;
+    top:0;
+    right:0;
+    display:flex;
+    padding:5px 7px;
+    z-index:500;
 `;
 
