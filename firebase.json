@@ -6,6 +6,7 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "source" : "**/*.@(jpg|jpeg|gif|png)",
     "headers" : [ {
       "key" : "Cache-Control",
       "value" : "max-age=0"
