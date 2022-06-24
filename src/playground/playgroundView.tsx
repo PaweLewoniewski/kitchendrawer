@@ -47,7 +47,8 @@ const PlaygroundView = ({ componentToPrint }: PlaygroundViewProps) => {
         <TransformWrapper
             initialScale={1}
             initialPositionX={200}
-            initialPositionY={100}
+            initialPositionY={200}
+            panning={{disabled:true}}
         >
             {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
                 <Fragment>
