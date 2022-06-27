@@ -26,7 +26,7 @@ const VerticalLine = ({ dimensionX }: VerticalProps) => {
     };
 
     return (
-        <>
+        <VertivalContener>
             <Draggable
                 axis={`x`}
                 handle=".handle"
@@ -43,22 +43,26 @@ const VerticalLine = ({ dimensionX }: VerticalProps) => {
                 onStart={handleStart}
                 onStop={handleStop}
             >
-                <VerticalLineBox>
-                <VerticalLinear />
-                    <VerticalLineText className="handle">
-                        <span><AiOutlineArrowLeft size={10} /></span>{linePositionX} {CM}<span><AiOutlineArrowRight size={10} /></span>
-                    </VerticalLineText>
+                <VerticalLineBox className="handle">
+                    <VerticalLinear />
                 </VerticalLineBox>
             </Draggable>
-        </>
+            <VerticalLineText >
+                <span><AiOutlineArrowLeft size={10} /></span>{linePositionX} {CM}<span><AiOutlineArrowRight size={10} /></span>
+            </VerticalLineText>
+        </VertivalContener>
     );
 };
 export default VerticalLine;
 
+const VertivalContener = styled.div`
+   
+`;
+
 const VerticalLineBox = styled.div`
     display:flex;
     position:absolute;
-    top:-70px;
+    top:0;
     height:100%;
     z-index:45;
     cursor:pointer;
@@ -66,10 +70,12 @@ const VerticalLineBox = styled.div`
 
 const VerticalLineText = styled.div`
     display:flex;
+    position:absolute;
+    left:-20px;
 `;
 
 const VerticalLinear = styled.div`
         border-left:1px dotted black;
         width:1px;
-        height:150%;       
+        height:100%;       
 `;

@@ -26,7 +26,7 @@ const HorizontalLine = ({ dimensionY }: HorizontalProps) => {
     };
 
     return (
-        <>
+        <HorizontalContener>
             <Draggable
                 axis={`y`}
                 handle=".handle"
@@ -43,36 +43,49 @@ const HorizontalLine = ({ dimensionY }: HorizontalProps) => {
                 onStart={handleStart}
                 onStop={handleStop}
             >
-                <HorizontalLineBox>
+                <HorizontalLineBox className="handle">
                     <HorizontalLinear />
-                    <HorizontalLineText className="handle">
-                        <span><AiOutlineArrowUp size={10} /></span>{linePositionY} {CM}<span><AiOutlineArrowDown size={10} /></span>
-                    </HorizontalLineText>
                 </HorizontalLineBox>
             </Draggable>
-        </>
+            <HorizontalLineText>
+                <span><AiOutlineArrowUp size={10} /></span>{linePositionY} {CM}<span><AiOutlineArrowDown size={10} /></span>
+            </HorizontalLineText>
+        </HorizontalContener>
     );
 };
 export default HorizontalLine;
 
+
+const HorizontalContener = styled.div`
+    position:relative;
+`;
+
+
 const HorizontalLineBox = styled.div`
-    /* display:flex; */
     position:absolute;
     left:0;
     top:0;
+    height:1px;
     width:100%;
     z-index:45;
     cursor:pointer;
 `;
 
 const HorizontalLineText = styled.div`
+    position:absolute;
+    top:-100px;
+    left:0;
     display:flex;
-    flex-direction:column ;
+    flex-direction:column;
     width:100%;
 `;
 
 const HorizontalLinear = styled.div`
+        position:absolute;
+        top:0;
+        left:0;
         border-top:1px dotted black;
         width:100%;
-        height:1px;       
+        height:1px;  
+        z-index:450;     
 `;
