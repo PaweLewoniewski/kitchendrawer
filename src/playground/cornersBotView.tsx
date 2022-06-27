@@ -18,6 +18,7 @@ const CornersBotView = ({ data, index, positionX, positionY }: CornersViewProp) 
 
     const dispatch = useAppDispatch();
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    const { playgroundScale } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const datakit: AllkitchenData[] = kitchenData;
     const [currentData, setCurrentData] = useState<CornerCabinets>();
 
@@ -50,7 +51,7 @@ const CornersBotView = ({ data, index, positionX, positionY }: CornersViewProp) 
                     defaultPosition={{ x: positionX, y: positionY }}
                     position={{ x: positionX, y: positionY }}
                     grid={[1, 1]}
-                    scale={1}
+                    scale={playgroundScale}
                     bounds="parent"
                     onStop={handleStop}
                 >

@@ -1,16 +1,16 @@
 export interface RoomDimension {
     roomWidth: number;
     roomDepth: number;
-    distance?:number;
+    distance?: number;
 }
 
 export interface Restrictions {
-    id:string;
+    id: string;
     cabinWidth: number;
     cabinDepth: number;
-    name?:string;
-    xAxis?:number;
-    yAxis?:number;
+    name?: string;
+    xAxis?: number;
+    yAxis?: number;
 }
 
 export interface CornerCabinetsNames {
@@ -18,35 +18,35 @@ export interface CornerCabinetsNames {
 }
 
 export interface CornerCabinets {
-    id:string;
+    id: string;
     cabinWidth: number;
     cabinDepth: number;
     name?: string;
-    xAxis?:number;
-    yAxis?:number;
-    side?:number;
-    sideA:number;
-    sideB:number;
+    xAxis?: number;
+    yAxis?: number;
+    side?: number;
+    sideA: number;
+    sideB: number;
 }
 
 export interface Cabinets {
-    id:string;
+    id: string;
     cabinWidth: number;
     cabinDepth: number;
     name?: string;
-    xAxis?:number;
-    yAxis?:number;
-    side?:number;
-    image?:string;
+    xAxis?: number;
+    yAxis?: number;
+    side?: number;
+    image?: string;
 }
 
 export interface CurrentTarget {
-    id:string;
+    id: string;
     cabinWidth?: number;
     cabinDepth?: number;
     name?: string;
-    xAxis?:number;
-    yAxis?:number;
+    xAxis?: number;
+    yAxis?: number;
 }
 
 export interface AllkitchenData {
@@ -61,9 +61,10 @@ export interface AllkitchenData {
 export interface LocalDataState {
     kitchenData?: AllkitchenData[];
     currentTarget?: CurrentTarget[] | undefined;
+    playgroundScale: number;
 }
 
 export interface LocalDataActions {
-    type?: 'ROOM_DIMENSIONS' |'CURRENT_TARGET';
+    type?: 'ROOM_DIMENSIONS' | 'CURRENT_TARGET' | 'GROUND_SCALE';
     payload?: LocalDataState;
 }

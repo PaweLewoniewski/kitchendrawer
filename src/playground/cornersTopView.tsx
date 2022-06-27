@@ -20,7 +20,7 @@ const CornersTopView = ({ data, index, positionX, positionY }: CornersViewProp) 
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const datakit: AllkitchenData[] = kitchenData;
     const [currentData, setCurrentData] = useState<CornerCabinets>();
-
+    const { playgroundScale } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
 
     useEffect(() => {
         if (index) {
@@ -50,7 +50,7 @@ const CornersTopView = ({ data, index, positionX, positionY }: CornersViewProp) 
                     defaultPosition={{ x: positionX, y: positionY }}
                     position={{ x: positionX, y: positionY }}
                     grid={[1, 1]}
-                    scale={1}
+                    scale={playgroundScale}
                     bounds="parent"
                     onStop={handleStop}
                 >

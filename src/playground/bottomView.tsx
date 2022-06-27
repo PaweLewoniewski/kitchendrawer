@@ -18,6 +18,7 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
 
     const dispatch = useAppDispatch();
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
+    const { playgroundScale } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const datakit: AllkitchenData[] = kitchenData;
     const [currentData, setCurrentData] = useState<Cabinets>();
 
@@ -53,7 +54,7 @@ const BottomView = ({ data, index, positionX, positionY }: BottomViewProp) => {
                     position={{ x: positionX, y: positionY }}
                     positionOffset={{x:'0', y:'0'}}
                     grid={[1, 1]}
-                    scale={1}
+                    scale={playgroundScale}
                     bounds={data.side !== 0 ? 
                     {left:-data.cabinWidth / 3.6, 
                     top: data.cabinWidth /4, 

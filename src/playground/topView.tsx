@@ -20,7 +20,7 @@ const TopView = ({ data, index, positionX, positionY }: TopViewProp) => {
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const datakit: AllkitchenData[] = kitchenData;
     const [currentData, setCurrentData] = useState<Cabinets>();
-
+    const { playgroundScale } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
 
     useEffect(() => {
         if (index) {
@@ -53,7 +53,7 @@ const TopView = ({ data, index, positionX, positionY }: TopViewProp) => {
                     defaultPosition={{ x: positionX, y: positionY }}
                     position={{ x: positionX, y: positionY }}
                     grid={[1, 1]}
-                    scale={1}
+                    scale={playgroundScale}
                     bounds={data.side !== 0 ? 
                         {left:-data.cabinWidth / 3.6, 
                         top: data.cabinWidth /4, 

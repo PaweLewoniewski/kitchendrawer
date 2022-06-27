@@ -20,7 +20,7 @@ const RestrictionView = ({ data, index, positionX, positionY }: RestrictionsView
     const { kitchenData } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
     const datakit: AllkitchenData[] = kitchenData;
     const [currentData, setCurrentData] = useState<Cabinets>();
-
+    const { playgroundScale } = useAppSelector((store: RootState) => store.multiReducers.localDataReducer);
 
     useEffect(() => {
         if (index) {
@@ -50,7 +50,7 @@ const RestrictionView = ({ data, index, positionX, positionY }: RestrictionsView
                     defaultPosition={{ x: positionX, y: positionY }}
                     position={{ x: positionX, y: positionY }}
                     grid={[1, 1]}
-                    scale={1}
+                    scale={playgroundScale}
                     bounds="parent"
                     onStop={handleStop}
                 >

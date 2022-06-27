@@ -23,6 +23,8 @@ const PlaygroundView = () => {
     const [loadData, setLoadData] = useState<AllkitchenData[]>();
     const dispatch = useAppDispatch();
     const componentToPrint = useRef<HTMLDivElement>(null);
+    const [zoomer, setZoomer] = useState(1);
+
 
     useEffect(() => {
         if (localData !== null && loadData === undefined) {
@@ -33,8 +35,9 @@ const PlaygroundView = () => {
         if (loadData !== kitchenData) {
             setLoadData(kitchenData);
         }
+        dispatch({ type: "GROUND_SCALE", payload: zoomer });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loadData, localData]);
+    }, [loadData, localData, zoomer]);
 
     const mainData = loadData?.find((item: AllkitchenData) => item.roomDimension?.roomWidth && item.roomDimension.roomDepth);
     const roomWidth = mainData?.roomDimension?.roomWidth ? mainData?.roomDimension?.roomWidth / 1 : 0;
@@ -45,13 +48,13 @@ const PlaygroundView = () => {
         content: () => componentToPrint.current,
     });
 
-
     return (
         <TransformWrapper
             initialScale={1}
             initialPositionX={0}
             initialPositionY={0}
             panning={{ excluded: ['div'] }}
+            onZoom={(rest)=> setZoomer(rest.state.scale)}
         >
             {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
                 <Fragment>
