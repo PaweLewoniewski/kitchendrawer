@@ -77,5 +77,8 @@ const VerticalLineText = styled.div`
 const VerticalLinear = styled.div`
         border-left:1px dotted black;
         width:1px;
-        height:100%;       
+        height:100%;  
+        &:hover{
+            border-left:1px solid green;
+        }     
 `;
