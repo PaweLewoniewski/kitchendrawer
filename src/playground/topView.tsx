@@ -52,7 +52,8 @@ const TopView = ({ data, index, positionX, positionY }: TopViewProp) => {
                     handle=".handle"
                     defaultPosition={{ x: positionX, y: positionY }}
                     position={{ x: positionX, y: positionY }}
-                    grid={[5, 5]}
+                    grid={[1, 1]}
+                    scale={1}
                     bounds={data.side !== 0 ? 
                         {left:-data.cabinWidth / 3.6, 
                         top: data.cabinWidth /4, 

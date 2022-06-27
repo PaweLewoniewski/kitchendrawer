@@ -49,7 +49,8 @@ const CornersTopView = ({ data, index, positionX, positionY }: CornersViewProp) 
                     handle=".handle"
                     defaultPosition={{ x: positionX, y: positionY }}
                     position={{ x: positionX, y: positionY }}
-                    grid={[5, 5]}
+                    grid={[1, 1]}
+                    scale={1}
                     bounds="parent"
                     onStop={handleStop}
                 >
