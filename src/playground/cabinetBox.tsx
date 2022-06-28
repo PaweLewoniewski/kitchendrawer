@@ -105,9 +105,6 @@ const CabinBox = styled.div<Cabinets>`
     align-items:center;
     justify-content:center;
     position:relative;
-    /* background:#fbffca; */
-    /* margin:0px 1px; */
-    /* transition:0.3s ease-in-out; */
     cursor:pointer;
     &:hover{
         border:2px solid #ff8800;
@@ -125,6 +122,7 @@ const DimensionsBoxLines = styled.div`
     position:absolute;
     top:-16px;
     left:-1px;
+    z-index:-1;
 `;
 
 const DimensionsBoxNames = styled.div`
@@ -160,6 +158,7 @@ const DimensionsBoxLinesLong = styled.div`
     position:absolute;
     top:-40px;
     left:-1px;
+    z-index:-1;
 `;
 
 const DimensionsBoxNamesLong = styled.div`

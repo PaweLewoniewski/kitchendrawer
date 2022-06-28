@@ -176,6 +176,7 @@ const DimensionsBoxLines = styled.div<CornerCabinetsNames>`
     position:absolute;
     top:${props => props.name === `Top corners` ? `-16px` : `-40px`};
     left:-1px;
+    z-index:-1;
 `;
 
 const DimensionsBoxNames = styled.div<CornerCabinetsNames>`
@@ -231,6 +232,7 @@ const DimensionsSecBoxLines = styled.div<CornerCabinetsNames>`
     position:absolute;
     right:${props => props.name === `Top corners` ? `-16px` : `-40px`};
     top:0;
+    z-index:-1;
 `;
 
 const DimensionsSecBoxNames = styled.div<CornerCabinetsNames>`
@@ -256,10 +258,11 @@ const DimensionsSecLeftBoxLines = styled.div<CornerCabinetsNames>`
     position:absolute;
     left:${props => props.name === `Top corners` ? `-25px` : `-45px`};
     top:0;
+    z-index:-1;
 `;
 
 const DimensionsSecLeftBoxNames = styled.div<CornerCabinetsNames>`
-    width:${props => props.name === `Top corners` ? `10px` : `45px`};
+    width:${props => props.name === `Top corners` ? `10px` : `50px`};
     height:105%;
     border-left:1px solid black;
     border-right:none;
@@ -269,6 +272,7 @@ const DimensionsSecLeftBoxNames = styled.div<CornerCabinetsNames>`
     left:${props => props.name === `Top corners` ? `-22px` : `-40px`};
     text-align:center;
     padding-bottom:3px;
+    
 `;
 
 const DimensionSecLeftText = styled.p`
