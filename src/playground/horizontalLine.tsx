@@ -63,10 +63,10 @@ const HorizontalContener = styled.div`
 
 const HorizontalLineBox = styled.div`
     position:absolute;
-    left:0;
+    left:-10%;
     top:0;
     height:1px;
-    width:100%;
+    width:110%;
     z-index:45;
     cursor:pointer;
 `;

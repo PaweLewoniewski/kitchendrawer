@@ -62,8 +62,8 @@ const VertivalContener = styled.div`
 const VerticalLineBox = styled.div`
     display:flex;
     position:absolute;
-    top:0;
-    height:100%;
+    top:-10%;
+    height:110%;
     z-index:45;
     cursor:pointer;
 `;
