@@ -22,7 +22,6 @@ const VerticalLine = ({ dimensionX }: VerticalProps) => {
 
     const handleDrag = (e: any, ui: { deltaX: any; deltaY: any; }) => {
         setLinePositionX(linePositionX + ui.deltaX);
-        console.log(linePositionX);
     };
 
     return (

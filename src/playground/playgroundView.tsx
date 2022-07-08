@@ -64,6 +64,7 @@ const PlaygroundView = () => {
                         <SingleBtn btnName={CENTER} onClick={() => resetTransform()} />
                         <SingleBtn btnName={PRINT} onClick={printContent} />
                     </SpecialBtns>
+                    {/* <RoomFreeSpace>free width: {roomWidth}cm | free depth: {roomDepth}cm</RoomFreeSpace> */}
                     <TransformComponent wrapperStyle={{ overflow: 'visible' }}>
                         {roomWidth !== 0 ?
                             <PlaygroundOutter ref={componentToPrint}>
@@ -157,6 +158,15 @@ const RoomDim = styled.div`
     padding:2px 5px;
 `;
 
+// const RoomFreeSpace = styled.div`
+//     position:absolute;
+//     top:0;
+//     left:0;
+//     display:flex;
+//     padding:5px 7px;
+//     z-index:500;
+// `;
+
 const SpecialBtns = styled.div`
     position:absolute;
     top:0;
@@ -165,4 +175,5 @@ const SpecialBtns = styled.div`
     padding:5px 7px;
     z-index:500;
 `;
+
 

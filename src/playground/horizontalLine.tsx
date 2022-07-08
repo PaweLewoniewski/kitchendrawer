@@ -22,7 +22,6 @@ const HorizontalLine = ({ dimensionY }: HorizontalProps) => {
 
     const handleDrag = (e: any, ui: { deltaX: any; deltaY: any; }) => {
         setLinePositionY(linePositionY + ui.deltaY);
-        console.log(linePositionY);
     };
 
     return (
